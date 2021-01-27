@@ -1,0 +1,12 @@
+1 - Si el jugador presionó el boton de iniciar la carrera, Saltar al paso 2 (iniciar el semaforo). En caso contrario, Saltar al paso 1. 
+2 - Semaforo: Reiniciar los contadores de ambos jugadores. Luego encender la luz roja, naranja y verde en secuencia. Al terminar, mantener la luz verde encendida y apagar el resto. También, encender las luces iniciales de los dos jugadores e indicar que inicia la carrera.
+3- Mientras la carrera esté en marcha, realizar los pasos 4 al 7. En caso contrario (si la carrera terminó), saltar al paso 8.
+4 - Si el jugador 1 presionó su boton, mover su contador un paso. (barrer su contador un bit). 
+5 - Si el jugador 1 tiene su contador igual a 0, indicar que terminó la carrera
+6 - Si el jugador 2 presionó su botón, mover su contador un paso. (barrer su contador un bit).
+7 - Si el jugador 2 tiene su contador igual a 0, indicar que terminó la carrera
+8 - Apagar el semáforo y el indicador de que terminó la carrera.
+9 - Si el jugador 1 tiene su contador menor que el jugador 2, el ganador es el jugador 1.
+10 - Si el jugador 2 tiene su contador menor que el jugador 1, el ganador es el jugador 2.
+11 - Si los contadores de ambos jugadores son iguales, es un empate.
+12 - Regresar al paso 1.
