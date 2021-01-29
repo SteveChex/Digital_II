@@ -1,0 +1,47 @@
+Configuraciones:
+	Inicializar el timer0 y el ADC
+	Habilitar las interrupciones por timer0, Adc y por puertoB
+	Habilitar los pines específicos del puerto B que se usaran para interrupción
+	Preparar las salidas ( Puerto C, D y pines del puerto B )
+	Declarar las funciones prototipo que se usarán.
+
+#Parte1
+Si Boton 1 está apagado y el Botón 2 está apagado:
+	Apagar bandera boton presionado (botonActivo= 0);
+	#Esto se hace, porque el boton entrará antes a la interrupcion que a esta linea.
+
+Interrupcion de botón:
+	Si la bandera RBIF es 1, ver
+	Si el boton 1 esta encendido y no hay un Boton Activo (botonActivo = 0):
+		contador++
+	Si el boton 2 está encendido y no hay un Boton Activo (botonActivo = 0):
+		contador-- (contador = contador - 1)
+Escribir valor en el puerto D
+
+#Parte 2
+Activar los bits del adc.
+Si el adc ya tiene un valor:
+	Leer valor del ADC (Seguro es más complejo que solo leer)
+	guardar en la variable adcVal
+
+#parte 3
+configurar el timer.
+Llamar a la función para traducir el número a hexadecimal
+Enviar el hexadecimal1 a la variable 1 (num1)
+Enviar el hexadecimal2 a la variable 2 (num2)
+
+Interrupcion del timer:
+	Si la bandera T0IF es 1, ver
+	Si M1 == 1,
+		M1 = 0
+		M2 = 1
+		Escribir en PortC = num1
+	Si no,
+		M1 = 1
+		M2 = 0
+		Escribir en PortC = num2
+
+#parte 4
+Si contador > adcVal
+	alarma = 1 (bit del puerto b)
+
