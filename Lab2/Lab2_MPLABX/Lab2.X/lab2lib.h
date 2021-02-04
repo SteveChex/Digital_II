@@ -13,7 +13,7 @@
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include <stdint.h>
 
-void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex);
-
+void decodif(volatile uint8_t number, volatile uint8_t* mshex, volatile uint8_t* lshex);
+void adc_lect(volatile uint8_t *data);
 
 #endif  /* LAB2LIB*/

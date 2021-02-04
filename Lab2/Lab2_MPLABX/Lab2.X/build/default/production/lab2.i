@@ -7,13 +7,7 @@
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "lab2.c" 2
-
-
-
-
-
-
-
+# 12 "lab2.c"
 #pragma config FOSC = XT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -28,7 +22,7 @@
 
 #pragma config BOR4V = BOR40V
 #pragma config WRT = OFF
-# 30 "lab2.c"
+# 34 "lab2.c"
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2509,7 +2503,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 30 "lab2.c" 2
+# 34 "lab2.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
@@ -2644,7 +2638,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 31 "lab2.c" 2
+# 35 "lab2.c" 2
 
 # 1 "./lab2lib.h" 1
 # 14 "./lab2lib.h"
@@ -2652,9 +2646,10 @@ typedef uint16_t uintptr_t;
 # 14 "./lab2lib.h" 2
 
 
-void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex);
-# 32 "lab2.c" 2
-# 41 "lab2.c"
+void decodif(volatile uint8_t number, volatile uint8_t* mshex, volatile uint8_t* lshex);
+void adc_lect(volatile uint8_t *data);
+# 36 "lab2.c" 2
+# 45 "lab2.c"
 void setup(void);
 void adc_start(void);
 void __attribute__((picinterrupt((""))))isr(void);
@@ -2671,6 +2666,16 @@ void main(void) {
     while (1) {
         adc_start();
         decodif(adc_value, &hex_h, &hex_l);
+        if (PORTD < adc_value){
+            PORTBbits.RB3 = 1;
+        }
+        else {
+            PORTBbits.RB3 = 0;
+        }
+        if (PORTBbits.RB0 || PORTBbits.RB1){
+            _delay((unsigned long)((400)*(4000000/4000.0)));
+            RBIF = 1;
+        }
     }
 }
 
@@ -2690,7 +2695,7 @@ void setup(void) {
     TRISD = 0;
     PORTB = 0;
     PORTC = 0;
-    PORTD = 0;
+    PORTD = 127;
 
 
 
@@ -2708,7 +2713,6 @@ void setup(void) {
 
     IOCB = 0B00000111;
     PIE1 = 0B01000010;
-
     PIR1bits.ADIF = 0;
     INTCON = 0B11001000;
 
@@ -2732,28 +2736,27 @@ void adc_start(void) {
 
 void __attribute__((picinterrupt((""))))isr(void) {
     if (ADIF && ADIE) {
-        adc_value = ADRESH;
-        ADIF = 0;
+        adc_lect(&adc_value);
     }
     if (TMR2IE && TMR2IF) {
         if (1 == PORTBbits.RB4) {
             PORTBbits.RB4 = 0;
-            PORTC = hex_h;
+            PORTC = hex_l;
             PORTBbits.RB5 = 1;
         }
         else {
             PORTBbits.RB5 = 0;
-            PORTC = hex_l;
+            PORTC = hex_h;
             PORTBbits.RB4 = 1;
         }
         TMR2IF = 0;
     }
     if (RBIE && RBIF) {
         if (1 == PORTBbits.RB0) {
-
+            PORTD++;
         }
         if (1 == PORTBbits.RB1) {
-
+            PORTD--;
         }
         RBIF = 0;
     }

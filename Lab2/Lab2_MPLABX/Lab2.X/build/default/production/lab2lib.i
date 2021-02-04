@@ -2638,14 +2638,17 @@ typedef uint16_t uintptr_t;
 # 14 "./lab2lib.h" 2
 
 
-void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex);
+void decodif(volatile uint8_t number, volatile uint8_t* mshex, volatile uint8_t* lshex);
+void adc_lect(volatile uint8_t *data);
 # 11 "lab2lib.c" 2
 
 
-void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex) {
+void decodif(volatile uint8_t number, volatile uint8_t* mshex,
+             volatile uint8_t* lshex){
     uint8_t msbits, lsbits;
     msbits = number >> 4;
     lsbits = number & 0B00001111;
+
 
     switch (msbits) {
         case 0:
@@ -2751,4 +2754,9 @@ void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex) {
         default:
             *lshex = 0B10000000;
     }
+}
+
+void adc_lect(volatile uint8_t *data) {
+    *data = ADRESH;
+    ADIF = 0;
 }

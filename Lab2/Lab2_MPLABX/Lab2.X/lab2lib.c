@@ -10,11 +10,13 @@
 #include <stdint.h>
 #include "lab2lib.h"
 
-void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex) {
+void decodif(volatile uint8_t number, volatile uint8_t* mshex, 
+             volatile uint8_t* lshex){
     uint8_t msbits, lsbits; // DEFINIENDO VARIABLES PARA CADA NIBBLE
     msbits = number >> 4; // ELIMINANDO LOS BITS MENOOS SIGNIFICATIVOS
     lsbits = number & 0B00001111; // ELIMINANDO LOS BITS MÁS SIGNIFICATIVOS
 
+    // AMBOS SWITCH ... CASE SON IGUALES, PERO APLICADOS A VARIABLES DISTINTAS
     switch (msbits) { // TRANSFORMANDO LOS MSB EN UNA CADENA HEX
         case 0:
             *mshex = 0B00111111;
@@ -67,7 +69,7 @@ void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex) {
         default:
             *mshex = 0B10000000; //EL CASO DEFAULT ACTIVA EL PUNTO
     }
-    switch (lsbits) {   // TRANSFORMANDO LOS LSB EN UNA CADENA HEX
+    switch (lsbits) { // TRANSFORMANDO LOS LSB EN UNA CADENA HEX
         case 0:
             *lshex = 0B00111111;
             break;
@@ -119,6 +121,11 @@ void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex) {
         default:
             *lshex = 0B10000000; //EL CASO DEFAULT ACTIVA EL PUNTO
     }
+}
+
+void adc_lect(volatile uint8_t *data) { // LECTURA DEL ADC
+    *data = ADRESH;
+    ADIF = 0;
 }
 
 

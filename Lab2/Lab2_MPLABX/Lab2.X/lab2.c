@@ -1,8 +1,12 @@
 /*
- * File:   lab2.c
- * Author: Steve Chex
- *
- * Created on 29 de enero de 2021, 08:02 AM
+ * Archivo: Lab2.c
+ * Autor:   Steve Chex
+ * Lab 2:   Interrupciones y Librerias
+ * Descripción: Comparación de dato en contador binario contra contador
+ *              hexadecimal. Incluye "alarma" de comparación entre contadores.
+ *              Creado con interrupciones, modulo ADC y librería propia.
+ *   
+ *Created on 29 de enero de 2021, 08:02 AM
  */
 // CONFIG1
 #pragma config FOSC = XT        // Oscillator Selection bits (XT oscillator: Crystal/resonator on RA6/OSC2/CLKOUT and RA7/OSC1/CLKIN)
@@ -29,18 +33,18 @@
 
 #include <xc.h>
 #include <stdint.h>
-#include "lab2lib.h"
+#include "lab2lib.h"  // NOMBRE DE LA LIBRERÍA CREADA PARA EL LABORATORIO
 
 
 //******************************************************************************
-//                    DEFINICIONES Y VARIABLES
+//                 DEFINICIONES, PROTOTIPOS Y VARIABLES
 //******************************************************************************
 
 #define _XTAL_FREQ 4000000  //PARA EL USO DE LA FUNCIÓN __delay_ms
 
 void setup(void);
-void adc_start(void);
-void __interrupt()isr(void);
+void adc_start(void);   // FUNCIÓN QUE INICIA LA CONVERSIÓN DEL ADC
+void __interrupt()isr(void);  //VECTOR DE INTERRUPCIÓN
 
 uint8_t adc_value = 0;
 uint8_t hex_h, hex_l;
@@ -52,8 +56,18 @@ uint8_t hex_h, hex_l;
 void main(void) {
     setup();
     while (1) {
-        adc_start();
-        decodif(adc_value, &hex_h, &hex_l);
+        adc_start();  // FUNCIÓN DE INICIO DEL ADC
+        decodif(adc_value, &hex_h, &hex_l); // FUNCIÓN CONVERSORA A HEXADECIMAL
+        if (PORTD < adc_value){ // ALARMA DE COMPARACIÓN ENTRE CONTADORES
+            PORTBbits.RB3 = 1;  // CONTADOR HEX MAYOR A CONTADOR BINARIO
+        }
+        else {
+            PORTBbits.RB3 = 0;  // CONTADOR HEX MENOR A CONTADOR BINARIO
+        }
+        if (PORTBbits.RB0 || PORTBbits.RB1){ // INCREMENTO/DECREMENTO CONTINUO
+            __delay_ms(400); // DELAY POR CAPACIDAD DE SIMULACION EN MI PC
+            RBIF = 1; // FORZAR LA INTERRUPCION
+        }
     }
 }
 
@@ -69,11 +83,11 @@ void setup(void) {
     ANSELH = 0;
     ANSELHbits.ANS8 = 1; // PUERTO ANALOGICO: B2   
     TRISB = 0B00000111; // ENTRADAS: PUERTOS 0 AL 2
-    TRISC = 0; // LIMPIANDO PUERTOS RESTANTES
-    TRISD = 0;
-    PORTB = 0; // ESTABLECIENDO VALORES INICIALES
-    PORTC = 0;
-    PORTD = 0;
+    TRISC = 0; // ASIGNANDO COMO SALIDAS LOS PUERTOS D Y C
+    TRISD = 0; // PARA LOS LEDS Y 7 SEGMENTOS
+    PORTB = 0; // ESTABLECIENDO VALORES INICIALES EN TODOS LOS PUERTOS
+    PORTC = 0; 
+    PORTD = 127; // VALOR CONVENIENTE PARA EL CONTADOR
 
     // ADC
 
@@ -90,8 +104,7 @@ void setup(void) {
     // INTERRUPCIONES
 
     IOCB = 0B00000111; // ACTIVAR PINES DE INTERRUPCIÓN
-    PIE1 = 0B01000010; // ACTIVAR INTERRUPCIÓN POR CONVERSION DEL ADC Y 
-    // OVERFLOW DEL TIMER2
+    PIE1 = 0B01000010; // ACTIVAR INT. DEL ADC Y DEL TIMER2
     PIR1bits.ADIF = 0; // LIMPIANDO BANDERA DEL ADC
     INTCON = 0B11001000; // ACTIVAR INT. GLOBALES, DEL PUERTO B, RBIF = 0 E
     // INTERRUPCIONES PERIFERICAS
@@ -115,28 +128,27 @@ void adc_start(void) {
 
 void __interrupt()isr(void) {
     if (ADIF && ADIE) { // LECTURA DEL VALOR ANALOGICO
-        adc_value = ADRESH;
-        ADIF = 0;
+        adc_lect(&adc_value); // FUNCIÓN QUE LEE EL ADC Y BORRA EL BIT ADIF
     }
     if (TMR2IE && TMR2IF) { // MULTIPLEXADO DISPLAYS
         if (1 == PORTBbits.RB4) {
-            PORTBbits.RB4 = 0;
-            PORTC = hex_h;
-            PORTBbits.RB5 = 1;
-        } 
-        else {
+            PORTBbits.RB4 = 0; // APAGA EL DISPLAY ACTUAL
+            PORTC = hex_l; // ESCRIBE EL NUEVO DATO
+            PORTBbits.RB5 = 1; // ENCIENDE EL SIGUIENTE DISPLAY
+        }
+        else { // MISMA ESTRUCTURA QUE ANTES
             PORTBbits.RB5 = 0;
-            PORTC = hex_l;
+            PORTC = hex_h;
             PORTBbits.RB4 = 1;
         }
         TMR2IF = 0;
     }
-    if (RBIE && RBIF) { // CAMBIO DE ESTADO EN PORTB
+    if (RBIE && RBIF) { // CAMBIO DE ESTADO EN EL CONTADOR BINARIO
         if (1 == PORTBbits.RB0) {
-            //PORTD++;
+            PORTD++; // INCREMENTO EN EL PUERTO B
         }
         if (1 == PORTBbits.RB1) {
-            //PORTD--;
+            PORTD--; // DECREMENTO EN EL PUERTO B
         }
         RBIF = 0;
     }

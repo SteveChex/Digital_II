@@ -1,4 +1,10 @@
 Version 4.0 HI-TECH Software Intermediate Code
+"1238 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1238: extern volatile unsigned char ADRESH __attribute__((address(0x01E)));
+[v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
+"3587
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3587: extern volatile __bit ADIF __attribute__((address(0x66)));
+[v _ADIF `Vb ~T0 @X0 0 e@102 ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -234,180 +240,186 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "13 lab2lib.c
-[; ;lab2lib.c: 13: void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex) {
-[v _decodif `(v ~T0 @X0 1 ef3`uc`*uc`*uc ]
+[; ;lab2lib.c: 13: void decodif(volatile uint8_t number, volatile uint8_t* mshex,
+[v _decodif `(v ~T0 @X0 1 ef3`Vuc`*Vuc`*Vuc ]
+"14
+[; ;lab2lib.c: 14:              volatile uint8_t* lshex){
 {
 [e :U _decodif ]
-[v _number `uc ~T0 @X0 1 r1 ]
-[v _mshex `*uc ~T0 @X0 1 r2 ]
-[v _lshex `*uc ~T0 @X0 1 r3 ]
-[f ]
+"13
+[; ;lab2lib.c: 13: void decodif(volatile uint8_t number, volatile uint8_t* mshex,
+[v _number `Vuc ~T0 @X0 1 r1 ]
+[v _mshex `*Vuc ~T0 @X0 1 r2 ]
 "14
-[; ;lab2lib.c: 14:     uint8_t msbits, lsbits;
+[; ;lab2lib.c: 14:              volatile uint8_t* lshex){
+[v _lshex `*Vuc ~T0 @X0 1 r3 ]
+[f ]
+"15
+[; ;lab2lib.c: 15:     uint8_t msbits, lsbits;
 [v _msbits `uc ~T0 @X0 1 a ]
 [v _lsbits `uc ~T0 @X0 1 a ]
-"15
-[; ;lab2lib.c: 15:     msbits = number >> 4;
-[e = _msbits -> >> -> _number `i -> 4 `i `uc ]
 "16
-[; ;lab2lib.c: 16:     lsbits = number & 0B00001111;
+[; ;lab2lib.c: 16:     msbits = number >> 4;
+[e = _msbits -> >> -> _number `i -> 4 `i `uc ]
+"17
+[; ;lab2lib.c: 17:     lsbits = number & 0B00001111;
 [e = _lsbits -> & -> _number `i -> 15 `i `uc ]
-"18
-[; ;lab2lib.c: 18:     switch (msbits) {
+"20
+[; ;lab2lib.c: 20:     switch (msbits) {
 [e $U 140  ]
 {
-"19
-[; ;lab2lib.c: 19:         case 0:
-[e :U 141 ]
-"20
-[; ;lab2lib.c: 20:             *mshex = 0B00111111;
-[e = *U _mshex -> -> 63 `i `uc ]
 "21
-[; ;lab2lib.c: 21:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 21:         case 0:
+[e :U 141 ]
 "22
-[; ;lab2lib.c: 22:         case 1:
-[e :U 142 ]
+[; ;lab2lib.c: 22:             *mshex = 0B00111111;
+[e = *U _mshex -> -> 63 `i `uc ]
 "23
-[; ;lab2lib.c: 23:             *mshex = 0B00000110;
-[e = *U _mshex -> -> 6 `i `uc ]
+[; ;lab2lib.c: 23:             break;
+[e $U 139  ]
 "24
-[; ;lab2lib.c: 24:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 24:         case 1:
+[e :U 142 ]
 "25
-[; ;lab2lib.c: 25:         case 2:
-[e :U 143 ]
+[; ;lab2lib.c: 25:             *mshex = 0B00000110;
+[e = *U _mshex -> -> 6 `i `uc ]
 "26
-[; ;lab2lib.c: 26:             *mshex = 0B01011011;
-[e = *U _mshex -> -> 91 `i `uc ]
+[; ;lab2lib.c: 26:             break;
+[e $U 139  ]
 "27
-[; ;lab2lib.c: 27:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 27:         case 2:
+[e :U 143 ]
 "28
-[; ;lab2lib.c: 28:         case 3:
-[e :U 144 ]
+[; ;lab2lib.c: 28:             *mshex = 0B01011011;
+[e = *U _mshex -> -> 91 `i `uc ]
 "29
-[; ;lab2lib.c: 29:             *mshex = 0B01001111;
-[e = *U _mshex -> -> 79 `i `uc ]
+[; ;lab2lib.c: 29:             break;
+[e $U 139  ]
 "30
-[; ;lab2lib.c: 30:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 30:         case 3:
+[e :U 144 ]
 "31
-[; ;lab2lib.c: 31:         case 4:
-[e :U 145 ]
+[; ;lab2lib.c: 31:             *mshex = 0B01001111;
+[e = *U _mshex -> -> 79 `i `uc ]
 "32
-[; ;lab2lib.c: 32:             *mshex = 0B01100110;
-[e = *U _mshex -> -> 102 `i `uc ]
+[; ;lab2lib.c: 32:             break;
+[e $U 139  ]
 "33
-[; ;lab2lib.c: 33:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 33:         case 4:
+[e :U 145 ]
 "34
-[; ;lab2lib.c: 34:         case 5:
-[e :U 146 ]
+[; ;lab2lib.c: 34:             *mshex = 0B01100110;
+[e = *U _mshex -> -> 102 `i `uc ]
 "35
-[; ;lab2lib.c: 35:             *mshex = 0B01101101;
-[e = *U _mshex -> -> 109 `i `uc ]
+[; ;lab2lib.c: 35:             break;
+[e $U 139  ]
 "36
-[; ;lab2lib.c: 36:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 36:         case 5:
+[e :U 146 ]
 "37
-[; ;lab2lib.c: 37:         case 6:
-[e :U 147 ]
+[; ;lab2lib.c: 37:             *mshex = 0B01101101;
+[e = *U _mshex -> -> 109 `i `uc ]
 "38
-[; ;lab2lib.c: 38:             *mshex = 0B01111101;
-[e = *U _mshex -> -> 125 `i `uc ]
+[; ;lab2lib.c: 38:             break;
+[e $U 139  ]
 "39
-[; ;lab2lib.c: 39:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 39:         case 6:
+[e :U 147 ]
 "40
-[; ;lab2lib.c: 40:         case 7:
-[e :U 148 ]
+[; ;lab2lib.c: 40:             *mshex = 0B01111101;
+[e = *U _mshex -> -> 125 `i `uc ]
 "41
-[; ;lab2lib.c: 41:             *mshex = 0B00000111;
-[e = *U _mshex -> -> 7 `i `uc ]
+[; ;lab2lib.c: 41:             break;
+[e $U 139  ]
 "42
-[; ;lab2lib.c: 42:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 42:         case 7:
+[e :U 148 ]
 "43
-[; ;lab2lib.c: 43:         case 8:
-[e :U 149 ]
+[; ;lab2lib.c: 43:             *mshex = 0B00000111;
+[e = *U _mshex -> -> 7 `i `uc ]
 "44
-[; ;lab2lib.c: 44:             *mshex = 0B01111111;
-[e = *U _mshex -> -> 127 `i `uc ]
+[; ;lab2lib.c: 44:             break;
+[e $U 139  ]
 "45
-[; ;lab2lib.c: 45:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 45:         case 8:
+[e :U 149 ]
 "46
-[; ;lab2lib.c: 46:         case 9:
-[e :U 150 ]
+[; ;lab2lib.c: 46:             *mshex = 0B01111111;
+[e = *U _mshex -> -> 127 `i `uc ]
 "47
-[; ;lab2lib.c: 47:             *mshex = 0B01101111;
-[e = *U _mshex -> -> 111 `i `uc ]
+[; ;lab2lib.c: 47:             break;
+[e $U 139  ]
 "48
-[; ;lab2lib.c: 48:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 48:         case 9:
+[e :U 150 ]
 "49
-[; ;lab2lib.c: 49:         case 10:
-[e :U 151 ]
+[; ;lab2lib.c: 49:             *mshex = 0B01101111;
+[e = *U _mshex -> -> 111 `i `uc ]
 "50
-[; ;lab2lib.c: 50:             *mshex = 0B01110111;
-[e = *U _mshex -> -> 119 `i `uc ]
+[; ;lab2lib.c: 50:             break;
+[e $U 139  ]
 "51
-[; ;lab2lib.c: 51:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 51:         case 10:
+[e :U 151 ]
 "52
-[; ;lab2lib.c: 52:         case 11:
-[e :U 152 ]
+[; ;lab2lib.c: 52:             *mshex = 0B01110111;
+[e = *U _mshex -> -> 119 `i `uc ]
 "53
-[; ;lab2lib.c: 53:             *mshex = 0B01111100;
-[e = *U _mshex -> -> 124 `i `uc ]
+[; ;lab2lib.c: 53:             break;
+[e $U 139  ]
 "54
-[; ;lab2lib.c: 54:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 54:         case 11:
+[e :U 152 ]
 "55
-[; ;lab2lib.c: 55:         case 12:
-[e :U 153 ]
+[; ;lab2lib.c: 55:             *mshex = 0B01111100;
+[e = *U _mshex -> -> 124 `i `uc ]
 "56
-[; ;lab2lib.c: 56:             *mshex = 0B00111001;
-[e = *U _mshex -> -> 57 `i `uc ]
+[; ;lab2lib.c: 56:             break;
+[e $U 139  ]
 "57
-[; ;lab2lib.c: 57:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 57:         case 12:
+[e :U 153 ]
 "58
-[; ;lab2lib.c: 58:         case 13:
-[e :U 154 ]
+[; ;lab2lib.c: 58:             *mshex = 0B00111001;
+[e = *U _mshex -> -> 57 `i `uc ]
 "59
-[; ;lab2lib.c: 59:             *mshex = 0B01011110;
-[e = *U _mshex -> -> 94 `i `uc ]
+[; ;lab2lib.c: 59:             break;
+[e $U 139  ]
 "60
-[; ;lab2lib.c: 60:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 60:         case 13:
+[e :U 154 ]
 "61
-[; ;lab2lib.c: 61:         case 14:
-[e :U 155 ]
+[; ;lab2lib.c: 61:             *mshex = 0B01011110;
+[e = *U _mshex -> -> 94 `i `uc ]
 "62
-[; ;lab2lib.c: 62:             *mshex = 0B01111001;
-[e = *U _mshex -> -> 121 `i `uc ]
+[; ;lab2lib.c: 62:             break;
+[e $U 139  ]
 "63
-[; ;lab2lib.c: 63:             break;
-[e $U 139  ]
+[; ;lab2lib.c: 63:         case 14:
+[e :U 155 ]
 "64
-[; ;lab2lib.c: 64:         case 15:
-[e :U 156 ]
+[; ;lab2lib.c: 64:             *mshex = 0B01111001;
+[e = *U _mshex -> -> 121 `i `uc ]
 "65
-[; ;lab2lib.c: 65:             *mshex = 0B01110001;
-[e = *U _mshex -> -> 113 `i `uc ]
-"66
-[; ;lab2lib.c: 66:             break;
+[; ;lab2lib.c: 65:             break;
 [e $U 139  ]
+"66
+[; ;lab2lib.c: 66:         case 15:
+[e :U 156 ]
 "67
-[; ;lab2lib.c: 67:         default:
-[e :U 157 ]
+[; ;lab2lib.c: 67:             *mshex = 0B01110001;
+[e = *U _mshex -> -> 113 `i `uc ]
 "68
-[; ;lab2lib.c: 68:             *mshex = 0B10000000;
-[e = *U _mshex -> -> 128 `i `uc ]
+[; ;lab2lib.c: 68:             break;
+[e $U 139  ]
 "69
-[; ;lab2lib.c: 69:     }
+[; ;lab2lib.c: 69:         default:
+[e :U 157 ]
+"70
+[; ;lab2lib.c: 70:             *mshex = 0B10000000;
+[e = *U _mshex -> -> 128 `i `uc ]
+"71
+[; ;lab2lib.c: 71:     }
 }
 [e $U 139  ]
 [e :U 140 ]
@@ -429,162 +441,162 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 15 `i 156
  157 ]
 [e :U 139 ]
-"70
-[; ;lab2lib.c: 70:     switch (lsbits) {
+"72
+[; ;lab2lib.c: 72:     switch (lsbits) {
 [e $U 159  ]
 {
-"71
-[; ;lab2lib.c: 71:         case 0:
-[e :U 160 ]
-"72
-[; ;lab2lib.c: 72:             *lshex = 0B00111111;
-[e = *U _lshex -> -> 63 `i `uc ]
 "73
-[; ;lab2lib.c: 73:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 73:         case 0:
+[e :U 160 ]
 "74
-[; ;lab2lib.c: 74:         case 1:
-[e :U 161 ]
+[; ;lab2lib.c: 74:             *lshex = 0B00111111;
+[e = *U _lshex -> -> 63 `i `uc ]
 "75
-[; ;lab2lib.c: 75:             *lshex = 0B00000110;
-[e = *U _lshex -> -> 6 `i `uc ]
+[; ;lab2lib.c: 75:             break;
+[e $U 158  ]
 "76
-[; ;lab2lib.c: 76:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 76:         case 1:
+[e :U 161 ]
 "77
-[; ;lab2lib.c: 77:         case 2:
-[e :U 162 ]
+[; ;lab2lib.c: 77:             *lshex = 0B00000110;
+[e = *U _lshex -> -> 6 `i `uc ]
 "78
-[; ;lab2lib.c: 78:             *lshex = 0B01011011;
-[e = *U _lshex -> -> 91 `i `uc ]
+[; ;lab2lib.c: 78:             break;
+[e $U 158  ]
 "79
-[; ;lab2lib.c: 79:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 79:         case 2:
+[e :U 162 ]
 "80
-[; ;lab2lib.c: 80:         case 3:
-[e :U 163 ]
+[; ;lab2lib.c: 80:             *lshex = 0B01011011;
+[e = *U _lshex -> -> 91 `i `uc ]
 "81
-[; ;lab2lib.c: 81:             *lshex = 0B01001111;
-[e = *U _lshex -> -> 79 `i `uc ]
+[; ;lab2lib.c: 81:             break;
+[e $U 158  ]
 "82
-[; ;lab2lib.c: 82:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 82:         case 3:
+[e :U 163 ]
 "83
-[; ;lab2lib.c: 83:         case 4:
-[e :U 164 ]
+[; ;lab2lib.c: 83:             *lshex = 0B01001111;
+[e = *U _lshex -> -> 79 `i `uc ]
 "84
-[; ;lab2lib.c: 84:             *lshex = 0B01100110;
-[e = *U _lshex -> -> 102 `i `uc ]
+[; ;lab2lib.c: 84:             break;
+[e $U 158  ]
 "85
-[; ;lab2lib.c: 85:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 85:         case 4:
+[e :U 164 ]
 "86
-[; ;lab2lib.c: 86:         case 5:
-[e :U 165 ]
+[; ;lab2lib.c: 86:             *lshex = 0B01100110;
+[e = *U _lshex -> -> 102 `i `uc ]
 "87
-[; ;lab2lib.c: 87:             *lshex = 0B01101101;
-[e = *U _lshex -> -> 109 `i `uc ]
+[; ;lab2lib.c: 87:             break;
+[e $U 158  ]
 "88
-[; ;lab2lib.c: 88:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 88:         case 5:
+[e :U 165 ]
 "89
-[; ;lab2lib.c: 89:         case 6:
-[e :U 166 ]
+[; ;lab2lib.c: 89:             *lshex = 0B01101101;
+[e = *U _lshex -> -> 109 `i `uc ]
 "90
-[; ;lab2lib.c: 90:             *lshex = 0B01111101;
-[e = *U _lshex -> -> 125 `i `uc ]
+[; ;lab2lib.c: 90:             break;
+[e $U 158  ]
 "91
-[; ;lab2lib.c: 91:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 91:         case 6:
+[e :U 166 ]
 "92
-[; ;lab2lib.c: 92:         case 7:
-[e :U 167 ]
+[; ;lab2lib.c: 92:             *lshex = 0B01111101;
+[e = *U _lshex -> -> 125 `i `uc ]
 "93
-[; ;lab2lib.c: 93:             *lshex = 0B00000111;
-[e = *U _lshex -> -> 7 `i `uc ]
+[; ;lab2lib.c: 93:             break;
+[e $U 158  ]
 "94
-[; ;lab2lib.c: 94:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 94:         case 7:
+[e :U 167 ]
 "95
-[; ;lab2lib.c: 95:         case 8:
-[e :U 168 ]
+[; ;lab2lib.c: 95:             *lshex = 0B00000111;
+[e = *U _lshex -> -> 7 `i `uc ]
 "96
-[; ;lab2lib.c: 96:             *lshex = 0B01111111;
-[e = *U _lshex -> -> 127 `i `uc ]
+[; ;lab2lib.c: 96:             break;
+[e $U 158  ]
 "97
-[; ;lab2lib.c: 97:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 97:         case 8:
+[e :U 168 ]
 "98
-[; ;lab2lib.c: 98:         case 9:
-[e :U 169 ]
+[; ;lab2lib.c: 98:             *lshex = 0B01111111;
+[e = *U _lshex -> -> 127 `i `uc ]
 "99
-[; ;lab2lib.c: 99:             *lshex = 0B01101111;
-[e = *U _lshex -> -> 111 `i `uc ]
+[; ;lab2lib.c: 99:             break;
+[e $U 158  ]
 "100
-[; ;lab2lib.c: 100:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 100:         case 9:
+[e :U 169 ]
 "101
-[; ;lab2lib.c: 101:         case 10:
-[e :U 170 ]
+[; ;lab2lib.c: 101:             *lshex = 0B01101111;
+[e = *U _lshex -> -> 111 `i `uc ]
 "102
-[; ;lab2lib.c: 102:             *lshex = 0B01110111;
-[e = *U _lshex -> -> 119 `i `uc ]
+[; ;lab2lib.c: 102:             break;
+[e $U 158  ]
 "103
-[; ;lab2lib.c: 103:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 103:         case 10:
+[e :U 170 ]
 "104
-[; ;lab2lib.c: 104:         case 11:
-[e :U 171 ]
+[; ;lab2lib.c: 104:             *lshex = 0B01110111;
+[e = *U _lshex -> -> 119 `i `uc ]
 "105
-[; ;lab2lib.c: 105:             *lshex = 0B01111100;
-[e = *U _lshex -> -> 124 `i `uc ]
+[; ;lab2lib.c: 105:             break;
+[e $U 158  ]
 "106
-[; ;lab2lib.c: 106:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 106:         case 11:
+[e :U 171 ]
 "107
-[; ;lab2lib.c: 107:         case 12:
-[e :U 172 ]
+[; ;lab2lib.c: 107:             *lshex = 0B01111100;
+[e = *U _lshex -> -> 124 `i `uc ]
 "108
-[; ;lab2lib.c: 108:             *lshex = 0B00111001;
-[e = *U _lshex -> -> 57 `i `uc ]
+[; ;lab2lib.c: 108:             break;
+[e $U 158  ]
 "109
-[; ;lab2lib.c: 109:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 109:         case 12:
+[e :U 172 ]
 "110
-[; ;lab2lib.c: 110:         case 13:
-[e :U 173 ]
+[; ;lab2lib.c: 110:             *lshex = 0B00111001;
+[e = *U _lshex -> -> 57 `i `uc ]
 "111
-[; ;lab2lib.c: 111:             *lshex = 0B01011110;
-[e = *U _lshex -> -> 94 `i `uc ]
+[; ;lab2lib.c: 111:             break;
+[e $U 158  ]
 "112
-[; ;lab2lib.c: 112:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 112:         case 13:
+[e :U 173 ]
 "113
-[; ;lab2lib.c: 113:         case 14:
-[e :U 174 ]
+[; ;lab2lib.c: 113:             *lshex = 0B01011110;
+[e = *U _lshex -> -> 94 `i `uc ]
 "114
-[; ;lab2lib.c: 114:             *lshex = 0B01111001;
-[e = *U _lshex -> -> 121 `i `uc ]
+[; ;lab2lib.c: 114:             break;
+[e $U 158  ]
 "115
-[; ;lab2lib.c: 115:             break;
-[e $U 158  ]
+[; ;lab2lib.c: 115:         case 14:
+[e :U 174 ]
 "116
-[; ;lab2lib.c: 116:         case 15:
-[e :U 175 ]
+[; ;lab2lib.c: 116:             *lshex = 0B01111001;
+[e = *U _lshex -> -> 121 `i `uc ]
 "117
-[; ;lab2lib.c: 117:             *lshex = 0B01110001;
-[e = *U _lshex -> -> 113 `i `uc ]
-"118
-[; ;lab2lib.c: 118:             break;
+[; ;lab2lib.c: 117:             break;
 [e $U 158  ]
+"118
+[; ;lab2lib.c: 118:         case 15:
+[e :U 175 ]
 "119
-[; ;lab2lib.c: 119:         default:
-[e :U 176 ]
+[; ;lab2lib.c: 119:             *lshex = 0B01110001;
+[e = *U _lshex -> -> 113 `i `uc ]
 "120
-[; ;lab2lib.c: 120:             *lshex = 0B10000000;
-[e = *U _lshex -> -> 128 `i `uc ]
+[; ;lab2lib.c: 120:             break;
+[e $U 158  ]
 "121
-[; ;lab2lib.c: 121:     }
+[; ;lab2lib.c: 121:         default:
+[e :U 176 ]
+"122
+[; ;lab2lib.c: 122:             *lshex = 0B10000000;
+[e = *U _lshex -> -> 128 `i `uc ]
+"123
+[; ;lab2lib.c: 123:     }
 }
 [e $U 158  ]
 [e :U 159 ]
@@ -606,7 +618,24 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 15 `i 175
  176 ]
 [e :U 158 ]
-"122
-[; ;lab2lib.c: 122: }
+"124
+[; ;lab2lib.c: 124: }
 [e :UE 138 ]
+}
+"126
+[; ;lab2lib.c: 126: void adc_lect(volatile uint8_t *data) {
+[v _adc_lect `(v ~T0 @X0 1 ef1`*Vuc ]
+{
+[e :U _adc_lect ]
+[v _data `*Vuc ~T0 @X0 1 r1 ]
+[f ]
+"127
+[; ;lab2lib.c: 127:     *data = ADRESH;
+[e = *U _data _ADRESH ]
+"128
+[; ;lab2lib.c: 128:     ADIF = 0;
+[e = _ADIF -> -> 0 `i `b ]
+"129
+[; ;lab2lib.c: 129: }
+[e :UE 177 ]
 }
