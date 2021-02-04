@@ -2511,8 +2511,6 @@ extern __bank0 __bit __timeout;
 # 28 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
 # 30 "lab2.c" 2
 
-# 1 "./lab2lib.h" 1
-# 14 "./lab2lib.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
 typedef signed char int8_t;
@@ -2646,11 +2644,23 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 14 "./lab2lib.h" 2
 # 31 "lab2.c" 2
-# 40 "lab2.c"
-void setup(void);
 
+# 1 "./lab2lib.h" 1
+# 14 "./lab2lib.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 14 "./lab2lib.h" 2
+
+
+void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex);
+# 32 "lab2.c" 2
+# 41 "lab2.c"
+void setup(void);
+void adc_start(void);
+void __attribute__((picinterrupt((""))))isr(void);
+
+uint8_t adc_value = 0;
+uint8_t hex_h, hex_l;
 
 
 
@@ -2659,10 +2669,9 @@ void setup(void);
 void main(void) {
     setup();
     while (1) {
-
+        adc_start();
+        decodif(adc_value, &hex_h, &hex_l);
     }
-
-    return;
 }
 
 
@@ -2670,6 +2679,9 @@ void main(void) {
 
 
 void setup(void) {
+
+
+
     ANSEL = 0;
     ANSELH = 0;
     ANSELHbits.ANS8 = 1;
@@ -2679,18 +2691,69 @@ void setup(void) {
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
-    INTCON = 0B10001000;
-    IOCB = 0B00000011;
+
+
+
+    ADCON0 = 0B01100000;
+    ADCON1 = 0B00000000;
+    ADCON0bits.ADON = 1;
+
+
+
+    PR2 = 0B11111111;
+    TMR2 = 0;
+    T2CON = 0B00000110;
+
+
+
+    IOCB = 0B00000111;
+    PIE1 = 0B01000010;
+
+    PIR1bits.ADIF = 0;
+    INTCON = 0B11001000;
 
 }
-# 86 "lab2.c"
+
+
+
+
+
+void adc_start(void) {
+    _delay((unsigned long)((10)*(4000000/4000.0)));
+    if (0 == ADCON0bits.GO_nDONE) {
+        ADCON0bits.GO_nDONE = 1;
+    }
+}
+
+
+
+
+
+
 void __attribute__((picinterrupt((""))))isr(void) {
+    if (ADIF && ADIE) {
+        adc_value = ADRESH;
+        ADIF = 0;
+    }
+    if (TMR2IE && TMR2IF) {
+        if (1 == PORTBbits.RB4) {
+            PORTBbits.RB4 = 0;
+            PORTC = hex_h;
+            PORTBbits.RB5 = 1;
+        }
+        else {
+            PORTBbits.RB5 = 0;
+            PORTC = hex_l;
+            PORTBbits.RB4 = 1;
+        }
+        TMR2IF = 0;
+    }
     if (RBIE && RBIF) {
         if (1 == PORTBbits.RB0) {
-            PORTD++;
+
         }
         if (1 == PORTBbits.RB1) {
-            PORTD--;
+
         }
         RBIF = 0;
     }

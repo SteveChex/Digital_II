@@ -13,4 +13,7 @@
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include <stdint.h>
 
+void decodif(uint8_t number, uint8_t* mshex, uint8_t* lshex);
+
+
 #endif  /* LAB2LIB*/

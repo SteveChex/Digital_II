@@ -28,6 +28,7 @@
 //******************************************************************************
 
 #include <xc.h>
+#include <stdint.h>
 #include "lab2lib.h"
 
 
@@ -35,10 +36,14 @@
 //                    DEFINICIONES Y VARIABLES
 //******************************************************************************
 
-#define _XTAL_FREQ 8000000  //PARA EL USO DE LA FUNCIÓN __delay_ms
+#define _XTAL_FREQ 4000000  //PARA EL USO DE LA FUNCIÓN __delay_ms
 
 void setup(void);
-//void __interrupt()isr(void);
+void adc_start(void);
+void __interrupt()isr(void);
+
+uint8_t adc_value = 0;
+uint8_t hex_h, hex_l;
 
 //******************************************************************************
 //                         LOOP PRINCIPAL
@@ -47,10 +52,9 @@ void setup(void);
 void main(void) {
     setup();
     while (1) {
-
+        adc_start();
+        decodif(adc_value, &hex_h, &hex_l);
     }
-
-    return;
 }
 
 //******************************************************************************
@@ -58,38 +62,81 @@ void main(void) {
 //******************************************************************************
 
 void setup(void) {
-    ANSEL = 0;
+
+    // CONFIGURACION GENERAL
+
+    ANSEL = 0; // LIMPIANDO PUERTOS ANALÓGICOS
     ANSELH = 0;
-    ANSELHbits.ANS8 = 1;
-    TRISB = 0B00000111; // SALIDAS: PUERTOS 0 AL 2
-    TRISC = 0;
+    ANSELHbits.ANS8 = 1; // PUERTO ANALOGICO: B2   
+    TRISB = 0B00000111; // ENTRADAS: PUERTOS 0 AL 2
+    TRISC = 0; // LIMPIANDO PUERTOS RESTANTES
     TRISD = 0;
-    PORTB = 0;
+    PORTB = 0; // ESTABLECIENDO VALORES INICIALES
     PORTC = 0;
     PORTD = 0;
-    INTCON = 0B10001000;
-    IOCB = 0B00000011;
 
+    // ADC
+
+    ADCON0 = 0B01100000; // CONVERSION EN B2 (AN8) A Fosc/8 (2ns) DE Tad
+    ADCON1 = 0B00000000; // JUSTIFICADO A LA IZQUIERDA. REFERENCIA VDD Y VSS
+    ADCON0bits.ADON = 1; //ACTIVANDO MODULO ADC
+
+    //TIMER2
+
+    PR2 = 0B11111111; // ASIGNANDO EL VALOR MÁXIMO DEL TIMER 2
+    TMR2 = 0; // ASIGNANDO VALOR INICIAL PARA EL TIMER 2
+    T2CON = 0B00000110; // INICIANDO EL TIMER 2 CON PRESCALER DE 16    
+
+    // INTERRUPCIONES
+
+    IOCB = 0B00000111; // ACTIVAR PINES DE INTERRUPCIÓN
+    PIE1 = 0B01000010; // ACTIVAR INTERRUPCIÓN POR CONVERSION DEL ADC Y 
+    // OVERFLOW DEL TIMER2
+    PIR1bits.ADIF = 0; // LIMPIANDO BANDERA DEL ADC
+    INTCON = 0B11001000; // ACTIVAR INT. GLOBALES, DEL PUERTO B, RBIF = 0 E
+    // INTERRUPCIONES PERIFERICAS
 }
 
 //******************************************************************************
 //                            FUNCIONES
 //******************************************************************************
 
-
+void adc_start(void) {
+    __delay_ms(10); // TIEMPO DE ESPERA RECOMENDADO PARA EL ADC
+    if (0 == ADCON0bits.GO_nDONE) {
+        ADCON0bits.GO_nDONE = 1;
+    }
+}
 
 
 //******************************************************************************
-//                          INTERRUPCIONES
+//                          INTERRUPCION
 //******************************************************************************
 
 void __interrupt()isr(void) {
-    if (RBIE && RBIF) {
+    if (ADIF && ADIE) { // LECTURA DEL VALOR ANALOGICO
+        adc_value = ADRESH;
+        ADIF = 0;
+    }
+    if (TMR2IE && TMR2IF) { // MULTIPLEXADO DISPLAYS
+        if (1 == PORTBbits.RB4) {
+            PORTBbits.RB4 = 0;
+            PORTC = hex_h;
+            PORTBbits.RB5 = 1;
+        } 
+        else {
+            PORTBbits.RB5 = 0;
+            PORTC = hex_l;
+            PORTBbits.RB4 = 1;
+        }
+        TMR2IF = 0;
+    }
+    if (RBIE && RBIF) { // CAMBIO DE ESTADO EN PORTB
         if (1 == PORTBbits.RB0) {
-            PORTD++;
+            //PORTD++;
         }
         if (1 == PORTBbits.RB1) {
-            PORTD--;
+            //PORTD--;
         }
         RBIF = 0;
     }
