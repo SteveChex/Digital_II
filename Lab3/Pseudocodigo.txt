@@ -1,0 +1,24 @@
+Preparación:
+	Estudiar y modificar la libreria de la pantalla LCD
+	Adaptar proteus para el envio de datos desde una consola simulada o real, segun la facilidad de implementación de cada una.
+Configuración:
+	Activar dos puertos analógicos
+	preparar 8 pines como salidas digitales
+	Activar la comunicación USART
+	Importar la librería de la pantalla LCD
+	Inicializar la pantalla LCD
+	Activar interrupción por comunicación USART en recepción de datos
+Parte 1:
+	Leer constantemente el valor de ambos potenciómetros. (Pienso en usar una interrupción, pero no se aun si será necesario).
+	"Formatear" datos recibidos antes de enviarlos a la pantalla.
+	Usando la libreria de la pantalla LCD, enviar los datos formateados. Se excluirá momentaneamente el valor del contador.
+Parte 2:
+	Habilitar la comunicación USART, de modo que cada vez que se modifique el valor de un potenciómetro, este dato se envie a la computadora/consola
+Parte 3:
+	Habilitar una interrupción de recepción de datos. 
+		Si el dato recibido coincide con el valor del signo "+" de la tabla ASCII, entonces se incrementará el valor de un contador.
+		Si el dato recidibo coincide con el valor del signo "-" de la tabla ASCII, entonces se restará 1 al valor de un contador.
+	El valor del contador nuevo se enviará a la pantalla LCD 	
+		Se asignará un formato para el dato
+		Se enviará el dato junto con el formato a la pantalla.
+	
