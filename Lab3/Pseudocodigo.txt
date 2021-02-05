@@ -1,3 +1,6 @@
+Steve Chex - 18476.
+Pseudocódigo.	
+
 Preparación:
 	Estudiar y modificar la libreria de la pantalla LCD
 	Adaptar proteus para el envio de datos desde una consola simulada o real, segun la facilidad de implementación de cada una.
