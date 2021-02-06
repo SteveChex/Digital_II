@@ -21,15 +21,15 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"57 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lab3.c
+"58 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lab3.c
 [v _main main `(v  1 e 1 0 ]
-"71
+"82
 [v _setup setup `(v  1 e 1 0 ]
-"102
+"113
 [v _adc_start adc_start `(v  1 e 1 0 ]
-"109
+"120
 [v _mostrar_datos mostrar_datos `(v  1 e 1 0 ]
-"125
+"136
 [v _isr isr `II(v  1 e 1 0 ]
 "27 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lcd.c
 [v _Lcd_Port Lcd_Port `(v  1 e 1 0 ]
@@ -49,25 +49,50 @@
 [v _Lcd_Shift_Right Lcd_Shift_Right `(v  1 e 1 0 ]
 "142
 [v _Lcd_Shift_Left Lcd_Shift_Left `(v  1 e 1 0 ]
+"16 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\USART.c
+[v _usart_conf usart_conf `(v  1 e 1 0 ]
+"49
+[v _usart_T_virt usart_T_virt `(v  1 e 1 0 ]
+"54
+[v _usart_T_nl usart_T_nl `(v  1 e 1 0 ]
+"59
+[v _usart_T_erase usart_T_erase `(v  1 e 1 0 ]
+"64
+[v _usart_R usart_R `(v  1 e 1 0 ]
 "228 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
 "352
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
 "459
 [v _INTCON INTCON `VEuc  1 e 1 @11 ]
+[s S292 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"553
+[u S300 . 1 `S292 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES300  1 e 1 @12 ]
 "1038
 [v _RCSTA RCSTA `VEuc  1 e 1 @24 ]
+"1133
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"1140
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
 "1238
 [v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
 "1245
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
-[s S45 . 1 `uc 1 ADON 1 0 :1:0 
+[s S101 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 `uc 1 ADCS 1 0 :2:6 
 ]
 "1276
-[s S50 . 1 `uc 1 . 1 0 :1:0 
+[s S106 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -76,14 +101,14 @@
 `uc 1 ADCS0 1 0 :1:6 
 `uc 1 ADCS1 1 0 :1:7 
 ]
-[s S59 . 1 `uc 1 . 1 0 :1:0 
+[s S115 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S62 . 1 `uc 1 . 1 0 :1:0 
+[s S118 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[u S65 . 1 `S45 1 . 1 0 `S50 1 . 1 0 `S59 1 . 1 0 `S62 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES65  1 e 1 @31 ]
+[u S121 . 1 `S101 1 . 1 0 `S106 1 . 1 0 `S115 1 . 1 0 `S118 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES121  1 e 1 @31 ]
 "1478
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
 "1602
@@ -92,6 +117,25 @@
 [v _PIE1 PIE1 `VEuc  1 e 1 @140 ]
 "2556
 [v _TXSTA TXSTA `VEuc  1 e 1 @152 ]
+[s S43 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"2582
+[s S52 . 1 `uc 1 TXD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 nTX8 1 0 :1:6 
+]
+[s S56 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[u S59 . 1 `S43 1 . 1 0 `S52 1 . 1 0 `S56 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES59  1 e 1 @152 ]
 "2642
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
 "2704
@@ -110,6 +154,10 @@
 [v _RB2 RB2 `VEb  1 e 0 @50 ]
 "4112
 [v _RB3 RB3 `VEb  1 e 0 @51 ]
+"4172
+[v _RCIE RCIE `VEb  1 e 0 @1125 ]
+"4175
+[v _RCIF RCIF `VEb  1 e 0 @101 ]
 "4181
 [v _RD0 RD0 `VEb  1 e 0 @64 ]
 "4184
@@ -128,47 +176,74 @@
 [v _RD7 RD7 `VEb  1 e 0 @71 ]
 "358 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\doprnt.c
 [v _dpowers dpowers `DC[5]ui  1 s 10 dpowers ]
-"50 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lab3.c
+"51 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lab3.c
 [v _pot1 pot1 `uc  1 e 1 0 ]
 [v _pot2 pot2 `uc  1 e 1 0 ]
-"51
+[v _cont cont `uc  1 e 1 0 ]
+"52
+[v _RC_data RC_data `uc  1 e 1 0 ]
+[v _TX_data TX_data `uc  1 e 1 0 ]
+"53
 [v _allData_t allData_t `uc  1 e 1 0 ]
-"57
+"58
 [v _main main `(v  1 e 1 0 ]
 {
-"65
+"76
 } 0
-"71
+"49 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\USART.c
+[v _usart_T_virt usart_T_virt `(v  1 e 1 0 ]
+{
+[v usart_T_virt@t_data t_data `*.4uc  1 a 1 wreg ]
+[v usart_T_virt@t_data t_data `*.4uc  1 a 1 wreg ]
+[v usart_T_virt@t_data t_data `*.4uc  1 a 1 6 ]
+"53
+} 0
+"54
+[v _usart_T_nl usart_T_nl `(v  1 e 1 0 ]
+{
+"58
+} 0
+"59
+[v _usart_T_erase usart_T_erase `(v  1 e 1 0 ]
+{
+"63
+} 0
+"82 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lab3.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"96
+"107
 } 0
-"109
+"16 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\USART.c
+[v _usart_conf usart_conf `(v  1 e 1 0 ]
+{
+"48
+} 0
+"120 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lab3.c
 [v _mostrar_datos mostrar_datos `(v  1 e 1 0 ]
 {
-"119
+"130
 } 0
 "505 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
 [v sprintf@sp sp `*.4uc  1 a 1 wreg ]
 "514
-[v sprintf@width width `i  1 a 2 22 ]
+[v sprintf@width width `i  1 a 2 29 ]
 "545
-[v sprintf@val val `ui  1 a 2 18 ]
+[v sprintf@val val `ui  1 a 2 25 ]
 "512
-[v sprintf@c c `uc  1 a 1 24 ]
+[v sprintf@c c `uc  1 a 1 31 ]
 "521
-[v sprintf@prec prec `c  1 a 1 20 ]
+[v sprintf@prec prec `c  1 a 1 27 ]
 "507
-[v sprintf@ap ap `[1]*.4v  1 a 1 17 ]
+[v sprintf@ap ap `[1]*.4v  1 a 1 24 ]
 "525
-[v sprintf@flag flag `uc  1 a 1 16 ]
+[v sprintf@flag flag `uc  1 a 1 23 ]
 "505
 [v sprintf@sp sp `*.4uc  1 a 1 wreg ]
-[v sprintf@f f `*.24DCuc  1 p 1 6 ]
+[v sprintf@f f `*.24DCuc  1 p 1 13 ]
 "550
-[v sprintf@sp sp `*.4uc  1 a 1 21 ]
+[v sprintf@sp sp `*.4uc  1 a 1 28 ]
 "1567
 } 0
 "8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\isdigit.c
@@ -177,48 +252,48 @@
 [v isdigit@c c `uc  1 a 1 wreg ]
 [v isdigit@c c `uc  1 a 1 wreg ]
 "14
-[v isdigit@c c `uc  1 a 1 4 ]
+[v isdigit@c c `uc  1 a 1 1 ]
 "15
 } 0
 "15 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 {
 "17
-[v ___wmul@product product `ui  1 a 2 7 ]
+[v ___wmul@product product `ui  1 a 2 4 ]
 "15
-[v ___wmul@multiplier multiplier `ui  1 p 2 3 ]
-[v ___wmul@multiplicand multiplicand `ui  1 p 2 5 ]
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
 "53
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
 {
 "10
-[v ___lwmod@counter counter `uc  1 a 1 5 ]
+[v ___lwmod@counter counter `uc  1 a 1 12 ]
 "5
-[v ___lwmod@divisor divisor `ui  1 p 2 0 ]
-[v ___lwmod@dividend dividend `ui  1 p 2 2 ]
+[v ___lwmod@divisor divisor `ui  1 p 2 7 ]
+[v ___lwmod@dividend dividend `ui  1 p 2 9 ]
 "25
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 {
 "10
-[v ___lwdiv@quotient quotient `ui  1 a 2 8 ]
+[v ___lwdiv@quotient quotient `ui  1 a 2 4 ]
 "11
-[v ___lwdiv@counter counter `uc  1 a 1 10 ]
+[v ___lwdiv@counter counter `uc  1 a 1 6 ]
 "5
-[v ___lwdiv@divisor divisor `ui  1 p 2 3 ]
-[v ___lwdiv@dividend dividend `ui  1 p 2 5 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 0 ]
+[v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
 "30
 } 0
 "132 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lcd.c
 [v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
 {
 "133
-[v Lcd_Write_String@i i `i  1 a 2 0 ]
+[v Lcd_Write_String@i i `i  1 a 2 7 ]
 "132
-[v Lcd_Write_String@a a `*.26uc  1 p 2 6 ]
+[v Lcd_Write_String@a a `*.26uc  1 p 2 2 ]
 "136
 } 0
 "111
@@ -227,7 +302,7 @@
 [v Lcd_Write_Char@a a `uc  1 a 1 wreg ]
 [v Lcd_Write_Char@a a `uc  1 a 1 wreg ]
 "125
-[v Lcd_Write_Char@a a `uc  1 a 1 5 ]
+[v Lcd_Write_Char@a a `uc  1 a 1 1 ]
 "130
 } 0
 "74
@@ -235,18 +310,18 @@
 {
 [v Lcd_Set_Cursor@a a `uc  1 a 1 wreg ]
 "75
-[v Lcd_Set_Cursor@temp temp `uc  1 a 1 10 ]
+[v Lcd_Set_Cursor@temp temp `uc  1 a 1 6 ]
 "74
 [v Lcd_Set_Cursor@a a `uc  1 a 1 wreg ]
-[v Lcd_Set_Cursor@b b `uc  1 p 1 7 ]
+[v Lcd_Set_Cursor@b b `uc  1 p 1 3 ]
 "76
-[v Lcd_Set_Cursor@a a `uc  1 a 1 9 ]
+[v Lcd_Set_Cursor@a a `uc  1 a 1 5 ]
 "95
 } 0
-"102 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lab3.c
+"113 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lab3.c
 [v _adc_start adc_start `(v  1 e 1 0 ]
 {
-"107
+"118
 } 0
 "97 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lcd.c
 [v _Lcd_Init Lcd_Init `(v  1 e 1 0 ]
@@ -258,7 +333,7 @@
 {
 [v Lcd_Cmd@a a `uc  1 a 1 wreg ]
 [v Lcd_Cmd@a a `uc  1 a 1 wreg ]
-[v Lcd_Cmd@a a `uc  1 a 1 6 ]
+[v Lcd_Cmd@a a `uc  1 a 1 2 ]
 "68
 } 0
 "27
@@ -266,11 +341,19 @@
 {
 [v Lcd_Port@a a `uc  1 a 1 wreg ]
 [v Lcd_Port@a a `uc  1 a 1 wreg ]
-[v Lcd_Port@a a `uc  1 a 1 3 ]
+[v Lcd_Port@a a `uc  1 a 1 6 ]
 "60
 } 0
-"125 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lab3.c
+"136 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\lab3.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"136
+"156
+} 0
+"64 C:\Users\edgar\Documents\GitHub\Digital_II\Lab3\Lab3_MPLABX\Lab3.X\USART.c
+[v _usart_R usart_R `(v  1 e 1 0 ]
+{
+[v usart_R@r_data r_data `*.1uc  1 a 1 wreg ]
+[v usart_R@r_data r_data `*.1uc  1 a 1 wreg ]
+[v usart_R@r_data r_data `*.1uc  1 a 1 1 ]
+"68
 } 0

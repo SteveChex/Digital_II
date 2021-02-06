@@ -14,6 +14,42 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1038
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1038: extern volatile unsigned char RCSTA __attribute__((address(0x018)));
 [v _RCSTA `Vuc ~T0 @X0 0 e@24 ]
+"2562
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2562:     struct {
+[s S99 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S99 . TX9D TRMT BRGH SENDB SYNC TXEN TX9 CSRC ]
+"2572
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2572:     struct {
+[s S100 :1 `uc 1 :5 `uc 1 :1 `uc 1 ]
+[n S100 . TXD8 . nTX8 ]
+"2577
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2577:     struct {
+[s S101 :6 `uc 1 :1 `uc 1 ]
+[n S101 . . TX8_9 ]
+"2561
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2561: typedef union {
+[u S98 `S99 1 `S100 1 `S101 1 ]
+[n S98 . . . . ]
+"2582
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2582: extern volatile TXSTAbits_t TXSTAbits __attribute__((address(0x098)));
+[v _TXSTAbits `VS98 ~T0 @X0 0 e@152 ]
+"1133
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1133: extern volatile unsigned char TXREG __attribute__((address(0x019)));
+[v _TXREG `Vuc ~T0 @X0 0 e@25 ]
+"543
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 543:     struct {
+[s S19 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S19 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
+"542
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 542: typedef union {
+[u S18 `S19 1 ]
+[n S18 . . ]
+"553
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 553: extern volatile PIR1bits_t PIR1bits __attribute__((address(0x00C)));
+[v _PIR1bits `VS18 ~T0 @X0 0 e@12 ]
+"1140
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1140: extern volatile unsigned char RCREG __attribute__((address(0x01A)));
+[v _RCREG `Vuc ~T0 @X0 0 e@26 ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -248,28 +284,114 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"14 USART.c
-[; ;USART.c: 14: void usart_config(void){
-[v _usart_config `(v ~T0 @X0 1 ef ]
+"16 USART.c
+[; ;USART.c: 16: void usart_conf(void) {
+[v _usart_conf `(v ~T0 @X0 1 ef ]
 {
-[e :U _usart_config ]
+[e :U _usart_conf ]
 [f ]
-"16
-[; ;USART.c: 16:     SPBRG = 25;
-[e = _SPBRG -> -> 25 `i `uc ]
-"17
-[; ;USART.c: 17:     SPBRGH = 0;
-[e = _SPBRGH -> -> 0 `i `uc ]
 "18
-[; ;USART.c: 18:     BAUDCTL = 0B00000000;
-[e = _BAUDCTL -> -> 0 `i `uc ]
+[; ;USART.c: 18:     SPBRG = 25;
+[e = _SPBRG -> -> 25 `i `uc ]
+"19
+[; ;USART.c: 19:     SPBRGH = 0;
+[e = _SPBRGH -> -> 0 `i `uc ]
 "20
-[; ;USART.c: 20:     TXSTA = 0B00100100;
+[; ;USART.c: 20:     BAUDCTL = 0B00000000;
+[e = _BAUDCTL -> -> 0 `i `uc ]
+"29
+[; ;USART.c: 29:     TXSTA = 0B00100100;
 [e = _TXSTA -> -> 36 `i `uc ]
-"21
-[; ;USART.c: 21:     RCSTA = 0B10010000;
+"39
+[; ;USART.c: 39:     RCSTA = 0B10010000;
 [e = _RCSTA -> -> 144 `i `uc ]
-"23
-[; ;USART.c: 23: }
+"48
+[; ;USART.c: 48: }
 [e :UE 138 ]
+}
+"49
+[; ;USART.c: 49: void usart_T_virt(uint8_t *t_data){
+[v _usart_T_virt `(v ~T0 @X0 1 ef1`*uc ]
+{
+[e :U _usart_T_virt ]
+[v _t_data `*uc ~T0 @X0 1 r1 ]
+[f ]
+"50
+[; ;USART.c: 50:     if(1 == TXSTAbits.TRMT){
+[e $ ! == -> 1 `i -> . . _TXSTAbits 0 1 `i 140  ]
+{
+"51
+[; ;USART.c: 51:         TXREG = *t_data;
+[e = _TXREG *U _t_data ]
+"52
+[; ;USART.c: 52:     }
+}
+[e :U 140 ]
+"53
+[; ;USART.c: 53: }
+[e :UE 139 ]
+}
+"54
+[; ;USART.c: 54: void usart_T_nl(void){
+[v _usart_T_nl `(v ~T0 @X0 1 ef ]
+{
+[e :U _usart_T_nl ]
+[f ]
+"55
+[; ;USART.c: 55:     if(1 == TXSTAbits.TRMT){
+[e $ ! == -> 1 `i -> . . _TXSTAbits 0 1 `i 142  ]
+{
+"56
+[; ;USART.c: 56:         TXREG = 13;
+[e = _TXREG -> -> 13 `i `uc ]
+"57
+[; ;USART.c: 57:     }
+}
+[e :U 142 ]
+"58
+[; ;USART.c: 58: }
+[e :UE 141 ]
+}
+"59
+[; ;USART.c: 59: void usart_T_erase(void){
+[v _usart_T_erase `(v ~T0 @X0 1 ef ]
+{
+[e :U _usart_T_erase ]
+[f ]
+"60
+[; ;USART.c: 60:     if(1 == TXSTAbits.TRMT){
+[e $ ! == -> 1 `i -> . . _TXSTAbits 0 1 `i 144  ]
+{
+"61
+[; ;USART.c: 61:         TXREG = 12;
+[e = _TXREG -> -> 12 `i `uc ]
+"62
+[; ;USART.c: 62:     }
+}
+[e :U 144 ]
+"63
+[; ;USART.c: 63: }
+[e :UE 143 ]
+}
+"64
+[; ;USART.c: 64: void usart_R(uint8_t *r_data){
+[v _usart_R `(v ~T0 @X0 1 ef1`*uc ]
+{
+[e :U _usart_R ]
+[v _r_data `*uc ~T0 @X0 1 r1 ]
+[f ]
+"65
+[; ;USART.c: 65:     if (1 == PIR1bits.RCIF){
+[e $ ! == -> 1 `i -> . . _PIR1bits 0 5 `i 146  ]
+{
+"66
+[; ;USART.c: 66:         *r_data = RCREG;
+[e = *U _r_data _RCREG ]
+"67
+[; ;USART.c: 67:     }
+}
+[e :U 146 ]
+"68
+[; ;USART.c: 68: }
+[e :UE 145 ]
 }

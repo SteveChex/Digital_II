@@ -2758,6 +2758,19 @@ void Lcd_Shift_Left(void);
 void Lcd_Credits(void);
 # 37 "lab3.c" 2
 
+# 1 "./USART.h" 1
+# 16 "./USART.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 16 "./USART.h" 2
+
+
+void usart_conf(void);
+void usart_T_virt(uint8_t *t_data);
+void usart_T_nl(void);
+void usart_T_erase(void);
+void usart_R(uint8_t *r_data);
+# 38 "lab3.c" 2
+
 
 
 
@@ -2771,8 +2784,8 @@ void adc_start(void);
 void mostrar_datos(void);
 
 uint8_t pot1 = 0, pot2 = 0, cont = 0;
+uint8_t RC_data, TX_data = 5;
 char allData_t;
-
 
 
 
@@ -2784,6 +2797,16 @@ void main(void) {
     while (1) {
         adc_start();
         mostrar_datos();
+        usart_T_virt(&TX_data);
+        while(1 != TXSTAbits.TRMT){
+            TX_data;
+        }
+        usart_T_nl();
+        _delay((unsigned long)((200)*(4000000/4000.0)));
+        while(1 != TXSTAbits.TRMT){
+            TX_data;
+        }
+        usart_T_erase();
     }
 }
 
@@ -2809,11 +2832,11 @@ void setup(void) {
 
 
 
+    usart_conf();
 
 
 
-
-    PIE1 |= 0B01000000;
+    PIE1 |= 0B01100000;
     INTCON |= 0B11000000;
 
 }
@@ -2855,5 +2878,14 @@ void __attribute__((picinterrupt((""))))isr(void) {
             ADCON0 = 0B01110001;
         }
         ADIF = 0;
+    }
+    if (RCIE && RCIF){
+        usart_R(&RC_data);
+        if (43 == RC_data){
+            cont++;
+        }
+        else if (45 == RC_data){
+            cont--;
+        }
     }
 }

@@ -35,6 +35,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "lcd.h" // USO DE LA LIBRERIA MODIFICADA PARA LA PANTALLA LCD
+#include "USART.h" // USO DE LA LIBRERIA DE COMUNICACIÓN USART
 
 //******************************************************************************
 //                 DEFINICIONES, PROTOTIPOS Y VARIABLES
@@ -48,8 +49,8 @@ void adc_start(void);
 void mostrar_datos(void);
 
 uint8_t pot1 = 0, pot2 = 0, cont = 0;
+uint8_t RC_data, TX_data = 5;
 char allData_t;
-
 //******************************************************************************
 //                         LOOP PRINCIPAL
 //******************************************************************************
@@ -60,7 +61,17 @@ void main(void) {
     //Lcd_Credits(); // MUESTRA EL CÓDIGO ORIGINAL DE BIENVENIDA (dura alrededor de 1 min)
     while (1) {
         adc_start(); // INICIA LA LECTURA DEL ADC
-        mostrar_datos();
+        mostrar_datos(); // ENVIAR LOS DATOS AL LCD
+        usart_T_virt(&TX_data); // ENVIAR 0 POR EL CANAL USART TX
+        while(1 != TXSTAbits.TRMT){
+            TX_data;
+        }
+        usart_T_nl();
+        __delay_ms(200);
+        while(1 != TXSTAbits.TRMT){
+            TX_data;
+        }
+        usart_T_erase();
     }
 }
 
@@ -86,11 +97,11 @@ void setup(void) {
 
     // COMUNICACIÓN
 
-    //usart_config();
-
+    usart_conf();
+    
     // INTERRUPCIONES
 
-    PIE1 |= 0B01000000; //temporal: ACTIVANDO INTERRUPCIONES DEL ADC UNICAMENTE
+    PIE1 |= 0B01100000; // ACTIVANDO INTERRUPCION DEL ADC Y RC USART.
     INTCON |= 0B11000000; // ACTIVANDO INTERRUPCIONES PERIFERICAS.
 
 }
@@ -132,5 +143,14 @@ void __interrupt()isr(void) {
             ADCON0 = 0B01110001; // CAMBIANDO PIN A B0 (AN12)          
         }
         ADIF = 0;
+    }
+    if (RCIE && RCIF){
+        usart_R(&RC_data);
+        if (43 == RC_data){
+            cont++;
+        }
+        else if (45 == RC_data){
+            cont--;
+        }
     }
 }

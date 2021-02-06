@@ -2631,17 +2631,44 @@ typedef uint16_t uintptr_t;
 # 16 "./USART.h" 2
 
 
-void usart_config(void);
+void usart_conf(void);
+void usart_T_virt(uint8_t *t_data);
+void usart_T_nl(void);
+void usart_T_erase(void);
+void usart_R(uint8_t *r_data);
 # 12 "USART.c" 2
 
 
-void usart_config(void){
+
+
+void usart_conf(void) {
 
     SPBRG = 25;
     SPBRGH = 0;
     BAUDCTL = 0B00000000;
-
+# 29 "USART.c"
     TXSTA = 0B00100100;
+# 39 "USART.c"
     RCSTA = 0B10010000;
-
+# 48 "USART.c"
+}
+void usart_T_virt(uint8_t *t_data){
+    if(1 == TXSTAbits.TRMT){
+        TXREG = *t_data;
+    }
+}
+void usart_T_nl(void){
+    if(1 == TXSTAbits.TRMT){
+        TXREG = 13;
+    }
+}
+void usart_T_erase(void){
+    if(1 == TXSTAbits.TRMT){
+        TXREG = 12;
+    }
+}
+void usart_R(uint8_t *r_data){
+    if (1 == PIR1bits.RCIF){
+        *r_data = RCREG;
+    }
 }
