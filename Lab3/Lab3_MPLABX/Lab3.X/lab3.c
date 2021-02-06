@@ -33,8 +33,8 @@
 
 #include <xc.h>
 #include <stdint.h>
-
-
+#include <stdio.h>
+#include "lcd.h" // USO DE LA LIBRERIA MODIFICADA PARA LA PANTALLA LCD
 
 //******************************************************************************
 //                 DEFINICIONES, PROTOTIPOS Y VARIABLES
@@ -44,7 +44,11 @@
 
 void setup(void);
 void __interrupt()isr(void);
+void adc_start(void);
+void mostrar_datos(void);
 
+uint8_t pot1 = 0, pot2 = 0, cont = 0;
+char allData_t;
 
 //******************************************************************************
 //                         LOOP PRINCIPAL
@@ -52,8 +56,11 @@ void __interrupt()isr(void);
 
 void main(void) {
     setup();
+    Lcd_Init(); // INICIALIZA LA PANTALLA
+    //Lcd_Credits(); // MUESTRA EL CÓDIGO ORIGINAL DE BIENVENIDA (dura alrededor de 1 min)
     while (1) {
-
+        adc_start(); // INICIA LA LECTURA DEL ADC
+        mostrar_datos();
     }
 }
 
@@ -63,19 +70,67 @@ void main(void) {
 
 void setup(void) {
 
+    // CONFIGURACION GENERAL
+
+    ANSELH &= 0B11111100; // RB2 Y RB3 SERÁN DIGITALES, RB1 Y RB0 ANALOGICAS
+    TRISD = 0; // TODO PORTD SERÁ UNA SALIDA
+    TRISB &= 0B11110011; // RB2 Y RB3 SERAN SALIDAS. RB1 Y RB0 SERAN ENTRADAS
+    PORTB = 0;
+    PORTD = 0;
+
+    // ADC
+
+    ADCON0 = 0B01110000; // CONVERSION EN B0 (AN12) A Fosc/8 (2ns) DE Tad
+    ADCON1 = 0B00000000; // JUSTIFICADO A LA IZQUIERDA. REFERENCIA VDD Y VSS
+    ADCON0bits.ADON = 1; //ACTIVANDO MODULO ADC
+
+    // COMUNICACIÓN
+
+    //usart_config();
+
+    // INTERRUPCIONES
+
+    PIE1 |= 0B01000000; //temporal: ACTIVANDO INTERRUPCIONES DEL ADC UNICAMENTE
+    INTCON |= 0B11000000; // ACTIVANDO INTERRUPCIONES PERIFERICAS.
+
 }
 
 //******************************************************************************
 //                            FUNCIONES
 //******************************************************************************
 
+void adc_start(void) {
+    __delay_ms(20); // TIEMPO DE ESPERA RECOMENDADO PARA EL ADC
+    if (0 == ADCON0bits.GO_nDONE) {
+        ADCON0bits.GO_nDONE = 1;
+    }
+}
 
-
+void mostrar_datos(void) { // MUESTRA EN LA PANTALLA LOS DATOS ENTRANTES
+    // Evitar la declaración de variables dentro de las funciones. 
+    // Desconozco todos los casos para los que esto es perjudicial.
+    Lcd_Set_Cursor(1, 1);
+    // LINE CONTROL ("0----5----0----5")
+    Lcd_Write_String(" POT1 POT2 CONT ");
+    Lcd_Set_Cursor(2, 1);
+    // LINE CONTROL   ("0----5----0----5")
+    Lcd_Write_String(&allData_t);
+    sprintf(&allData_t, " %3u  %3u  %3u  ", pot1, pot2, cont);
+}
 
 //******************************************************************************
 //                          INTERRUPCION
 //******************************************************************************
 
 void __interrupt()isr(void) {
-
+    if (ADIF && ADIE) {
+        if (ADCON0bits.CHS2) { // LEYENDO EL VALOR DE B0
+            pot1 = ADRESH;
+            ADCON0 = 0B01101001; // CAMBIANDO PIN A B1 (AN10)
+        } else if (ADCON0bits.CHS1) { // LEYENDO EL VALOR DE B1
+            pot2 = ADRESH;
+            ADCON0 = 0B01110001; // CAMBIANDO PIN A B0 (AN12)          
+        }
+        ADIF = 0;
+    }
 }
