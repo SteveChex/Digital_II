@@ -2765,10 +2765,12 @@ void Lcd_Credits(void);
 
 
 void usart_conf(void);
-void usart_T_virt(uint8_t *t_data);
+void usart_T_virt(char t_data);
 void usart_T_nl(void);
 void usart_T_erase(void);
 void usart_R(uint8_t *r_data);
+void num_ascii(uint8_t value, char *code);
+void usart_T_string(char *data);
 # 38 "lab3.c" 2
 
 
@@ -2781,11 +2783,19 @@ void usart_R(uint8_t *r_data);
 void setup(void);
 void __attribute__((picinterrupt((""))))isr(void);
 void adc_start(void);
+void mostrar_texto(void);
 void mostrar_datos(void);
+void voltaje(uint8_t data_in, uint8_t *volt_u, uint8_t *volt_d1, uint8_t *volt_d2);
+void numero(uint8_t data_in, uint8_t *cent, uint8_t *dec, uint8_t *uni);
+void encabezado_usart(void);
 
 uint8_t pot1 = 0, pot2 = 0, cont = 0;
 uint8_t RC_data, TX_data = 5;
-char allData_t;
+uint8_t vol_u = 0, vol_dec1 = 0, vol_dec2 = 0;
+uint8_t cont_cent = 0, cont_dec = 0, cont_uni = 0;
+uint8_t temp = 0;
+
+char data_t;
 
 
 
@@ -2795,18 +2805,16 @@ void main(void) {
     Lcd_Init();
 
     while (1) {
-        adc_start();
-        mostrar_datos();
-        usart_T_virt(&TX_data);
-        while(1 != TXSTAbits.TRMT){
-            TX_data;
-        }
-        usart_T_nl();
-        _delay((unsigned long)((200)*(4000000/4000.0)));
-        while(1 != TXSTAbits.TRMT){
-            TX_data;
-        }
         usart_T_erase();
+        encabezado_usart();
+        adc_start();
+        _delay((unsigned long)((10)*(4000000/4000.0)));
+        adc_start();
+        _delay((unsigned long)((10)*(4000000/4000.0)));
+        mostrar_texto();
+        mostrar_datos();
+        _delay((unsigned long)((30)*(4000000/4000.0)));
+
     }
 }
 
@@ -2818,9 +2826,11 @@ void setup(void) {
 
 
 
-    ANSELH &= 0B11111100;
+
+
+    ANSELH &= 0B11110100;
     TRISD = 0;
-    TRISB &= 0B11110011;
+    TRISB &= 0B11100011;
     PORTB = 0;
     PORTD = 0;
 
@@ -2852,18 +2862,199 @@ void adc_start(void) {
     }
 }
 
+void mostrar_texto(void) {
+    Lcd_Set_Cursor(1, 1);
+
+    Lcd_Write_String("S1:   S2:   S3: ");
+}
+
 void mostrar_datos(void) {
 
 
-    Lcd_Set_Cursor(1, 1);
 
-    Lcd_Write_String(" POT1 POT2 CONT ");
     Lcd_Set_Cursor(2, 1);
 
-    Lcd_Write_String(&allData_t);
-    sprintf(&allData_t, " %3u  %3u  %3u  ", pot1, pot2, cont);
+
+    vol_u = 0;
+    vol_dec1 = 0;
+    vol_dec2 = 0;
+
+
+
+    voltaje(pot1, &vol_u, &vol_dec1, &vol_dec2);
+
+    num_ascii(vol_u, &data_t);
+    Lcd_Write_Char(data_t);
+    usart_T_virt(data_t);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+    Lcd_Write_Char(46);
+    usart_T_virt(46);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+    num_ascii(vol_dec1, &data_t);
+    Lcd_Write_Char(data_t);
+    usart_T_virt(data_t);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+    num_ascii(vol_dec2, &data_t);
+    Lcd_Write_Char(data_t);
+    usart_T_virt(data_t);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+    Lcd_Write_String("V ");
+    usart_T_virt(86);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+
+
+    voltaje(pot2, &vol_u, &vol_dec1, &vol_dec2);
+
+    num_ascii(vol_u, &data_t);
+    Lcd_Write_Char(data_t);
+    usart_T_virt(data_t);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+    Lcd_Write_Char(46);
+    usart_T_virt(46);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+    num_ascii(vol_dec1, &data_t);
+    Lcd_Write_Char(data_t);
+    usart_T_virt(data_t);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    num_ascii(vol_dec2, &data_t);
+    Lcd_Write_Char(data_t);
+    usart_T_virt(data_t);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+    Lcd_Write_String("V  ");
+    usart_T_virt(86);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+
+
+    numero(cont, &cont_cent, &cont_dec, &cont_uni);
+
+    num_ascii(cont_cent, &data_t);
+    Lcd_Write_Char(data_t);
+    usart_T_virt(data_t);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    num_ascii(cont_dec, &data_t);
+    Lcd_Write_Char(data_t);
+    usart_T_virt(data_t);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    num_ascii(cont_uni, &data_t);
+    Lcd_Write_Char(data_t);
+    usart_T_virt(data_t);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_nl();
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
 }
 
+void voltaje(uint8_t data_in, uint8_t *volt_u, uint8_t *volt_d1, uint8_t *volt_d2) {
+
+
+
+
+
+    while (data_in > 49) {
+        data_in = data_in - 50;
+        temp++;
+    }
+    *volt_u = temp;
+    temp = 0;
+
+    while (data_in > 9) {
+        data_in = data_in - 10;
+        temp++;
+    }
+    *volt_d1 = temp;
+    temp = 0;
+    while (data_in > 0) {
+        data_in--;
+        temp++;
+    }
+    *volt_d2 = temp;
+    temp = 0;
+}
+
+void numero(uint8_t data_in, uint8_t *cent, uint8_t *dec, uint8_t *uni) {
+    while (data_in > 99) {
+        data_in = data_in - 100;
+        temp++;
+    }
+    *cent = temp;
+    temp = 0;
+    while (data_in > 9) {
+        data_in = data_in - 10;
+        temp++;
+    }
+    *dec = temp;
+    temp = 0;
+    while (data_in > 0) {
+        data_in--;
+        temp++;
+    }
+    *uni = temp;
+    temp = 0;
+}
+
+void encabezado_usart(void) {
+
+
+
+
+
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(83);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(49);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(58);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+
+
+    usart_T_virt(83);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(50);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(58);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+
+    usart_T_virt(83);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(51);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(58);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_nl();
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+}
 
 
 
@@ -2879,12 +3070,11 @@ void __attribute__((picinterrupt((""))))isr(void) {
         }
         ADIF = 0;
     }
-    if (RCIE && RCIF){
+    if (RCIE && RCIF) {
         usart_R(&RC_data);
-        if (43 == RC_data){
+        if (43 == RC_data) {
             cont++;
-        }
-        else if (45 == RC_data){
+        } else if (45 == RC_data) {
             cont--;
         }
     }

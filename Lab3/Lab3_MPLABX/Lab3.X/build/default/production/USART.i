@@ -2632,10 +2632,12 @@ typedef uint16_t uintptr_t;
 
 
 void usart_conf(void);
-void usart_T_virt(uint8_t *t_data);
+void usart_T_virt(char t_data);
 void usart_T_nl(void);
 void usart_T_erase(void);
 void usart_R(uint8_t *r_data);
+void num_ascii(uint8_t value, char *code);
+void usart_T_string(char *data);
 # 12 "USART.c" 2
 
 
@@ -2652,23 +2654,72 @@ void usart_conf(void) {
     RCSTA = 0B10010000;
 # 48 "USART.c"
 }
-void usart_T_virt(uint8_t *t_data){
-    if(1 == TXSTAbits.TRMT){
-        TXREG = *t_data;
+
+void usart_T_virt(char t_data) {
+    if (1 == TXSTAbits.TRMT) {
+        TXREG = t_data;
     }
 }
-void usart_T_nl(void){
-    if(1 == TXSTAbits.TRMT){
+
+void usart_T_nl(void) {
+    if (1 == TXSTAbits.TRMT) {
         TXREG = 13;
     }
 }
-void usart_T_erase(void){
-    if(1 == TXSTAbits.TRMT){
+
+void usart_T_erase(void) {
+    if (1 == TXSTAbits.TRMT) {
         TXREG = 12;
     }
 }
-void usart_R(uint8_t *r_data){
-    if (1 == PIR1bits.RCIF){
+
+void usart_R(uint8_t *r_data) {
+    if (1 == PIR1bits.RCIF) {
         *r_data = RCREG;
     }
+}
+
+void num_ascii(uint8_t value, char *code) {
+    switch (value) {
+        case 0:
+            *code = 48;
+            break;
+        case 1:
+            *code = 49;
+            break;
+        case 2:
+            *code = 50;
+            break;
+        case 3:
+            *code = 51;
+            break;
+        case 4:
+            *code = 52;
+            break;
+        case 5:
+            *code = 53;
+            break;
+        case 6:
+            *code = 54;
+            break;
+        case 7:
+            *code = 55;
+            break;
+        case 8:
+            *code = 56;
+            break;
+        case 9:
+            *code = 57;
+            break;
+        default:
+            *code = 63;
+            break;
+    }
+}
+
+void usart_T_string(char *data) {
+    int i;
+    for (i = 0; data[i] != '\0'; i++)
+        usart_T_virt(data[i]);
+    _delay((unsigned long)((30)*(8000000/4000.0)));
 }

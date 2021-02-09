@@ -50,6 +50,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1140
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1140: extern volatile unsigned char RCREG __attribute__((address(0x01A)));
 [v _RCREG `Vuc ~T0 @X0 0 e@26 ]
+[v F1256 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\pic.h
+[v __delay `JF1256 ~T0 @X0 0 e ]
+[p i __delay ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -309,89 +313,252 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;USART.c: 48: }
 [e :UE 138 ]
 }
-"49
-[; ;USART.c: 49: void usart_T_virt(uint8_t *t_data){
-[v _usart_T_virt `(v ~T0 @X0 1 ef1`*uc ]
+"50
+[; ;USART.c: 50: void usart_T_virt(char t_data) {
+[v _usart_T_virt `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _usart_T_virt ]
-[v _t_data `*uc ~T0 @X0 1 r1 ]
+[v _t_data `uc ~T0 @X0 1 r1 ]
 [f ]
-"50
-[; ;USART.c: 50:     if(1 == TXSTAbits.TRMT){
+"51
+[; ;USART.c: 51:     if (1 == TXSTAbits.TRMT) {
 [e $ ! == -> 1 `i -> . . _TXSTAbits 0 1 `i 140  ]
 {
-"51
-[; ;USART.c: 51:         TXREG = *t_data;
-[e = _TXREG *U _t_data ]
 "52
-[; ;USART.c: 52:     }
+[; ;USART.c: 52:         TXREG = t_data;
+[e = _TXREG -> _t_data `uc ]
+"53
+[; ;USART.c: 53:     }
 }
 [e :U 140 ]
-"53
-[; ;USART.c: 53: }
+"54
+[; ;USART.c: 54: }
 [e :UE 139 ]
 }
-"54
-[; ;USART.c: 54: void usart_T_nl(void){
+"56
+[; ;USART.c: 56: void usart_T_nl(void) {
 [v _usart_T_nl `(v ~T0 @X0 1 ef ]
 {
 [e :U _usart_T_nl ]
 [f ]
-"55
-[; ;USART.c: 55:     if(1 == TXSTAbits.TRMT){
+"57
+[; ;USART.c: 57:     if (1 == TXSTAbits.TRMT) {
 [e $ ! == -> 1 `i -> . . _TXSTAbits 0 1 `i 142  ]
 {
-"56
-[; ;USART.c: 56:         TXREG = 13;
+"58
+[; ;USART.c: 58:         TXREG = 13;
 [e = _TXREG -> -> 13 `i `uc ]
-"57
-[; ;USART.c: 57:     }
+"59
+[; ;USART.c: 59:     }
 }
 [e :U 142 ]
-"58
-[; ;USART.c: 58: }
+"60
+[; ;USART.c: 60: }
 [e :UE 141 ]
 }
-"59
-[; ;USART.c: 59: void usart_T_erase(void){
+"62
+[; ;USART.c: 62: void usart_T_erase(void) {
 [v _usart_T_erase `(v ~T0 @X0 1 ef ]
 {
 [e :U _usart_T_erase ]
 [f ]
-"60
-[; ;USART.c: 60:     if(1 == TXSTAbits.TRMT){
+"63
+[; ;USART.c: 63:     if (1 == TXSTAbits.TRMT) {
 [e $ ! == -> 1 `i -> . . _TXSTAbits 0 1 `i 144  ]
 {
-"61
-[; ;USART.c: 61:         TXREG = 12;
+"64
+[; ;USART.c: 64:         TXREG = 12;
 [e = _TXREG -> -> 12 `i `uc ]
-"62
-[; ;USART.c: 62:     }
+"65
+[; ;USART.c: 65:     }
 }
 [e :U 144 ]
-"63
-[; ;USART.c: 63: }
+"66
+[; ;USART.c: 66: }
 [e :UE 143 ]
 }
-"64
-[; ;USART.c: 64: void usart_R(uint8_t *r_data){
+"68
+[; ;USART.c: 68: void usart_R(uint8_t *r_data) {
 [v _usart_R `(v ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _usart_R ]
 [v _r_data `*uc ~T0 @X0 1 r1 ]
 [f ]
-"65
-[; ;USART.c: 65:     if (1 == PIR1bits.RCIF){
+"69
+[; ;USART.c: 69:     if (1 == PIR1bits.RCIF) {
 [e $ ! == -> 1 `i -> . . _PIR1bits 0 5 `i 146  ]
 {
-"66
-[; ;USART.c: 66:         *r_data = RCREG;
+"70
+[; ;USART.c: 70:         *r_data = RCREG;
 [e = *U _r_data _RCREG ]
-"67
-[; ;USART.c: 67:     }
+"71
+[; ;USART.c: 71:     }
 }
 [e :U 146 ]
-"68
-[; ;USART.c: 68: }
+"72
+[; ;USART.c: 72: }
 [e :UE 145 ]
+}
+"74
+[; ;USART.c: 74: void num_ascii(uint8_t value, char *code) {
+[v _num_ascii `(v ~T0 @X0 1 ef2`uc`*uc ]
+{
+[e :U _num_ascii ]
+[v _value `uc ~T0 @X0 1 r1 ]
+[v _code `*uc ~T0 @X0 1 r2 ]
+[f ]
+"75
+[; ;USART.c: 75:     switch (value) {
+[e $U 149  ]
+{
+"76
+[; ;USART.c: 76:         case 0:
+[e :U 150 ]
+"77
+[; ;USART.c: 77:             *code = 48;
+[e = *U _code -> -> 48 `i `uc ]
+"78
+[; ;USART.c: 78:             break;
+[e $U 148  ]
+"79
+[; ;USART.c: 79:         case 1:
+[e :U 151 ]
+"80
+[; ;USART.c: 80:             *code = 49;
+[e = *U _code -> -> 49 `i `uc ]
+"81
+[; ;USART.c: 81:             break;
+[e $U 148  ]
+"82
+[; ;USART.c: 82:         case 2:
+[e :U 152 ]
+"83
+[; ;USART.c: 83:             *code = 50;
+[e = *U _code -> -> 50 `i `uc ]
+"84
+[; ;USART.c: 84:             break;
+[e $U 148  ]
+"85
+[; ;USART.c: 85:         case 3:
+[e :U 153 ]
+"86
+[; ;USART.c: 86:             *code = 51;
+[e = *U _code -> -> 51 `i `uc ]
+"87
+[; ;USART.c: 87:             break;
+[e $U 148  ]
+"88
+[; ;USART.c: 88:         case 4:
+[e :U 154 ]
+"89
+[; ;USART.c: 89:             *code = 52;
+[e = *U _code -> -> 52 `i `uc ]
+"90
+[; ;USART.c: 90:             break;
+[e $U 148  ]
+"91
+[; ;USART.c: 91:         case 5:
+[e :U 155 ]
+"92
+[; ;USART.c: 92:             *code = 53;
+[e = *U _code -> -> 53 `i `uc ]
+"93
+[; ;USART.c: 93:             break;
+[e $U 148  ]
+"94
+[; ;USART.c: 94:         case 6:
+[e :U 156 ]
+"95
+[; ;USART.c: 95:             *code = 54;
+[e = *U _code -> -> 54 `i `uc ]
+"96
+[; ;USART.c: 96:             break;
+[e $U 148  ]
+"97
+[; ;USART.c: 97:         case 7:
+[e :U 157 ]
+"98
+[; ;USART.c: 98:             *code = 55;
+[e = *U _code -> -> 55 `i `uc ]
+"99
+[; ;USART.c: 99:             break;
+[e $U 148  ]
+"100
+[; ;USART.c: 100:         case 8:
+[e :U 158 ]
+"101
+[; ;USART.c: 101:             *code = 56;
+[e = *U _code -> -> 56 `i `uc ]
+"102
+[; ;USART.c: 102:             break;
+[e $U 148  ]
+"103
+[; ;USART.c: 103:         case 9:
+[e :U 159 ]
+"104
+[; ;USART.c: 104:             *code = 57;
+[e = *U _code -> -> 57 `i `uc ]
+"105
+[; ;USART.c: 105:             break;
+[e $U 148  ]
+"106
+[; ;USART.c: 106:         default:
+[e :U 160 ]
+"107
+[; ;USART.c: 107:             *code = 63;
+[e = *U _code -> -> 63 `i `uc ]
+"108
+[; ;USART.c: 108:             break;
+[e $U 148  ]
+"109
+[; ;USART.c: 109:     }
+}
+[e $U 148  ]
+[e :U 149 ]
+[e [\ -> _value `i , $ -> 0 `i 150
+ , $ -> 1 `i 151
+ , $ -> 2 `i 152
+ , $ -> 3 `i 153
+ , $ -> 4 `i 154
+ , $ -> 5 `i 155
+ , $ -> 6 `i 156
+ , $ -> 7 `i 157
+ , $ -> 8 `i 158
+ , $ -> 9 `i 159
+ 160 ]
+[e :U 148 ]
+"110
+[; ;USART.c: 110: }
+[e :UE 147 ]
+}
+"112
+[; ;USART.c: 112: void usart_T_string(char *data) {
+[v _usart_T_string `(v ~T0 @X0 1 ef1`*uc ]
+{
+[e :U _usart_T_string ]
+[v _data `*uc ~T0 @X0 1 r1 ]
+[f ]
+"113
+[; ;USART.c: 113:     int i;
+[v _i `i ~T0 @X0 1 a ]
+"114
+[; ;USART.c: 114:     for (i = 0; data[i] != '\0'; i++)
+{
+[e = _i -> 0 `i ]
+[e $U 165  ]
+[e :U 162 ]
+"115
+[; ;USART.c: 115:         usart_T_virt(data[i]);
+[e ( _usart_T_virt (1 *U + _data * -> _i `x -> -> # *U _data `i `x ]
+[e ++ _i -> 1 `i ]
+[e :U 165 ]
+[e $ != -> *U + _data * -> _i `x -> -> # *U _data `i `x `ui -> 0 `ui 162  ]
+[e :U 163 ]
+}
+"116
+[; ;USART.c: 116:     _delay((unsigned long)((30)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 30 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"117
+[; ;USART.c: 117: }
+[e :UE 161 ]
 }
