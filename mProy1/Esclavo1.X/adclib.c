@@ -10,13 +10,15 @@
 #include <stdint.h>
 #include "adclib.h"
 
+#define _XTAL_FREQ 4000000  //PARA EL USO DE LA FUNCIÓN __delay_ms
+
 void adc_lect(volatile uint8_t *data) { // LECTURA DEL ADC
     *data = ADRESH;
 }
 
 void adc_start(void) {
-    __delay_ms(5); // TIEMPO DE ESPERA RECOMENDADO PARA EL ADC
     if (0 == ADCON0bits.GO_nDONE) {
+        __delay_ms(5); // TIEMPO DE ESPERA RECOMENDADO PARA EL ADC
         ADCON0bits.GO_nDONE = 1;
     }
 }

@@ -37,7 +37,7 @@
 
 #include <xc.h>
 #include <stdint.h>
-
+#include "adclib.h" // LIBRERÍA PERSONAL PARA EL ADC
 
 //******************************************************************************
 //                 DEFINICIONES, PROTOTIPOS Y VARIABLES
@@ -48,6 +48,8 @@
 void setup(void);
 void __interrupt()isr(void);  //VECTOR DE INTERRUPCIÓN
 
+uint8_t adc_data = 0, spi_data = 0;
+
 //******************************************************************************
 //                         LOOP PRINCIPAL
 //******************************************************************************
@@ -55,7 +57,8 @@ void __interrupt()isr(void);  //VECTOR DE INTERRUPCIÓN
 void main(void) {
     setup();
     while (1) {
-       
+        adc_start();
+        PORTD = adc_data;
     }
 }
 
@@ -67,33 +70,23 @@ void setup(void) {
 
     // CONFIGURACION GENERAL
     
-    ANSELHbits.ANS12 = 1; // PUERTO ANALOGICO: B0
-    TRISB = 0B00000111; // ENTRADAS: PUERTOS 0 AL 2
-    TRISC = 0; // ASIGNANDO COMO SALIDAS LOS PUERTOS D Y C
-    TRISD = 0; // PARA LOS LEDS Y 7 SEGMENTOS
-    PORTB = 0; // ESTABLECIENDO VALORES INICIALES EN TODOS LOS PUERTOS
-    PORTC = 0; 
-    PORTD = 127; // VALOR CONVENIENTE PARA EL CONTADOR
+    TRISB &= 0B11111111; //RB0 ENTRADA. EL RESTO NO SE USARÁ
+    TRISD &= 0; // PORTD COMO PUERTO DE DEPURACIÓN
+    ANSELH &= 0B00010000; // RB0 COMO ENTRADA ANALOGICA
+    PORTD = 0; // LIMPIANDO PUERTOS
+    PORTB = 0;
 
     // ADC
 
-    ADCON0 = 0B01100000; // CONVERSION EN B2 (AN8) A Fosc/8 (2ns) DE Tad
+    ADCON0 = 0B01110000; // CONVERSION EN B2 (AN8) A Fosc/8 (2ns) DE Tad
     ADCON1 = 0B00000000; // JUSTIFICADO A LA IZQUIERDA. REFERENCIA VDD Y VSS
     ADCON0bits.ADON = 1; //ACTIVANDO MODULO ADC
 
-    //TIMER2
-
-    PR2 = 0B11111111; // ASIGNANDO EL VALOR MÁXIMO DEL TIMER 2
-    TMR2 = 0; // ASIGNANDO VALOR INICIAL PARA EL TIMER 2
-    T2CON = 0B00000110; // INICIANDO EL TIMER 2 CON PRESCALER DE 16    
-
     // INTERRUPCIONES
 
-    IOCB = 0B00000111; // ACTIVAR PINES DE INTERRUPCIÓN
-    PIE1 = 0B01000010; // ACTIVAR INT. DEL ADC Y DEL TIMER2
+    PIE1 = 0B01000000; // ACTIVAR INT. DEL ADC
     PIR1bits.ADIF = 0; // LIMPIANDO BANDERA DEL ADC
-    INTCON = 0B11001000; // ACTIVAR INT. GLOBALES, DEL PUERTO B, RBIF = 0 E
-    // INTERRUPCIONES PERIFERICASf
+    INTCON = 0B11001000; // ACTIVAR INT. GLOBALES Y PERIFERICAS
 }
 
 //******************************************************************************
@@ -106,5 +99,8 @@ void setup(void) {
 //******************************************************************************
 
 void __interrupt()isr(void) {
-   
+    if (1 == ADIF){
+        adc_lect(&adc_data);
+        ADIF = 0;
+    }
 }
