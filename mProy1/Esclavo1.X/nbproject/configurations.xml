@@ -14,7 +14,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>adclib.c</itemPath>
-      <itemPath>main.c</itemPath>
+      <itemPath>mainE1.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

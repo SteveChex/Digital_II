@@ -1,8 +1,8 @@
 /*
- * Archivo: main.c
+ * Archivo: mainE2.c
  * Autor:   Steve Chex
- * Descripción: Mini proyecto 1
- *              Gestión de multiples microcontroladores mediante SPI
+ * Descripción: ESCLAVO 2
+ *              Contador binario y transmisión de la información en él.
  * 
  * 
  */
@@ -37,7 +37,6 @@
 
 #include <xc.h>
 #include <stdint.h>
-#include "adclib.h" // LIBRERÍA PERSONAL PARA EL ADC
 
 //******************************************************************************
 //                 DEFINICIONES, PROTOTIPOS Y VARIABLES
@@ -46,10 +45,9 @@
 #define _XTAL_FREQ 4000000  //PARA EL USO DE LA FUNCIÓN __delay_ms
 
 void setup(void);
-void __interrupt()isr(void);  //VECTOR DE INTERRUPCIÓN
+void __interrupt()isr(void); //VECTOR DE INTERRUPCIÓN
 
-uint8_t adc_data = 0, spi_data = 0;
-
+uint8_t cont = 0;
 //******************************************************************************
 //                         LOOP PRINCIPAL
 //******************************************************************************
@@ -57,8 +55,7 @@ uint8_t adc_data = 0, spi_data = 0;
 void main(void) {
     setup();
     while (1) {
-        adc_start();
-        PORTD = adc_data;
+        asm("nop");
     }
 }
 
@@ -68,25 +65,19 @@ void main(void) {
 
 void setup(void) {
 
-    // CONFIGURACION GENERAL
-    
-    TRISB &= 0B11111111; //RB0 ENTRADA. EL RESTO NO SE USARÁ
-    TRISD &= 0; // PORTD COMO PUERTO DE DEPURACIÓN
-    ANSELH &= 0B00010000; // RB0 COMO ENTRADA ANALOGICA
-    PORTD = 0; // LIMPIANDO PUERTOS
+    // CONFIGURACIÓN GENERAL
+
+    TRISD = 0; // SALIDAS PARA EL SEMAFORO
+    TRISB = 0B00000011; // ENTRADAS PARA LOS BOTONES
+    ANSELH = 0; // DESACTIVANDO ENTRADAS ANALOGICAS
+    PORTD = 0;
     PORTB = 0;
-
-    // ADC
-
-    ADCON0 = 0B01110000; // CONVERSION EN B2 (AN8) A Fosc/8 (2ns) DE Tad
-    ADCON1 = 0B00000000; // JUSTIFICADO A LA IZQUIERDA. REFERENCIA VDD Y VSS
-    ADCON0bits.ADON = 1; //ACTIVANDO MODULO ADC
 
     // INTERRUPCIONES
 
-    PIE1 = 0B01000000; // ACTIVAR INT. DEL ADC
-    PIR1bits.ADIF = 0; // LIMPIANDO BANDERA DEL ADC
-    INTCON = 0B11001000; // ACTIVAR INT. GLOBALES Y PERIFERICAS
+    IOCB = 0B00000011; // ACTIVAR PINES DE INTERRUPCIÓN
+    INTCON = 0B11001000; // ACTIVAR INT. GLOBALES, PERIFERICAS, DEL PUERTO B
+    // Y LIMPIANDO BANDERA RBIF
 }
 
 //******************************************************************************
@@ -99,8 +90,16 @@ void setup(void) {
 //******************************************************************************
 
 void __interrupt()isr(void) {
-    if (1 == ADIF){
-        adc_lect(&adc_data);
-        ADIF = 0;
+    if (1 == RBIF){
+        if(1 == PORTBbits.RB0){
+            cont--;
+            PORTD = cont;
+        }
+        if (1 == PORTBbits.RB1){
+            cont++;
+            PORTD = cont;
+        }
+        RBIF = 0;
     }
+
 }

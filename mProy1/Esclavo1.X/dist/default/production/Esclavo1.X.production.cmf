@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\edgar\AppData\Local\Temp\s1r0.o
+$C:\Users\edgar\AppData\Local\Temp\sadc.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 E E 3 2
 config CONFIG 4 2007 2007 2 2
@@ -72,45 +72,45 @@ STRING 7D-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Esclavo1.X.production.o
-11 cinit CODE >612:C:\Users\edgar\AppData\Local\Temp\s1r0.s
-11 cinit CODE >615:C:\Users\edgar\AppData\Local\Temp\s1r0.s
-11 cinit CODE >629:C:\Users\edgar\AppData\Local\Temp\s1r0.s
-12 cinit CODE >630:C:\Users\edgar\AppData\Local\Temp\s1r0.s
-13 cinit CODE >636:C:\Users\edgar\AppData\Local\Temp\s1r0.s
-13 cinit CODE >638:C:\Users\edgar\AppData\Local\Temp\s1r0.s
-14 cinit CODE >639:C:\Users\edgar\AppData\Local\Temp\s1r0.s
-4 intentry CODE >101:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
+11 cinit CODE >612:C:\Users\edgar\AppData\Local\Temp\sadc.s
+11 cinit CODE >615:C:\Users\edgar\AppData\Local\Temp\sadc.s
+11 cinit CODE >629:C:\Users\edgar\AppData\Local\Temp\sadc.s
+12 cinit CODE >630:C:\Users\edgar\AppData\Local\Temp\sadc.s
+13 cinit CODE >636:C:\Users\edgar\AppData\Local\Temp\sadc.s
+13 cinit CODE >638:C:\Users\edgar\AppData\Local\Temp\sadc.s
+14 cinit CODE >639:C:\Users\edgar\AppData\Local\Temp\sadc.s
+4 intentry CODE >101:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
 73 text4 CODE >15:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\adclib.c
 74 text4 CODE >16:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\adclib.c
 7C text4 CODE >17:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\adclib.c
-37 text3 CODE >101:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-37 text3 CODE >102:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-3D text3 CODE >103:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-43 text3 CODE >104:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-46 text3 CODE >106:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
+37 text3 CODE >101:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+37 text3 CODE >102:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+3D text3 CODE >103:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+43 text3 CODE >104:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+46 text3 CODE >106:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
 61 text2 CODE >19:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\adclib.c
 61 text2 CODE >20:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\adclib.c
 67 text2 CODE >21:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\adclib.c
 6F text2 CODE >22:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\adclib.c
 72 text2 CODE >24:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\adclib.c
-17 text1 CODE >69:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-17 text1 CODE >73:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-1A text1 CODE >74:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-1B text1 CODE >75:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-21 text1 CODE >76:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-24 text1 CODE >77:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-25 text1 CODE >81:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-27 text1 CODE >82:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-2A text1 CODE >83:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-2D text1 CODE >87:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-31 text1 CODE >88:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-34 text1 CODE >89:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-36 text1 CODE >90:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-4F maintext CODE >57:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-4F maintext CODE >58:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-54 maintext CODE >59:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-54 maintext CODE >60:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
-59 maintext CODE >61:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\main.c
+17 text1 CODE >69:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+17 text1 CODE >73:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+1A text1 CODE >74:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+1B text1 CODE >75:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+21 text1 CODE >76:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+24 text1 CODE >77:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+25 text1 CODE >81:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+27 text1 CODE >82:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+2A text1 CODE >83:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+2D text1 CODE >87:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+31 text1 CODE >88:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+34 text1 CODE >89:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+36 text1 CODE >90:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+4F maintext CODE >57:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+4F maintext CODE >58:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+54 maintext CODE >59:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+54 maintext CODE >60:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
+59 maintext CODE >61:C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo1.X\mainE1.c
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -133,19 +133,19 @@ __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
 _ADIF 66 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 _PIE1 8C 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\edgar\AppData\Local\Temp\s1r0.o
+___sp 0 0 STACK 2 stack C:\Users\edgar\AppData\Local\Temp\sadc.o
 _main 9E 0 CODE 0 maintext dist/default/production\Esclavo1.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
-start 1C 0 CODE 0 init C:\Users\edgar\AppData\Local\Temp\s1r0.o
+start 1C 0 CODE 0 init C:\Users\edgar\AppData\Local\Temp\sadc.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __Hpowerup 0 0 CODE 0 powerup -
-intlevel0 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1r0.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1r0.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1r0.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1r0.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1r0.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1r0.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\sadc.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\sadc.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\sadc.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\sadc.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\sadc.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\sadc.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 wtemp0 7E 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __Hfunctab 0 0 ENTRY 0 functab -
@@ -156,11 +156,11 @@ _ADRESH 1E 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 _ANSELH 189 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
 _INTCON B 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\edgar\AppData\Local\Temp\s1r0.o
-___stacklo 0 0 ABS 0 - C:\Users\edgar\AppData\Local\Temp\s1r0.o
+___stackhi 0 0 ABS 0 - C:\Users\edgar\AppData\Local\Temp\sadc.o
+___stacklo 0 0 ABS 0 - C:\Users\edgar\AppData\Local\Temp\sadc.o
 __size_of_setup 0 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 start_initialization 22 0 CODE 0 cinit dist/default/production\Esclavo1.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\edgar\AppData\Local\Temp\s1r0.o
+___int_sp 0 0 STACK 2 stack C:\Users\edgar\AppData\Local\Temp\sadc.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -201,7 +201,7 @@ _isr 6E 0 CODE 0 text3 dist/default/production\Esclavo1.X.production.o
 saved_w 7E 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __end_of_isr 9E 0 CODE 0 text3 dist/default/production\Esclavo1.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\edgar\AppData\Local\Temp\s1r0.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\edgar\AppData\Local\Temp\sadc.o
 __size_of_adc_lect 0 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __pmaintext 9E 0 CODE 0 maintext dist/default/production\Esclavo1.X.production.o
 __Lcommon 0 0 ABS 0 common -

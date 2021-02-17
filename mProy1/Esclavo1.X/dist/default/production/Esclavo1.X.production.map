@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.31\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\Esclavo1.X.production.sym \
   --cmf=dist/default/production\Esclavo1.X.production.cmf -z -Q16F887 \
-  -oC:\Users\edgar\AppData\Local\Temp\s1r0.2 --defsym=__MPLAB_BUILD=1 \
+  -oC:\Users\edgar\AppData\Local\Temp\sadc.2 --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/Esclavo1.X.production.map -E1 -ver=XC8 Compiler \
   --acfsm=1493 -ASTACK=0110h-016Fh -pstack=STACK -ACODE=00h-07FFhx4 \
   -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 \
@@ -18,7 +18,7 @@ Linker command line:
   -AEEDATA=00h-0FFh/02100h -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 \
   -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 \
   -preset_vec=00h,intentry=04h,init,end_init -ppowerup=CODE -pcinit=CODE \
-  -pfunctab=ENTRY -k C:\Users\edgar\AppData\Local\Temp\s1r0.o \
+  -pfunctab=ENTRY -k C:\Users\edgar\AppData\Local\Temp\sadc.o \
   dist/default/production\Esclavo1.X.production.o 
 
 Object code version is 3.11
@@ -28,7 +28,7 @@ Machine type is 16F887
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\edgar\AppData\Local\Temp\s1r0.o
+C:\Users\edgar\AppData\Local\Temp\sadc.o
                 end_init                              E        E        3        8       0
                 reset_vec                             0        0        3        0       0
                 config                             2007     2007        2        0       4
@@ -274,7 +274,7 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 57 in file "main.c"
+		line 57 in file "mainE1.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -304,7 +304,7 @@ Total ram usage:        0 bytes
 
  *************** function _setup *****************
  Defined at:
-		line 69 in file "main.c"
+		line 69 in file "mainE1.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -364,7 +364,7 @@ Total ram usage:        2 bytes
 
  *************** function _isr *****************
  Defined at:
-		line 101 in file "main.c"
+		line 101 in file "mainE1.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -427,6 +427,13 @@ Total ram usage:        2 bytes
 MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
+mainE1.c
+		_main          		CODE           	004F	0000	18
+		_isr           		CODE           	0037	0000	24
+		_setup         		CODE           	0017	0000	32
+
+mainE1.c estimated size: 74
+
 adclib.c
 		_adc_start     		CODE           	0061	0000	18
 		_adc_lect      		CODE           	0073	0000	10
@@ -437,11 +444,4 @@ shared
 		__initialization		CODE           	0011	0000	2
 
 shared estimated size: 2
-
-main.c
-		_main          		CODE           	004F	0000	18
-		_isr           		CODE           	0037	0000	24
-		_setup         		CODE           	0017	0000	32
-
-main.c estimated size: 74
 
