@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "USART.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,23 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-# 16 "main.c"
-#pragma config FOSC = XT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
-# 38 "main.c"
+# 1 "USART.c" 2
+# 10 "USART.c"
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2503,7 +2488,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 38 "main.c" 2
+# 10 "USART.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
@@ -2638,72 +2623,103 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 39 "main.c" 2
+# 11 "USART.c" 2
 
-# 1 "./adclib.h" 1
-# 12 "./adclib.h"
+# 1 "./USART.h" 1
+# 16 "./USART.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 12 "./adclib.h" 2
+# 16 "./USART.h" 2
 
 
-void adc_lect(volatile uint8_t *data);
-void adc_start(void);
-# 40 "main.c" 2
-
-
-
-
-
-
-
-
-void setup(void);
-void __attribute__((picinterrupt((""))))isr(void);
-
-uint8_t adc_data = 0, spi_data = 0;
+void usart_conf(void);
+void usart_T_virt(char t_data);
+void usart_T_nl(void);
+void usart_T_erase(void);
+void usart_R(uint8_t *r_data);
+void num_ascii(uint8_t value, char *code);
+void usart_T_string(char *data);
+# 12 "USART.c" 2
 
 
 
 
+void usart_conf(void) {
 
-void main(void) {
-    setup();
-    while (1) {
-        adc_start();
-        PORTD = adc_data;
+    SPBRG = 25;
+    SPBRGH = 0;
+    BAUDCTL = 0B00000000;
+# 29 "USART.c"
+    TXSTA = 0B00100100;
+# 39 "USART.c"
+    RCSTA = 0B10010000;
+# 48 "USART.c"
+}
+
+void usart_T_virt(char t_data) {
+    if (1 == TXSTAbits.TRMT) {
+        TXREG = t_data;
     }
 }
 
-
-
-
-
-void setup(void) {
-
-
-
-    TRISB &= 0B11111111;
-    TRISD &= 0;
-    ANSELH &= 0B00010000;
-    PORTD = 0;
-    PORTB = 0;
-
-
-
-    ADCON0 = 0B01110000;
-    ADCON1 = 0B00000000;
-    ADCON0bits.ADON = 1;
-
-
-
-    PIE1 = 0B01000000;
-    PIR1bits.ADIF = 0;
-    INTCON = 0B11001000;
-}
-# 101 "main.c"
-void __attribute__((picinterrupt((""))))isr(void) {
-    if (1 == ADIF){
-        adc_lect(&adc_data);
-        ADIF = 0;
+void usart_T_nl(void) {
+    if (1 == TXSTAbits.TRMT) {
+        TXREG = 13;
     }
+}
+
+void usart_T_erase(void) {
+    if (1 == TXSTAbits.TRMT) {
+        TXREG = 12;
+    }
+}
+
+void usart_R(uint8_t *r_data) {
+    if (1 == PIR1bits.RCIF) {
+        *r_data = RCREG;
+    }
+}
+
+void num_ascii(uint8_t value, char *code) {
+    switch (value) {
+        case 0:
+            *code = 48;
+            break;
+        case 1:
+            *code = 49;
+            break;
+        case 2:
+            *code = 50;
+            break;
+        case 3:
+            *code = 51;
+            break;
+        case 4:
+            *code = 52;
+            break;
+        case 5:
+            *code = 53;
+            break;
+        case 6:
+            *code = 54;
+            break;
+        case 7:
+            *code = 55;
+            break;
+        case 8:
+            *code = 56;
+            break;
+        case 9:
+            *code = 57;
+            break;
+        default:
+            *code = 63;
+            break;
+    }
+}
+
+void usart_T_string(char *data) {
+    int i;
+    for (i = 0; data[i] != '\0'; i++)
+        usart_T_virt(data[i]);
+    _delay((unsigned long)((30)*(8000000/4000.0)));
 }

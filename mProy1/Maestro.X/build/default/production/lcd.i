@@ -1,4 +1,4 @@
-# 1 "mainE1.c"
+# 1 "lcd.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,23 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "mainE1.c" 2
-# 16 "mainE1.c"
-#pragma config FOSC = XT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
-# 38 "mainE1.c"
+# 1 "lcd.c" 2
+# 10 "lcd.c"
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2503,7 +2488,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 38 "mainE1.c" 2
+# 10 "lcd.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
@@ -2638,94 +2623,168 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 39 "mainE1.c" 2
+# 11 "lcd.c" 2
 
-# 1 "./adclib.h" 1
-# 12 "./adclib.h"
+# 1 "./lcd.h" 1
+# 16 "./lcd.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 12 "./adclib.h" 2
-
-
-void adc_lect(volatile uint8_t *data);
-void adc_start(void);
-# 40 "mainE1.c" 2
+# 16 "./lcd.h" 2
 
 
 
+void Lcd_Port(char a);
+void Lcd_Cmd(char a);
+void Lcd_Clear(void);
+void Lcd_Set_Cursor(char a, char b);
+void Lcd_Init(void);
+void Lcd_Write_Char(char a);
+void Lcd_Write_String(char *a);
+void Lcd_Shift_Right(void);
+void Lcd_Shift_Left(void);
+void Lcd_Credits(void);
+# 12 "lcd.c" 2
+# 27 "lcd.c"
+void Lcd_Port(char a) {
+    if (a & 1)
+        RD0 = 1;
+    else
+        RD0 = 0;
+    if (a & 2)
+        RD1 = 1;
+    else
+        RD1 = 0;
+    if (a & 4)
+        RD2 = 1;
+    else
+        RD2 = 0;
+    if (a & 8)
+        RD3 = 1;
+    else
+        RD3 = 0;
+    if (a & 16)
+        RD4 = 1;
+    else
+        RD4 = 0;
+    if (a & 32)
+        RD5 = 1;
+    else
+        RD5 = 0;
+    if (a & 64)
+        RD6 = 1;
+    else
+        RD6 = 0;
+    if (a & 128)
+        RD7 = 1;
+    else
+        RD7 = 0;
+}
+
+void Lcd_Cmd(char a) {
+    RC1 = 0;
+    Lcd_Port(a);
+    RC0 = 1;
+    _delay((unsigned long)((4)*(8000000/4000.0)));
+    RC0 = 0;
+}
+
+void Lcd_Clear(void) {
+    Lcd_Cmd(0X01);
+}
+
+void Lcd_Set_Cursor(char a, char b) {
+    char temp, z, y;
+    if (a == 1) {
+        temp = 0x80 + b - 1;
 
 
 
 
 
-void setup(void);
-void __attribute__((picinterrupt((""))))isr(void);
 
-uint8_t adc_data = 0, spi_data = 0;
-
-
+        Lcd_Cmd(temp);
+    } else if (a == 2) {
+        temp = 0xC0 + b - 1;
 
 
 
-void main(void) {
-    setup();
-    while (1) {
-        adc_start();
-        PORTD = adc_data;
-        if (WCOL) {
-            PORTCbits.RC0 = 1;
-        } else {
-            PORTCbits.RC0 = 0;
-        }
+
+
+
+        Lcd_Cmd(temp);
     }
 }
 
+void Lcd_Init(void) {
+    Lcd_Port(0x00);
+    _delay((unsigned long)((20)*(8000000/4000.0)));
+    Lcd_Cmd(0x30);
+    _delay((unsigned long)((5)*(8000000/4000.0)));
+    Lcd_Cmd(0x30);
+    _delay((unsigned long)((11)*(8000000/4000.0)));
+    Lcd_Cmd(0x30);
 
-
-
-
-void setup(void) {
-
-
-
-    TRISB &= 0B11111111;
-    TRISD &= 0;
-    ANSELH &= 0B00010000;
-    PORTD = 0;
-    PORTB = 0;
-    PORTC = 0;
-
-
-
-    ADCON0 = 0B01110000;
-    ADCON1 = 0B00000000;
-    ADCON0bits.ADON = 1;
-
-
-
-    TRISA = 0B00100000;
-    TRISC = 0B00011000;
-
-    SSPSTAT = 0B00000000;
-    SSPCON2 = 0;
-    SSPCON = 0B00110100;
-
-
-
-    PIE1 = 0B01001000;
-    PIR1bits.ADIF = 0;
-    INTCON = 0B11001000;
+    Lcd_Cmd(0x38);
+    Lcd_Cmd(0x0C);
+    Lcd_Cmd(0x06);
 }
-# 116 "mainE1.c"
-void __attribute__((picinterrupt((""))))isr(void) {
-    GIE = 0;
-    if (1 == ADIF) {
-        adc_lect(&adc_data);
-        ADIF = 0;
+
+void Lcd_Write_Char(char a) {
+# 125 "lcd.c"
+    RC1 = 1;
+    Lcd_Port(a);
+    RC0 = 1;
+    _delay((unsigned long)((40)*(8000000/4000000.0)));
+    RC0 = 0;
+}
+
+void Lcd_Write_String(char *a) {
+    int i;
+    for (i = 0; a[i] != '\0'; i++)
+        Lcd_Write_Char(a[i]);
+}
+
+void Lcd_Shift_Right(void) {
+    Lcd_Cmd(0x1C);
+}
+
+void Lcd_Shift_Left(void) {
+    Lcd_Cmd(0x18);
+}
+
+void Lcd_Credits(void) {
+
+
+    unsigned int a;
+    Lcd_Clear();
+    Lcd_Set_Cursor(1, 1);
+    Lcd_Write_String("LCD Library for");
+    Lcd_Set_Cursor(2, 1);
+    Lcd_Write_String("MPLAB XC8");
+    _delay((unsigned long)((2000)*(8000000/4000.0)));
+    Lcd_Clear();
+    Lcd_Set_Cursor(1, 1);
+    Lcd_Write_String("Developed By");
+    Lcd_Set_Cursor(2, 1);
+    Lcd_Write_String("electroSome");
+    _delay((unsigned long)((2000)*(8000000/4000.0)));
+    Lcd_Clear();
+    Lcd_Set_Cursor(1, 1);
+    Lcd_Write_String("www.electroSome.com");
+
+    for (a = 0; a < 15; a++) {
+        _delay((unsigned long)((300)*(8000000/4000.0)));
+        Lcd_Shift_Left();
     }
-    if (1 == SSPIF) {
-        spi_data = SSPBUF;
-        SSPBUF = adc_data;
-        SSPIF = 0;
+
+    for (a = 0; a < 15; a++) {
+        _delay((unsigned long)((300)*(8000000/4000.0)));
+        Lcd_Shift_Right();
     }
-    GIE = 1;
+
+    Lcd_Clear();
+    Lcd_Set_Cursor(2, 1);
+    Lcd_Write_Char('e');
+    Lcd_Write_Char('S');
+    _delay((unsigned long)((1200)*(8000000/4000.0)));
+    Lcd_Clear();
 }

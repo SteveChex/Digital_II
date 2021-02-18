@@ -1,9 +1,10 @@
 /*
- * Archivo: mainE1.c
+ * Archivo: mainMaster.c
  * Autor:   Steve Chex
- * Descripción: ESCLAVO 1
- *              Lectura de ADC y transmisión del dato
- *              
+ * Descripción: Maestro
+ *              Recibe los datos de los 3 esclavos y la envia a la pantalla
+ *              LCD y a la terminal virtual usando SPI Y UART
+ * 
  * 
  */
 
@@ -37,33 +38,38 @@
 
 #include <xc.h>
 #include <stdint.h>
-#include "adclib.h" // LIBRERÍA PERSONAL PARA EL ADC
+#include "USART.h"
+#include "lcd.h"
 
 //******************************************************************************
 //                 DEFINICIONES, PROTOTIPOS Y VARIABLES
 //******************************************************************************
 
-#define _XTAL_FREQ 4000000  //PARA EL USO DE LA FUNCIÓN __delay_ms
+#define _XTAL_FREQ 4000000  // PARA EL USO DE LA FUNCIÓN __delay_ms
 
 void setup(void);
-void __interrupt()isr(void); //VECTOR DE INTERRUPCIÓN
+void __interrupt()isr(void);
+void mostrar_titulo_lcd(void);
+void encabezado_usart(void);
+void mostrar_dato(void);
 
-uint8_t adc_data = 0, spi_data = 0;
-
+uint8_t pot = 0, cont = 0, temp = 0;
 //******************************************************************************
 //                         LOOP PRINCIPAL
 //******************************************************************************
 
 void main(void) {
     setup();
+    Lcd_Init(); // INICIALIZA LA PANTALLA
     while (1) {
-        adc_start();
-        PORTD = adc_data;
-        if (WCOL) {
-            PORTCbits.RC0 = 1;
-        } else {
-            PORTCbits.RC0 = 0;
-        }
+        encabezado_usart();
+        mostrar_titulo_lcd();
+        mostrar_dato();
+        __delay_ms(2);
+        PORTBbits.RB7 = 0;
+        SSPBUF = 255;
+
+        usart_T_nl();
     }
 }
 
@@ -73,56 +79,110 @@ void main(void) {
 
 void setup(void) {
 
-    // CONFIGURACION GENERAL
+    //CONFIGURACIÓN GENERAL
 
-    TRISB &= 0B11111111; //RB0 ENTRADA. EL RESTO NO SE USARÁ
-    TRISD &= 0; // PORTD COMO PUERTO DE DEPURACIÓN
-    ANSELH &= 0B00010000; // RB0 COMO ENTRADA ANALOGICA
+    ANSELH = 0; // QUITANDO ENTRADAS ANALÓGICAS DE LA 8 A LA 13
+    TRISD = 0; // PORTD COMO PUERTO DE SALIDA
+
     PORTD = 0; // LIMPIANDO PUERTOS
-    PORTB = 0;
     PORTC = 0;
 
-    // ADC
+    // COMUNICACIÓN UART
 
-    ADCON0 = 0B01110000; // CONVERSION EN B0 (AN8) A Fosc/8 (2ns) DE Tad
-    ADCON1 = 0B00000000; // JUSTIFICADO A LA IZQUIERDA. REFERENCIA VDD Y VSS
-    ADCON0bits.ADON = 1; //ACTIVANDO MODULO ADC
+    usart_conf(); // SE APROVECHARÁ LA CONFIGURACIÓN USADA PARA EL LAB 3
 
     // COMUNICACIÓN SPI
 
-    TRISA = 0B00100000; // HABILITANDO EL PIN SS COMO ENTRADA
-    TRISC = 0B00011000; // ASIGNANDO LAS SALIDAS DEL Y ENTRADAS DEL MODULO
+    TRISB = 0B00011111; //PINES 7-5 DEL PUERTO B SERAN SALIDAS
+    PORTB = 0B01100000; // COMENZAR LA SECUENCIA CON EL ESCLAVO 1 (RB7))
+    TRISC = 0B00010000; //ASIGNANDO SALIDAS EN EL PUERTO C
 
     SSPSTAT = 0B00000000; // MIDDLE SAMPLED & FALLING EDGE (CKP = 1)
     SSPCON2 = 0; // BORRANDO EL REGISTRO (UTIL SOLO PARA I2C)
-    SSPCON = 0B00110100; // CONFIGURADO MODO ESCLAVO CON SS Y ACTIVADO EL MODULO        
+    SSPCON = 0B00110000; // CONFIGURANDO MODO MAESTRO E INICIANDO EL MODULO    
 
     // INTERRUPCIONES
 
-    PIE1 = 0B01001000; // ACTIVAR INT. DEL ADC
-    PIR1bits.ADIF = 0; // LIMPIANDO BANDERA DEL ADC
-    INTCON = 0B11001000; // ACTIVAR INT. GLOBALES Y PERIFERICAS
+    PIE1 = 0B00001000; // ACTIVAR INT. DEL ADC
+    INTCON = 0B11000000; // ACTIVAR INT. GLOBALES Y PERIFERICAS
 }
 
 //******************************************************************************
 //                            FUNCIONES
 //******************************************************************************
 
+void mostrar_titulo_lcd(void) { // MUESTRA EN LA PANTALLA EL ENCABEZADO
+    Lcd_Set_Cursor(1, 1);
+    // LINE CONTROL ("0----5----0----5")
+    Lcd_Write_String("S1:   S2:   S3: ");
+}
+
+void encabezado_usart(void) {
+    // MUESTRA EL MISMO ENCABEZADO QUE LA PANTALLA LCD
+    // ENVIANDO DATOS SECUENCIALMENTE
+
+    // "S1:_-_"
+
+    __delay_ms(2);
+    usart_T_virt(83);
+    __delay_ms(2);
+    usart_T_virt(49);
+    __delay_ms(2);
+    usart_T_virt(58);
+    __delay_ms(2);
+    usart_T_virt(32);
+    __delay_ms(2);
+    usart_T_virt(32);
+    __delay_ms(2);
+    usart_T_virt(32);
+    __delay_ms(2);
+
+    // "S2:_-_"
+
+    usart_T_virt(83);
+    __delay_ms(2);
+    usart_T_virt(50);
+    __delay_ms(2);
+    usart_T_virt(58);
+    __delay_ms(2);
+    usart_T_virt(32);
+    __delay_ms(2);
+    usart_T_virt(32);
+    __delay_ms(2);
+    usart_T_virt(32);
+    __delay_ms(2);
+
+    // "S3:_"
+    usart_T_virt(83);
+    __delay_ms(2);
+    usart_T_virt(51);
+    __delay_ms(2);
+    usart_T_virt(58);
+    __delay_ms(2);
+    usart_T_virt(32);
+    __delay_ms(2);
+    usart_T_nl();
+    __delay_ms(2);
+
+}
+
+void mostrar_dato(void) {
+    Lcd_Set_Cursor(2, 1);
+    // LINE CONTROL ("0----5----0----5")
+    Lcd_Write_Char(pot);
+}
 
 //******************************************************************************
 //                          INTERRUPCION
 //******************************************************************************
 
 void __interrupt()isr(void) {
-    GIE = 0;
-    if (1 == ADIF) {
-        adc_lect(&adc_data);
-        ADIF = 0;
-    }
-    if (1 == SSPIF) {
-        spi_data = SSPBUF;
-        SSPBUF = adc_data;
+    GIE = 0; // DESACTIVANDO INTERRUPCIONES GLOBALES MOMENTANEAMENTE
+    if (SSPIF) {
+        pot = SSPBUF; // LEYENDO DATO RECIBIDO
+        PORTBbits.RB7 = 1;
         SSPIF = 0;
     }
-    GIE = 1;
+
+    GIE = 1; // REACTIVANDO INTERRUPCIONES
 }

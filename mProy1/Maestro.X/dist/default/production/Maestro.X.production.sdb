@@ -1,0 +1,260 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F887 ]
+[d frameptr 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"27 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\lcd.c
+[v _Lcd_Port Lcd_Port `(v  1 e 1 0 ]
+"62
+[v _Lcd_Cmd Lcd_Cmd `(v  1 e 1 0 ]
+"70
+[v _Lcd_Clear Lcd_Clear `(v  1 e 1 0 ]
+"74
+[v _Lcd_Set_Cursor Lcd_Set_Cursor `(v  1 e 1 0 ]
+"97
+[v _Lcd_Init Lcd_Init `(v  1 e 1 0 ]
+"111
+[v _Lcd_Write_Char Lcd_Write_Char `(v  1 e 1 0 ]
+"132
+[v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
+"138
+[v _Lcd_Shift_Right Lcd_Shift_Right `(v  1 e 1 0 ]
+"142
+[v _Lcd_Shift_Left Lcd_Shift_Left `(v  1 e 1 0 ]
+"61 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\mainMaster.c
+[v _main main `(v  1 e 1 0 ]
+"80
+[v _setup setup `(v  1 e 1 0 ]
+"114
+[v _mostrar_titulo_lcd mostrar_titulo_lcd `(v  1 e 1 0 ]
+"120
+[v _encabezado_usart encabezado_usart `(v  1 e 1 0 ]
+"169
+[v _mostrar_dato mostrar_dato `(v  1 e 1 0 ]
+"179
+[v _isr isr `II(v  1 e 1 0 ]
+"16 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\USART.c
+[v _usart_conf usart_conf `(v  1 e 1 0 ]
+"50
+[v _usart_T_virt usart_T_virt `(v  1 e 1 0 ]
+"56
+[v _usart_T_nl usart_T_nl `(v  1 e 1 0 ]
+"228 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+[s S48 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"245
+[u S57 . 1 `S48 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES57  1 e 1 @6 ]
+"290
+[v _PORTC PORTC `VEuc  1 e 1 @7 ]
+"352
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+"459
+[v _INTCON INTCON `VEuc  1 e 1 @11 ]
+[s S182 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"553
+[u S190 . 1 `S182 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES190  1 e 1 @12 ]
+"843
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
+"850
+[v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
+"1038
+[v _RCSTA RCSTA `VEuc  1 e 1 @24 ]
+"1133
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"1140
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
+"1478
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1540
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
+"1602
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"1702
+[v _PIE1 PIE1 `VEuc  1 e 1 @140 ]
+"1979
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
+"2177
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
+"2556
+[v _TXSTA TXSTA `VEuc  1 e 1 @152 ]
+[s S144 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"2582
+[s S153 . 1 `uc 1 TXD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 nTX8 1 0 :1:6 
+]
+[s S157 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[u S160 . 1 `S144 1 . 1 0 `S153 1 . 1 0 `S157 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES160  1 e 1 @152 ]
+"2642
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"2704
+[v _SPBRGH SPBRGH `VEuc  1 e 1 @154 ]
+"3335
+[v _BAUDCTL BAUDCTL `VEuc  1 e 1 @391 ]
+"3449
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"3896
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"4133
+[v _RC0 RC0 `VEb  1 e 0 @56 ]
+"4136
+[v _RC1 RC1 `VEb  1 e 0 @57 ]
+"4181
+[v _RD0 RD0 `VEb  1 e 0 @64 ]
+"4184
+[v _RD1 RD1 `VEb  1 e 0 @65 ]
+"4187
+[v _RD2 RD2 `VEb  1 e 0 @66 ]
+"4190
+[v _RD3 RD3 `VEb  1 e 0 @67 ]
+"4193
+[v _RD4 RD4 `VEb  1 e 0 @68 ]
+"4196
+[v _RD5 RD5 `VEb  1 e 0 @69 ]
+"4199
+[v _RD6 RD6 `VEb  1 e 0 @70 ]
+"4202
+[v _RD7 RD7 `VEb  1 e 0 @71 ]
+"4277
+[v _SSPIF SSPIF `VEb  1 e 0 @99 ]
+"56 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\mainMaster.c
+[v _pot pot `uc  1 e 1 0 ]
+"61
+[v _main main `(v  1 e 1 0 ]
+{
+"74
+} 0
+"80
+[v _setup setup `(v  1 e 1 0 ]
+{
+"108
+} 0
+"16 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\USART.c
+[v _usart_conf usart_conf `(v  1 e 1 0 ]
+{
+"48
+} 0
+"114 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\mainMaster.c
+[v _mostrar_titulo_lcd mostrar_titulo_lcd `(v  1 e 1 0 ]
+{
+"118
+} 0
+"132 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\lcd.c
+[v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
+{
+[v Lcd_Write_String@a a `*.24uc  1 a 1 wreg ]
+"133
+[v Lcd_Write_String@i i `i  1 a 2 0 ]
+"132
+[v Lcd_Write_String@a a `*.24uc  1 a 1 wreg ]
+"134
+[v Lcd_Write_String@a a `*.24uc  1 a 1 2 ]
+"136
+} 0
+"169 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\mainMaster.c
+[v _mostrar_dato mostrar_dato `(v  1 e 1 0 ]
+{
+"173
+} 0
+"111 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\lcd.c
+[v _Lcd_Write_Char Lcd_Write_Char `(v  1 e 1 0 ]
+{
+[v Lcd_Write_Char@a a `uc  1 a 1 wreg ]
+[v Lcd_Write_Char@a a `uc  1 a 1 wreg ]
+"125
+[v Lcd_Write_Char@a a `uc  1 a 1 5 ]
+"130
+} 0
+"74
+[v _Lcd_Set_Cursor Lcd_Set_Cursor `(v  1 e 1 0 ]
+{
+[v Lcd_Set_Cursor@a a `uc  1 a 1 wreg ]
+"75
+[v Lcd_Set_Cursor@temp temp `uc  1 a 1 2 ]
+"74
+[v Lcd_Set_Cursor@a a `uc  1 a 1 wreg ]
+[v Lcd_Set_Cursor@b b `uc  1 p 1 7 ]
+"76
+[v Lcd_Set_Cursor@a a `uc  1 a 1 1 ]
+"95
+} 0
+"120 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\mainMaster.c
+[v _encabezado_usart encabezado_usart `(v  1 e 1 0 ]
+{
+"167
+} 0
+"50 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\USART.c
+[v _usart_T_virt usart_T_virt `(v  1 e 1 0 ]
+{
+[v usart_T_virt@t_data t_data `uc  1 a 1 wreg ]
+[v usart_T_virt@t_data t_data `uc  1 a 1 wreg ]
+[v usart_T_virt@t_data t_data `uc  1 a 1 3 ]
+"54
+} 0
+"56
+[v _usart_T_nl usart_T_nl `(v  1 e 1 0 ]
+{
+"60
+} 0
+"97 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\lcd.c
+[v _Lcd_Init Lcd_Init `(v  1 e 1 0 ]
+{
+"109
+} 0
+"62
+[v _Lcd_Cmd Lcd_Cmd `(v  1 e 1 0 ]
+{
+[v Lcd_Cmd@a a `uc  1 a 1 wreg ]
+[v Lcd_Cmd@a a `uc  1 a 1 wreg ]
+[v Lcd_Cmd@a a `uc  1 a 1 6 ]
+"68
+} 0
+"27
+[v _Lcd_Port Lcd_Port `(v  1 e 1 0 ]
+{
+[v Lcd_Port@a a `uc  1 a 1 wreg ]
+[v Lcd_Port@a a `uc  1 a 1 wreg ]
+[v Lcd_Port@a a `uc  1 a 1 3 ]
+"60
+} 0
+"179 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Maestro.X\mainMaster.c
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"188
+} 0
