@@ -1,0 +1,41 @@
+// Configuración
+
+PuertoB = 1Entrada;
+PuertoD = 8Salidas; 
+PuertoB = 1EntradaAnalógica;
+
+ADCON0 = PuertoB0, Fosc/8, Activar Modulo ADC;
+ADCON1 = Justificado a la izuierda, Referencias VDD y VSS;
+Activar ADC;
+
+PuertoA = Entrada Pin SS;
+PuertoC = Entrada Pin SCK y SDI;
+Activar SPI;
+
+Activar Interrupciones Globales;
+Activar Interrupciones Perifericas;
+Activar Interrupciones de ADC; 
+
+// main
+
+Bucle{
+	Iniciar conversión del ADC;
+	Escribir conversión del ADC en el puerto D;
+}
+
+// Interrupción
+
+interrupción{
+	Desactivar GIE;
+	Si ADIF == 1{
+		Guardar dato del adc
+		ADIF = 0;
+	}	
+	Si SSPIF == 1{
+		Leer SSPBUF;
+		Escribir en SSPBUF el dato a enviar;
+		SSPIF = 0;
+	}
+	Activar GIE;
+}
+

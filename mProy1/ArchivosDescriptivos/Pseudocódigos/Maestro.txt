@@ -1,0 +1,71 @@
+// Configuración
+
+PuertoD = 8Salidas;
+PuertoB = 3Salidas;
+PuertoC = 3Salidas, 4Entradas;
+
+SPBRG = 25 = Baud rate en 9600;
+SPBRG = 0;
+Habilitar Receptor y transmisor en 8 bits;
+Activar USART;
+
+SSPSTAT = MiddleSampled & Falling Edge (CKP = 1);
+SSPCON = Modo Maestro a Fosc/4 e Iniciar Modulo;
+Activar SPI;
+
+Activar Interrupciones;
+Activar interrupciones periféricas;
+Activar interrupciones por recepción SPI;
+
+// Main
+
+Bucle{
+	Esclavo 1 = Activado;
+	Recibir dato del esclavo 1;
+	Esperar Interrupcion;
+	Esclavo 2 = Activado;
+	Recibir dato del esclavo 2;
+	Esperar Interrupción;
+	Esclavo 3 = Activado;
+	Recibir dato del esclavo 3;
+	Esperar Interrupción;
+
+	Mapear Temperatura;
+	Mapear potenciómetro a voltaje;
+	Mostrar datos en pantallas{
+		Convertir datos de potenciometro a valores Ascii;
+		Enviar datos formateados a la pantalla;
+		Enviar datos formateados a la terminal virtual;
+
+		Extraer valores de contador;
+		Convertir datos de contador a valores Ascii;
+		Enviar datos a la pantalla;
+		Enviar datos a la terminal virtual;
+
+		Extraer valores de temperatura;
+		Convertir datos de temperatura a valores Ascii;
+		Enviar datos a la pantalla;
+		Enviar datos a la terminal virtual;
+	}
+}
+
+// Interrupción
+
+Interrupción{
+	Desactivar GIE;
+	Si SSPIF == 1{
+		Si esclavo 1 esta activo{
+			Apagar el esclavo 1;
+			potenciometro = Buffer SPI;
+		}
+		Si esclavo 2 esta activo{
+			Apagar el esclavo 2;
+			contador = Buffer SPI;
+		}
+		Si esclavo 3 esta activo{
+			Apagar el esclavo 3;
+			temperatura = Buffer SPI;
+		}
+	}
+	Activar GIE;
+}

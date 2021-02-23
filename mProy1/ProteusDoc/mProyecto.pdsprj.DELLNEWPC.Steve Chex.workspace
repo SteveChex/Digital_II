@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="0">
-  <PLACEMENT>2c0000000000000001000000fffffffffffffffffffffffffffffffff4ffffff000000004b040000c1020000</PLACEMENT>
+  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff320100000500000089050000c6020000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
   <WINDOW type="default" module="DXP"/>
  </FRAME>
@@ -33,7 +33,7 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="612" flags="00008023" y="214" h="250" pid="0" iid="27">
+   <POPUP w="450" x="916" flags="00008023" y="283" h="250" pid="0" iid="27">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>

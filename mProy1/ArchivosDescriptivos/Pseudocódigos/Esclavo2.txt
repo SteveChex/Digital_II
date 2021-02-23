@@ -1,0 +1,41 @@
+// Configuración
+
+PuertoD = 3Salidas; 
+PuertoB = 2Entrada;
+
+PuertoA = Entrada Pin SS;
+PuertoC = Entrada Pin SCK y SDI;
+Activar SPI;
+
+Activar Interrupciones Globales;
+Activar Interrupciones Perifericas;
+Activar Interrupciones de SPI;
+
+// main
+
+Bucle{
+	Escribir en el puerto D el valor del Contador;
+}
+
+// Interrupción
+
+interrupción{
+	Desactivar GIE;
+	Si RBIF == 1{
+		Si RB0 == 1{
+			Decrementar Contador;
+			Escribir en el puerto D el valor del Contador;
+		}
+		Si RB1 == 1{
+			Incrementar Contador;
+			Escribir en el puerto D el valor del Contador;
+		}
+	}	
+	Si SSPIF == 1{
+		Leer SSPBUF;
+		Escribir en SSPBUF el dato a enviar;
+		SSPIF = 0;
+	}
+	Activar GIE;
+}
+
