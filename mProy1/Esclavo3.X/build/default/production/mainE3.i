@@ -2640,6 +2640,42 @@ typedef int16_t intptr_t;
 typedef uint16_t uintptr_t;
 # 39 "mainE3.c" 2
 
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\math.h" 1 3
+
+
+
+# 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\__unsupported.h" 1 3
+# 4 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\math.h" 2 3
+# 30 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\math.h" 3
+extern double fabs(double);
+extern double floor(double);
+extern double ceil(double);
+extern double modf(double, double *);
+extern double sqrt(double);
+extern double atof(const char *);
+extern double sin(double) ;
+extern double cos(double) ;
+extern double tan(double) ;
+extern double asin(double) ;
+extern double acos(double) ;
+extern double atan(double);
+extern double atan2(double, double) ;
+extern double log(double);
+extern double log10(double);
+extern double pow(double, double) ;
+extern double exp(double) ;
+extern double sinh(double) ;
+extern double cosh(double) ;
+extern double tanh(double);
+extern double eval_poly(double, const double *, int);
+extern double frexp(double, int *);
+extern double ldexp(double, int);
+extern double fmod(double, double);
+extern double trunc(double);
+extern double round(double);
+# 40 "mainE3.c" 2
+
+
 # 1 "./adclib2.h" 1
 # 12 "./adclib2.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
@@ -2648,7 +2684,7 @@ typedef uint16_t uintptr_t;
 
 void adc_lect(volatile uint8_t *data);
 void adc_start(void);
-# 40 "mainE3.c" 2
+# 42 "mainE3.c" 2
 
 
 
@@ -2660,7 +2696,7 @@ void adc_start(void);
 void setup(void);
 void __attribute__((picinterrupt((""))))isr(void);
 
-uint8_t temp_data = 0;
+uint8_t temp_data = 0, spi_data = 0;
 
 
 
@@ -2669,7 +2705,13 @@ void main(void) {
     setup();
     while (1) {
         adc_start();
-        PORTD = temp_data;
+        if (temp_data < 24) {
+            PORTD = 0B00000001;
+        } else if (temp_data < 43) {
+            PORTD = 0B00000010;
+        } else if (temp_data >= 43) {
+            PORTD = 0B00000100;
+        }
     }
 }
 
@@ -2690,20 +2732,35 @@ void setup(void) {
 
 
     ADCON0 = 0B01110000;
-    ADCON1 = 0B00000000;
+    ADCON1 = 0B00010000;
+    TRISAbits.TRISA3 = 1;
+    ANSELbits.ANS3 = 1;
     ADCON0bits.ADON = 1;
 
 
 
-    PIE1 = 0B01000000;
+    TRISA = 0B00100000;
+    TRISC = 0B00011000;
+
+    SSPSTAT = 0B00000000;
+    SSPCON2 = 0;
+    SSPCON = 0B00110100;
+
+
+
+    PIE1 = 0B01001000;
     PIR1bits.ADIF = 0;
     INTCON = 0B11001000;
 }
-# 100 "mainE3.c"
+# 119 "mainE3.c"
 void __attribute__((picinterrupt((""))))isr(void) {
     if (1 == ADIF) {
         adc_lect(&temp_data);
         ADIF = 0;
     }
-
+    if (1 == SSPIF) {
+        spi_data = SSPBUF;
+        SSPBUF = temp_data;
+        SSPIF = 0;
+    }
 }

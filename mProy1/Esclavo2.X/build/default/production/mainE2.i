@@ -2650,7 +2650,7 @@ typedef uint16_t uintptr_t;
 void setup(void);
 void __attribute__((picinterrupt((""))))isr(void);
 
-uint8_t cont = 0;
+uint8_t cont = 50, spi_data = 0;
 
 
 
@@ -2658,7 +2658,7 @@ uint8_t cont = 0;
 void main(void) {
     setup();
     while (1) {
-        __asm("nop");
+        PORTD = cont;
     }
 }
 
@@ -2678,22 +2678,38 @@ void setup(void) {
 
 
 
+    TRISA = 0B00100000;
+    TRISC = 0B00011000;
+
+    SSPSTAT = 0B00000000;
+    SSPCON2 = 0;
+    SSPCON = 0B00110100;
+
+
+
+    PIE1 = 0B00001000;
     IOCB = 0B00000011;
     INTCON = 0B11001000;
 
 }
-# 92 "mainE2.c"
+# 102 "mainE2.c"
 void __attribute__((picinterrupt((""))))isr(void) {
-    if (1 == RBIF){
-        if(1 == PORTBbits.RB0){
+    GIE = 0;
+    if (1 == RBIF) {
+        if (1 == PORTBbits.RB0) {
             cont--;
             PORTD = cont;
         }
-        if (1 == PORTBbits.RB1){
+        if (1 == PORTBbits.RB1) {
             cont++;
             PORTD = cont;
         }
         RBIF = 0;
     }
-
+    if (1 == SSPIF) {
+        spi_data = SSPBUF;
+        SSPBUF = cont;
+        SSPIF = 0;
+    }
+    GIE = 0;
 }

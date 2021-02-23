@@ -2671,11 +2671,6 @@ void main(void) {
     while (1) {
         adc_start();
         PORTD = adc_data;
-        if (WCOL) {
-            PORTCbits.RC0 = 1;
-        } else {
-            PORTCbits.RC0 = 0;
-        }
     }
 }
 
@@ -2715,7 +2710,7 @@ void setup(void) {
     PIR1bits.ADIF = 0;
     INTCON = 0B11001000;
 }
-# 116 "mainE1.c"
+# 111 "mainE1.c"
 void __attribute__((picinterrupt((""))))isr(void) {
     GIE = 0;
     if (1 == ADIF) {

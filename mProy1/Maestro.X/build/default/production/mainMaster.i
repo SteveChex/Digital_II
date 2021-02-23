@@ -2686,8 +2686,21 @@ void __attribute__((picinterrupt((""))))isr(void);
 void mostrar_titulo_lcd(void);
 void encabezado_usart(void);
 void mostrar_dato(void);
+void spi_pot(void);
+void spi_count(void);
+void spi_temp(void);
+void map_var(uint8_t v_in, uint8_t *v_out, uint8_t inMin, uint8_t inMax,
+        uint8_t outMin, uint8_t outMax);
+void voltaje(uint8_t data_in, uint8_t *volt_u, uint8_t *volt_d1,
+        uint8_t *volt_d2);
+void conts(uint8_t data_in, uint8_t *uni, uint8_t *dec, uint8_t *cent);
 
-uint8_t pot = 0, cont = 0, temp = 0;
+
+uint8_t pot = 39, cont = 39, temp = 0;
+
+uint8_t pot_u = 0, pot_d1 = 0, pot_d2 = 0, temp_m = 0, cont_u = 0, cont_d = 0,
+        cont_c = 0, aux = 0;
+char sdata;
 
 
 
@@ -2695,13 +2708,18 @@ uint8_t pot = 0, cont = 0, temp = 0;
 void main(void) {
     setup();
     Lcd_Init();
+    encabezado_usart();
     while (1) {
-        encabezado_usart();
+        spi_pot();
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+        spi_count();
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+        spi_temp();
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+        map_var(temp, &temp_m, 0, 255, 13, 150);
+        voltaje(pot, &pot_u, &pot_d1, &pot_d2);
         mostrar_titulo_lcd();
         mostrar_dato();
-        _delay((unsigned long)((2)*(4000000/4000.0)));
-        PORTBbits.RB7 = 0;
-        SSPBUF = 255;
 
         usart_T_nl();
     }
@@ -2714,6 +2732,10 @@ void main(void) {
 void setup(void) {
 
 
+
+    ANSEL = 0;
+    TRISA = 0;
+    PORTA = 0;
 
     ANSELH = 0;
     TRISD = 0;
@@ -2728,7 +2750,7 @@ void setup(void) {
 
 
     TRISB = 0B00011111;
-    PORTB = 0B01100000;
+    PORTB = 0B11100000;
     TRISC = 0B00010000;
 
     SSPSTAT = 0B00000000;
@@ -2748,7 +2770,7 @@ void setup(void) {
 void mostrar_titulo_lcd(void) {
     Lcd_Set_Cursor(1, 1);
 
-    Lcd_Write_String("S1:   S2:   S3: ");
+    Lcd_Write_String("S1:    S2:  S3: ");
 }
 
 void encabezado_usart(void) {
@@ -2803,20 +2825,163 @@ void encabezado_usart(void) {
 void mostrar_dato(void) {
     Lcd_Set_Cursor(2, 1);
 
-    Lcd_Write_Char(pot);
+
+
+
+
+    num_ascii(pot_u, &sdata);
+    Lcd_Write_Char(sdata);
+    usart_T_virt(sdata);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    Lcd_Write_Char(46);
+    usart_T_virt(46);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    num_ascii(pot_d1, &sdata);
+    Lcd_Write_Char(sdata);
+    usart_T_virt(sdata);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    num_ascii(pot_d2, &sdata);
+    Lcd_Write_Char(sdata);
+    usart_T_virt(sdata);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    Lcd_Write_Char(86);
+    usart_T_virt(86);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+    Lcd_Write_String("  ");
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+
+    conts(cont, &cont_u, &cont_d, &cont_c);
+    num_ascii(cont_c, &sdata);
+    Lcd_Write_Char(sdata);
+    usart_T_virt(sdata);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    num_ascii(cont_d, &sdata);
+    Lcd_Write_Char(sdata);
+    usart_T_virt(sdata);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    num_ascii(cont_u, &sdata);
+    Lcd_Write_Char(sdata);
+    usart_T_virt(sdata);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+    Lcd_Write_String("  ");
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    usart_T_virt(32);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+
+
+    conts(temp_m, &cont_u, &cont_d, &cont_c);
+    num_ascii(cont_c, &sdata);
+    Lcd_Write_Char(sdata);
+    usart_T_virt(sdata);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    num_ascii(cont_d, &sdata);
+    Lcd_Write_Char(sdata);
+    usart_T_virt(sdata);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    num_ascii(cont_u, &sdata);
+    Lcd_Write_Char(sdata);
+    usart_T_virt(sdata);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+    Lcd_Write_Char(67);
+    usart_T_virt(67);
+    _delay((unsigned long)((2)*(4000000/4000.0)));
+}
+
+void spi_pot(void) {
+    PORTBbits.RB7 = 0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+    SSPBUF = 0;
+}
+
+void spi_count(void) {
+    PORTBbits.RB6 = 0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+    SSPBUF = 0;
+}
+
+void spi_temp(void) {
+    PORTBbits.RB5 = 0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+    SSPBUF = 0;
 }
 
 
 
 
 
+
+void map_var(uint8_t v_in, uint8_t *v_out, uint8_t inMin, uint8_t inMax,
+        uint8_t outMin, uint8_t outMax) {
+    *v_out = ((((v_in - inMin)*(outMax - outMin)) / (inMax - inMin)) + outMin);
+}
+
+void voltaje(uint8_t data_in, uint8_t *volt_u, uint8_t *volt_d1, uint8_t *volt_d2) {
+
+
+
+
+
+    while (data_in > 49) {
+        data_in = data_in - 50;
+        aux++;
+    }
+    *volt_u = aux;
+    aux = 0;
+
+    while (data_in > 9) {
+        data_in = data_in - 10;
+        aux++;
+    }
+    *volt_d1 = aux;
+    *volt_d2 = data_in;
+    aux = 0;
+}
+
+void conts(uint8_t data_in, uint8_t *uni, uint8_t *dec, uint8_t *cent) {
+
+
+
+
+    while (data_in > 99) {
+        data_in = data_in - 100;
+        aux++;
+    }
+    *cent = aux;
+    aux = 0;
+
+    while (data_in > 9) {
+        data_in = data_in - 10;
+        aux++;
+    }
+    *dec = aux;
+    *uni = data_in;
+    aux = 0;
+}
+
+
+
+
 void __attribute__((picinterrupt((""))))isr(void) {
     GIE = 0;
-    if (SSPIF) {
-        pot = SSPBUF;
-        PORTBbits.RB7 = 1;
+    if (1 == SSPIF) {
+        if (0 == PORTBbits.RB7) {
+            PORTBbits.RB7 = 1;
+            pot = SSPBUF;
+        } else if (0 == PORTBbits.RB6) {
+            PORTBbits.RB6 = 1;
+            cont = SSPBUF;
+        } else if (0 == PORTBbits.RB5) {
+            PORTBbits.RB5 = 1;
+            temp = SSPBUF;
+        }
         SSPIF = 0;
     }
-
     GIE = 1;
 }

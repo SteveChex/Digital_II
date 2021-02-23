@@ -47,7 +47,7 @@
 void setup(void);
 void __interrupt()isr(void); //VECTOR DE INTERRUPCIÓN
 
-uint8_t cont = 0;
+uint8_t cont = 50, spi_data = 0;
 //******************************************************************************
 //                         LOOP PRINCIPAL
 //******************************************************************************
@@ -55,7 +55,7 @@ uint8_t cont = 0;
 void main(void) {
     setup();
     while (1) {
-        asm("nop");
+        PORTD = cont;
     }
 }
 
@@ -73,8 +73,18 @@ void setup(void) {
     PORTD = 0;
     PORTB = 0;
 
-    // INTERRUPCIONES
+    // COMUNICACIÓN SPI
 
+    TRISA = 0B00100000; // HABILITANDO EL PIN SS COMO ENTRADA
+    TRISC = 0B00011000; // ASIGNANDO LAS SALIDAS DEL Y ENTRADAS DEL MODULO
+
+    SSPSTAT = 0B00000000; // MIDDLE SAMPLED & FALLING EDGE (CKP = 1)
+    SSPCON2 = 0; // BORRANDO EL REGISTRO (UTIL SOLO PARA I2C)
+    SSPCON = 0B00110100; // CONFIGURADO MODO ESCLAVO CON SS Y ACTIVADO EL MODULO
+
+    // INTERRUPCIONES
+    
+    PIE1 = 0B00001000; // ACTIVAR INT. DE SPI
     IOCB = 0B00000011; // ACTIVAR PINES DE INTERRUPCIÓN
     INTCON = 0B11001000; // ACTIVAR INT. GLOBALES, PERIFERICAS, DEL PUERTO B
     // Y LIMPIANDO BANDERA RBIF
@@ -90,16 +100,22 @@ void setup(void) {
 //******************************************************************************
 
 void __interrupt()isr(void) {
-    if (1 == RBIF){
-        if(1 == PORTBbits.RB0){
+    GIE = 0;
+    if (1 == RBIF) {
+        if (1 == PORTBbits.RB0) {
             cont--;
             PORTD = cont;
         }
-        if (1 == PORTBbits.RB1){
+        if (1 == PORTBbits.RB1) {
             cont++;
             PORTD = cont;
         }
         RBIF = 0;
     }
-
+    if (1 == SSPIF) {
+        spi_data = SSPBUF;
+        SSPBUF = cont;
+        SSPIF = 0;
+    }
+    GIE = 0;
 }

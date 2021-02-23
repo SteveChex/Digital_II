@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="0">
-  <PLACEMENT>2c0000000000000001000000fffffffffffffffffffffffffffffffff4ffffff0000000083040000c1020000</PLACEMENT>
+  <PLACEMENT>2c0000000000000001000000fffffffffffffffffffffffffffffffff4ffffff000000004b040000c1020000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
   <WINDOW type="default" module="DXP"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP w="800" x="522" flags="00000003" y="21" h="200" pid="0" iid="-1">
+   <POPUP w="800" x="522" flags="00000002" y="21" h="200" pid="0" iid="-1">
     <PROPERTIES>
      <ITEM name="Message Column Width">663</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
@@ -33,7 +33,7 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="70" flags="00000022" y="105" h="250" pid="0" iid="27">
+   <POPUP w="450" x="612" flags="00008023" y="214" h="250" pid="0" iid="27">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>
@@ -223,7 +223,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="686" x="565" flags="00000022" y="357" h="411" pid="0" iid="11">
+   <POPUP w="686" x="640" flags="00000022" y="145" h="411" pid="0" iid="11">
     <PROPERTIES>
      <ITEM name="ComboBox1000">255</ITEM>
      <ITEM name="ComboBox1001">200</ITEM>
@@ -242,7 +242,7 @@
    <POPUP w="610" x="124" flags="00000000" y="123" h="466" pid="0" iid="29">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="695" x="613" flags="00008001" y="278" h="453" pid="0" iid="32">
+   <POPUP w="695" x="606" flags="00000000" y="245" h="453" pid="0" iid="32">
     <PROPERTIES/>
    </POPUP>
   </PWI>

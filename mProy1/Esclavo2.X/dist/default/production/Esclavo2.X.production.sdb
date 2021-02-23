@@ -15,11 +15,11 @@
 [v _main main `(v  1 e 1 0 ]
 "66
 [v _setup setup `(v  1 e 1 0 ]
-"92
+"102
 [v _isr isr `II(v  1 e 1 0 ]
 "228 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
-[s S34 . 1 `uc 1 RB0 1 0 :1:0 
+[s S41 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -29,24 +29,43 @@
 `uc 1 RB7 1 0 :1:7 
 ]
 "245
-[u S43 . 1 `S34 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES43  1 e 1 @6 ]
+[u S50 . 1 `S41 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES50  1 e 1 @6 ]
 "352
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
 "459
 [v _INTCON INTCON `VEuc  1 e 1 @11 ]
+"843
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
+"850
+[v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
+"1416
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
 "1478
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1540
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
 "1602
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"1702
+[v _PIE1 PIE1 `VEuc  1 e 1 @140 ]
+"1979
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
+"2177
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
 "2416
 [v _IOCB IOCB `VEuc  1 e 1 @150 ]
 "3449
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"3896
+[v _GIE GIE `VEb  1 e 0 @95 ]
 "4130
 [v _RBIF RBIF `VEb  1 e 0 @88 ]
+"4277
+[v _SSPIF SSPIF `VEb  1 e 0 @99 ]
 "50 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo2.X\mainE2.c
 [v _cont cont `uc  1 e 1 0 ]
+[v _spi_data spi_data `uc  1 e 1 0 ]
 "55
 [v _main main `(v  1 e 1 0 ]
 {
@@ -55,10 +74,10 @@
 "66
 [v _setup setup `(v  1 e 1 0 ]
 {
-"81
+"91
 } 0
-"92
+"102
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"105
+"121
 } 0

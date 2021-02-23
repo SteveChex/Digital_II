@@ -59,11 +59,6 @@ void main(void) {
     while (1) {
         adc_start();
         PORTD = adc_data;
-        if (WCOL) {
-            PORTCbits.RC0 = 1;
-        } else {
-            PORTCbits.RC0 = 0;
-        }
     }
 }
 
@@ -99,7 +94,7 @@ void setup(void) {
 
     // INTERRUPCIONES
 
-    PIE1 = 0B01001000; // ACTIVAR INT. DEL ADC
+    PIE1 = 0B01001000; // ACTIVAR INT. DEL ADC Y DE SPI
     PIR1bits.ADIF = 0; // LIMPIANDO BANDERA DEL ADC
     INTCON = 0B11001000; // ACTIVAR INT. GLOBALES Y PERIFERICAS
 }

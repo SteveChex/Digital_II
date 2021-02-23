@@ -15,11 +15,11 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"56 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo3.X\mainE3.c
+"58 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo3.X\mainE3.c
 [v _main main `(v  1 e 1 0 ]
-"68
+"76
 [v _setup setup `(v  1 e 1 0 ]
-"100
+"119
 [v _isr isr `II(v  1 e 1 0 ]
 "228 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
@@ -27,7 +27,7 @@
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
 "459
 [v _INTCON INTCON `VEuc  1 e 1 @11 ]
-[s S84 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[s S131 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -36,19 +36,23 @@
 `uc 1 ADIF 1 0 :1:6 
 ]
 "553
-[u S92 . 1 `S84 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES92  1 e 1 @12 ]
+[u S139 . 1 `S131 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES139  1 e 1 @12 ]
+"843
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
+"850
+[v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
 "1238
 [v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
 "1245
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
-[s S37 . 1 `uc 1 ADON 1 0 :1:0 
+[s S79 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 `uc 1 ADCS 1 0 :2:6 
 ]
 "1276
-[s S42 . 1 `uc 1 . 1 0 :1:0 
+[s S84 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -57,47 +61,82 @@
 `uc 1 ADCS0 1 0 :1:6 
 `uc 1 ADCS1 1 0 :1:7 
 ]
-[s S51 . 1 `uc 1 . 1 0 :1:0 
+[s S93 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S54 . 1 `uc 1 . 1 0 :1:0 
+[s S96 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[u S57 . 1 `S37 1 . 1 0 `S42 1 . 1 0 `S51 1 . 1 0 `S54 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES57  1 e 1 @31 ]
+[u S99 . 1 `S79 1 . 1 0 `S84 1 . 1 0 `S93 1 . 1 0 `S96 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES99  1 e 1 @31 ]
+"1416
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+[s S37 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"1433
+[u S46 . 1 `S37 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES46  1 e 1 @133 ]
 "1478
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1540
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
 "1602
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
 "1702
 [v _PIE1 PIE1 `VEuc  1 e 1 @140 ]
+"1979
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
+"2177
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
 "2977
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
+[s S58 . 1 `uc 1 ANS0 1 0 :1:0 
+`uc 1 ANS1 1 0 :1:1 
+`uc 1 ANS2 1 0 :1:2 
+`uc 1 ANS3 1 0 :1:3 
+`uc 1 ANS4 1 0 :1:4 
+`uc 1 ANS5 1 0 :1:5 
+`uc 1 ANS6 1 0 :1:6 
+`uc 1 ANS7 1 0 :1:7 
+]
+"3404
+[u S67 . 1 `S58 1 . 1 0 ]
+[v _ANSELbits ANSELbits `VES67  1 e 1 @392 ]
 "3449
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
 "3587
 [v _ADIF ADIF `VEb  1 e 0 @102 ]
-"51 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo3.X\mainE3.c
+"4277
+[v _SSPIF SSPIF `VEb  1 e 0 @99 ]
+"53 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo3.X\mainE3.c
 [v _temp_data temp_data `uc  1 e 1 0 ]
-"56
+[v _spi_data spi_data `uc  1 e 1 0 ]
+"58
 [v _main main `(v  1 e 1 0 ]
 {
-"62
+"70
 } 0
-"68
+"76
 [v _setup setup `(v  1 e 1 0 ]
 {
-"89
+"108
 } 0
 "19 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo3.X\adclib2.c
 [v _adc_start adc_start `(v  1 e 1 0 ]
 {
 "24
 } 0
-"100 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo3.X\mainE3.c
+"119 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo3.X\mainE3.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"106
+"129
 } 0
 "15 C:\Users\edgar\Documents\GitHub\Digital_II\mProy1\Esclavo3.X\adclib2.c
 [v _adc_lect adc_lect `(v  1 e 1 0 ]

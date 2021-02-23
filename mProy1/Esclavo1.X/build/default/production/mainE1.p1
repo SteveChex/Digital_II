@@ -9,20 +9,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "352 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 352: extern volatile unsigned char PORTD __attribute__((address(0x008)));
 [v _PORTD `Vuc ~T0 @X0 0 e@8 ]
-"4589
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 4589: extern volatile __bit WCOL __attribute__((address(0xA7)));
-[v _WCOL `Vb ~T0 @X0 0 e@167 ]
-"296
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 296:     struct {
-[s S10 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S10 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
-"295
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 295: typedef union {
-[u S9 `S10 1 ]
-[n S9 . . ]
-"307
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 307: extern volatile PORTCbits_t PORTCbits __attribute__((address(0x007)));
-[v _PORTCbits `VS9 ~T0 @X0 0 e@7 ]
 "1478
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1478: extern volatile unsigned char TRISB __attribute__((address(0x086)));
 [v _TRISB `Vuc ~T0 @X0 0 e@134 ]
@@ -405,141 +391,121 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;mainE1.c: 61:         PORTD = adc_data;
 [e = _PORTD _adc_data ]
 "62
-[; ;mainE1.c: 62:         if (WCOL) {
-[e $ ! _WCOL 142  ]
-{
-"63
-[; ;mainE1.c: 63:             PORTCbits.RC0 = 1;
-[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-"64
-[; ;mainE1.c: 64:         } else {
-}
-[e $U 143  ]
-[e :U 142 ]
-{
-"65
-[; ;mainE1.c: 65:             PORTCbits.RC0 = 0;
-[e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
-"66
-[; ;mainE1.c: 66:         }
-}
-[e :U 143 ]
-"67
-[; ;mainE1.c: 67:     }
+[; ;mainE1.c: 62:     }
 }
 [e :U 139 ]
 [e $U 140  ]
 [e :U 141 ]
-"68
-[; ;mainE1.c: 68: }
+"63
+[; ;mainE1.c: 63: }
 [e :UE 138 ]
 }
-"74
-[; ;mainE1.c: 74: void setup(void) {
+"69
+[; ;mainE1.c: 69: void setup(void) {
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"78
-[; ;mainE1.c: 78:     TRISB &= 0B11111111;
+"73
+[; ;mainE1.c: 73:     TRISB &= 0B11111111;
 [e =& _TRISB -> -> 255 `i `Vuc ]
-"79
-[; ;mainE1.c: 79:     TRISD &= 0;
+"74
+[; ;mainE1.c: 74:     TRISD &= 0;
 [e =& _TRISD -> -> 0 `i `Vuc ]
-"80
-[; ;mainE1.c: 80:     ANSELH &= 0B00010000;
+"75
+[; ;mainE1.c: 75:     ANSELH &= 0B00010000;
 [e =& _ANSELH -> -> 16 `i `Vuc ]
-"81
-[; ;mainE1.c: 81:     PORTD = 0;
+"76
+[; ;mainE1.c: 76:     PORTD = 0;
 [e = _PORTD -> -> 0 `i `uc ]
-"82
-[; ;mainE1.c: 82:     PORTB = 0;
+"77
+[; ;mainE1.c: 77:     PORTB = 0;
 [e = _PORTB -> -> 0 `i `uc ]
-"83
-[; ;mainE1.c: 83:     PORTC = 0;
+"78
+[; ;mainE1.c: 78:     PORTC = 0;
 [e = _PORTC -> -> 0 `i `uc ]
-"87
-[; ;mainE1.c: 87:     ADCON0 = 0B01110000;
+"82
+[; ;mainE1.c: 82:     ADCON0 = 0B01110000;
 [e = _ADCON0 -> -> 112 `i `uc ]
-"88
-[; ;mainE1.c: 88:     ADCON1 = 0B00000000;
+"83
+[; ;mainE1.c: 83:     ADCON1 = 0B00000000;
 [e = _ADCON1 -> -> 0 `i `uc ]
-"89
-[; ;mainE1.c: 89:     ADCON0bits.ADON = 1;
+"84
+[; ;mainE1.c: 84:     ADCON0bits.ADON = 1;
 [e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
-"93
-[; ;mainE1.c: 93:     TRISA = 0B00100000;
+"88
+[; ;mainE1.c: 88:     TRISA = 0B00100000;
 [e = _TRISA -> -> 32 `i `uc ]
-"94
-[; ;mainE1.c: 94:     TRISC = 0B00011000;
+"89
+[; ;mainE1.c: 89:     TRISC = 0B00011000;
 [e = _TRISC -> -> 24 `i `uc ]
-"96
-[; ;mainE1.c: 96:     SSPSTAT = 0B00000000;
+"91
+[; ;mainE1.c: 91:     SSPSTAT = 0B00000000;
 [e = _SSPSTAT -> -> 0 `i `uc ]
-"97
-[; ;mainE1.c: 97:     SSPCON2 = 0;
+"92
+[; ;mainE1.c: 92:     SSPCON2 = 0;
 [e = _SSPCON2 -> -> 0 `i `uc ]
-"98
-[; ;mainE1.c: 98:     SSPCON = 0B00110100;
+"93
+[; ;mainE1.c: 93:     SSPCON = 0B00110100;
 [e = _SSPCON -> -> 52 `i `uc ]
-"102
-[; ;mainE1.c: 102:     PIE1 = 0B01001000;
+"97
+[; ;mainE1.c: 97:     PIE1 = 0B01001000;
 [e = _PIE1 -> -> 72 `i `uc ]
-"103
-[; ;mainE1.c: 103:     PIR1bits.ADIF = 0;
+"98
+[; ;mainE1.c: 98:     PIR1bits.ADIF = 0;
 [e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
-"104
-[; ;mainE1.c: 104:     INTCON = 0B11001000;
+"99
+[; ;mainE1.c: 99:     INTCON = 0B11001000;
 [e = _INTCON -> -> 200 `i `uc ]
-"105
-[; ;mainE1.c: 105: }
-[e :UE 144 ]
+"100
+[; ;mainE1.c: 100: }
+[e :UE 142 ]
 }
 [v $root$_isr `(v ~T0 @X0 0 e ]
-"116
-[; ;mainE1.c: 116: void __attribute__((picinterrupt((""))))isr(void) {
+"111
+[; ;mainE1.c: 111: void __attribute__((picinterrupt((""))))isr(void) {
 [v _isr `(v ~T2 @X0 1 ef ]
 {
 [e :U _isr ]
 [f ]
-"117
-[; ;mainE1.c: 117:     GIE = 0;
+"112
+[; ;mainE1.c: 112:     GIE = 0;
 [e = _GIE -> -> 0 `i `b ]
-"118
-[; ;mainE1.c: 118:     if (1 == ADIF) {
-[e $ ! == -> 1 `i -> _ADIF `i 146  ]
+"113
+[; ;mainE1.c: 113:     if (1 == ADIF) {
+[e $ ! == -> 1 `i -> _ADIF `i 144  ]
 {
-"119
-[; ;mainE1.c: 119:         adc_lect(&adc_data);
+"114
+[; ;mainE1.c: 114:         adc_lect(&adc_data);
 [e ( _adc_lect (1 -> &U _adc_data `*Vuc ]
-"120
-[; ;mainE1.c: 120:         ADIF = 0;
+"115
+[; ;mainE1.c: 115:         ADIF = 0;
 [e = _ADIF -> -> 0 `i `b ]
+"116
+[; ;mainE1.c: 116:     }
+}
+[e :U 144 ]
+"117
+[; ;mainE1.c: 117:     if (1 == SSPIF) {
+[e $ ! == -> 1 `i -> _SSPIF `i 145  ]
+{
+"118
+[; ;mainE1.c: 118:         spi_data = SSPBUF;
+[e = _spi_data _SSPBUF ]
+"119
+[; ;mainE1.c: 119:         SSPBUF = adc_data;
+[e = _SSPBUF _adc_data ]
+"120
+[; ;mainE1.c: 120:         SSPIF = 0;
+[e = _SSPIF -> -> 0 `i `b ]
 "121
 [; ;mainE1.c: 121:     }
 }
-[e :U 146 ]
+[e :U 145 ]
 "122
-[; ;mainE1.c: 122:     if (1 == SSPIF) {
-[e $ ! == -> 1 `i -> _SSPIF `i 147  ]
-{
-"123
-[; ;mainE1.c: 123:         spi_data = SSPBUF;
-[e = _spi_data _SSPBUF ]
-"124
-[; ;mainE1.c: 124:         SSPBUF = adc_data;
-[e = _SSPBUF _adc_data ]
-"125
-[; ;mainE1.c: 125:         SSPIF = 0;
-[e = _SSPIF -> -> 0 `i `b ]
-"126
-[; ;mainE1.c: 126:     }
-}
-[e :U 147 ]
-"127
-[; ;mainE1.c: 127:     GIE = 1;
+[; ;mainE1.c: 122:     GIE = 1;
 [e = _GIE -> -> 1 `i `b ]
-"128
-[; ;mainE1.c: 128: }
-[e :UE 145 ]
+"123
+[; ;mainE1.c: 123: }
+[e :UE 143 ]
 }

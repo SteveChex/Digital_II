@@ -37,6 +37,8 @@
 
 #include <xc.h>
 #include <stdint.h>
+#include <math.h>
+
 #include "adclib2.h"
 
 //******************************************************************************
@@ -48,7 +50,7 @@
 void setup(void);
 void __interrupt()isr(void); //VECTOR DE INTERRUPCIÓN
 
-uint8_t temp_data = 0;
+uint8_t temp_data = 0, spi_data = 0;
 //******************************************************************************
 //                         LOOP PRINCIPAL
 //******************************************************************************
@@ -56,8 +58,14 @@ uint8_t temp_data = 0;
 void main(void) {
     setup();
     while (1) {
-        adc_start();
-        PORTD = temp_data;
+        adc_start();        
+        if (temp_data < 24) {
+            PORTD = 0B00000001;
+        } else if (temp_data < 43) {
+            PORTD = 0B00000010;
+        } else if (temp_data >= 43) {
+            PORTD = 0B00000100;
+        }
     }
 }
 
@@ -68,7 +76,7 @@ void main(void) {
 void setup(void) {
 
     //CONFIGURACIÓN GENERAL
-
+    
     TRISB &= 0B11111111; //RB0 ENTRADA. EL RESTO NO SE USARÁ
     TRISD = 0; // PORTD COMO PUERTO DE SALIDA
     ANSELH &= 0B00010000; // RB0 COMO ENTRADA ANALOGICA
@@ -76,14 +84,25 @@ void setup(void) {
     PORTB = 0;
 
     // ADC
-
+    
     ADCON0 = 0B01110000; // CONVERSION EN B0 (AN8) A Fosc/8 (2ns) DE Tad
-    ADCON1 = 0B00000000; // JUSTIFICADO A LA IZQUIERDA. REFERENCIA VDD Y VSS
+    ADCON1 = 0B00010000; // JUSTIFICADO A LA IZQUIERDA. REFERENCIA VREF+ Y VSS
+    TRISAbits.TRISA3 = 1; // ACTIVANDO LA ENTRADA AN3
+    ANSELbits.ANS3 = 1; // ACTIVANDO ENTRADA ANALÓGICA EN RA3
     ADCON0bits.ADON = 1; //ACTIVANDO MODULO ADC
+
+    // COMUNICACIÓN SPI
+
+    TRISA = 0B00100000; // HABILITANDO EL PIN SS COMO ENTRADA
+    TRISC = 0B00011000; // ASIGNANDO LAS SALIDAS DEL Y ENTRADAS DEL MODULO
+
+    SSPSTAT = 0B00000000; // MIDDLE SAMPLED & FALLING EDGE (CKP = 1)
+    SSPCON2 = 0; // BORRANDO EL REGISTRO (UTIL SOLO PARA I2C)
+    SSPCON = 0B00110100; // CONFIGURADO MODO ESCLAVO CON SS Y ACTIVADO EL MODULO
 
     // INTERRUPCIONES
 
-    PIE1 = 0B01000000; // ACTIVAR INT. DEL ADC
+    PIE1 = 0B01001000; // ACTIVAR INT. DEL ADC Y DE SPI
     PIR1bits.ADIF = 0; // LIMPIANDO BANDERA DEL ADC
     INTCON = 0B11001000; // ACTIVAR INT. GLOBALES Y PERIFERICAS
 }
@@ -102,5 +121,9 @@ void __interrupt()isr(void) {
         adc_lect(&temp_data);
         ADIF = 0;
     }
-
+    if (1 == SSPIF) {
+        spi_data = SSPBUF;
+        SSPBUF = temp_data;
+        SSPIF = 0;
+    }
 }
