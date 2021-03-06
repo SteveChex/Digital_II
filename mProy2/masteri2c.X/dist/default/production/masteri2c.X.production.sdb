@@ -1,0 +1,214 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F887 ]
+[d frameptr 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"60 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+[v _main main `(v  1 e 1 0 ]
+"109
+[v _setup setup `(v  1 e 1 0 ]
+"144
+[v _isr isr `II(v  1 e 1 0 ]
+"15 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+[v _i2c_iniciar i2c_iniciar `(v  1 e 1 0 ]
+"20
+[v _i2c_funcion i2c_funcion `(v  1 e 1 0 ]
+"30
+[v _i2c_escribir i2c_escribir `(v  1 e 1 0 ]
+"35
+[v _i2c_detener i2c_detener `(v  1 e 1 0 ]
+"40
+[v _i2c_leer i2c_leer `(v  1 e 1 0 ]
+"16 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+[v _usart_conf usart_conf `(v  1 e 1 0 ]
+"50
+[v _usart_T usart_T `(v  1 e 1 0 ]
+"68
+[v _usart_R usart_R `(v  1 e 1 0 ]
+"228 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+[s S54 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"245
+[u S63 . 1 `S54 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES63  1 e 1 @6 ]
+"290
+[v _PORTC PORTC `VEuc  1 e 1 @7 ]
+"352
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+"459
+[v _INTCON INTCON `VEuc  1 e 1 @11 ]
+"537
+[v _PIR1 PIR1 `VEuc  1 e 1 @12 ]
+[s S207 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"553
+[u S215 . 1 `S207 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES215  1 e 1 @12 ]
+"843
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
+"850
+[v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
+"1038
+[v _RCSTA RCSTA `VEuc  1 e 1 @24 ]
+"1133
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"1140
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
+"1478
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1540
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
+"1602
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"1702
+[v _PIE1 PIE1 `VEuc  1 e 1 @140 ]
+"1979
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
+"2048
+[v _SSPADD SSPADD `VEuc  1 e 1 @147 ]
+"2177
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
+"2556
+[v _TXSTA TXSTA `VEuc  1 e 1 @152 ]
+[s S169 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"2582
+[s S178 . 1 `uc 1 TXD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 nTX8 1 0 :1:6 
+]
+[s S182 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[u S185 . 1 `S169 1 . 1 0 `S178 1 . 1 0 `S182 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES185  1 e 1 @152 ]
+"2642
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"2704
+[v _SPBRGH SPBRGH `VEuc  1 e 1 @154 ]
+"3335
+[v _BAUDCTL BAUDCTL `VEuc  1 e 1 @391 ]
+"3449
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"3563
+[v _ACKDT ACKDT `VEb  1 e 0 @1165 ]
+"3566
+[v _ACKEN ACKEN `VEb  1 e 0 @1164 ]
+"3569
+[v _ACKSTAT ACKSTAT `VEb  1 e 0 @1166 ]
+"3896
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"4043
+[v _PEN PEN `VEb  1 e 0 @1162 ]
+"4106
+[v _RB1 RB1 `VEb  1 e 0 @49 ]
+"4166
+[v _RCEN RCEN `VEb  1 e 0 @1163 ]
+"4175
+[v _RCIF RCIF `VEb  1 e 0 @101 ]
+"4250
+[v _SEN SEN `VEb  1 e 0 @1160 ]
+"52 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+[v _i2c_recep i2c_recep `uc  1 e 1 0 ]
+[v _usart_recep usart_recep `uc  1 e 1 0 ]
+"60
+[v _main main `(v  1 e 1 0 ]
+{
+"103
+} 0
+"50 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+[v _usart_T usart_T `(v  1 e 1 0 ]
+{
+[v usart_T@t_data t_data `uc  1 a 1 wreg ]
+[v usart_T@t_data t_data `uc  1 a 1 wreg ]
+[v usart_T@t_data t_data `uc  1 a 1 5 ]
+"54
+} 0
+"109 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+[v _setup setup `(v  1 e 1 0 ]
+{
+"134
+} 0
+"16 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+[v _usart_conf usart_conf `(v  1 e 1 0 ]
+{
+"48
+} 0
+"40 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+[v _i2c_leer i2c_leer `(v  1 e 1 0 ]
+{
+[v i2c_leer@ak ak `uc  1 a 1 wreg ]
+[v i2c_leer@ak ak `uc  1 a 1 wreg ]
+[v i2c_leer@lect lect `*.1uc  1 p 1 5 ]
+[v i2c_leer@ak ak `uc  1 a 1 0 ]
+"48
+} 0
+"15
+[v _i2c_iniciar i2c_iniciar `(v  1 e 1 0 ]
+{
+"18
+} 0
+"20
+[v _i2c_funcion i2c_funcion `(v  1 e 1 0 ]
+{
+[v i2c_funcion@addr addr `uc  1 a 1 wreg ]
+[v i2c_funcion@addr addr `uc  1 a 1 wreg ]
+[v i2c_funcion@mode mode `uc  1 p 1 5 ]
+[v i2c_funcion@addr addr `uc  1 a 1 6 ]
+"28
+} 0
+"30
+[v _i2c_escribir i2c_escribir `(v  1 e 1 0 ]
+{
+[v i2c_escribir@data data `uc  1 a 1 wreg ]
+[v i2c_escribir@data data `uc  1 a 1 wreg ]
+[v i2c_escribir@data data `uc  1 a 1 5 ]
+"33
+} 0
+"35
+[v _i2c_detener i2c_detener `(v  1 e 1 0 ]
+{
+"38
+} 0
+"144 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"151
+} 0
+"68 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+[v _usart_R usart_R `(v  1 e 1 0 ]
+{
+[v usart_R@r_data r_data `*.1uc  1 a 1 wreg ]
+[v usart_R@r_data r_data `*.1uc  1 a 1 wreg ]
+[v usart_R@r_data r_data `*.1uc  1 a 1 1 ]
+"72
+} 0
