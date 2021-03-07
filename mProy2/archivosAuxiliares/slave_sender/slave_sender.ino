@@ -19,22 +19,30 @@ void setup() {
   Wire.onRequest(requestEvent); // register event
   Wire.onReceive(receiveEvent); // register event
   pinMode(5, OUTPUT);
+
+  Serial.begin(9600);
+  Serial1.begin(9600);
 }
 
 void loop() {
-  delay(100);
+  /*Serial1.println(0B00000010, BIN);
+  delay(1000);
+  Serial1.println(0B00000100, BIN);
+  delay(1000);
+  Serial1.println(0B00001001, BIN);
+  */delay(5000);
 }
 
 // function that executes whenever data is requested by master
 // this function is registered as an event, see setup()
 void requestEvent() {
   Wire.write(num); //
-  if (digitalRead(5)){
+  if (digitalRead(5)) {
     digitalWrite(5, HIGH);
-    }
-    else {
-      digitalWrite(5, LOW);
-      }
+  }
+  else {
+    digitalWrite(5, LOW);
+  }
   // as expected by master
 }
 void receiveEvent(int howMany) {
@@ -42,4 +50,7 @@ void receiveEvent(int howMany) {
     char x = Wire.read(); // receive byte as a character
   }
   num = (uint8_t)Wire.read();    // receive byte as an integer
+  Serial.println("--");
+  Serial.println(num);
+  Serial.println("--");
 }
