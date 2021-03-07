@@ -95,6 +95,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4175
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 4175: extern volatile __bit RCIF __attribute__((address(0x65)));
 [v _RCIF `Vb ~T0 @X0 0 e@101 ]
+"4001
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 4001: extern volatile __bit OERR __attribute__((address(0xC1)));
+[v _OERR `Vb ~T0 @X0 0 e@193 ]
+"3836
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3836: extern volatile __bit CREN __attribute__((address(0xC4)));
+[v _CREN `Vb ~T0 @X0 0 e@196 ]
 "22 ./USART.h
 [; ;./USART.h: 22: void usart_R(uint8_t *r_data);
 [v _usart_R `(v ~T0 @X0 0 ef1`*uc ]
@@ -556,19 +562,33 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! _RCIF 150  ]
 {
 "147
-[; ;masteri2c.c: 147:         usart_R(&usart_recep);
-[e ( _usart_R (1 &U _usart_recep ]
+[; ;masteri2c.c: 147:         if(OERR){
+[e $ ! _OERR 151  ]
+{
 "148
-[; ;masteri2c.c: 148:         RCIF = 0;
-[e = _RCIF -> -> 0 `i `b ]
+[; ;masteri2c.c: 148:             CREN = 0;
+[e = _CREN -> -> 0 `i `b ]
 "149
-[; ;masteri2c.c: 149:     }
+[; ;masteri2c.c: 149:         }
+}
+[e :U 151 ]
+"150
+[; ;masteri2c.c: 150:         usart_R(&usart_recep);
+[e ( _usart_R (1 &U _usart_recep ]
+"151
+[; ;masteri2c.c: 151:         CREN = 1;
+[e = _CREN -> -> 1 `i `b ]
+"152
+[; ;masteri2c.c: 152:         RCIF = 0;
+[e = _RCIF -> -> 0 `i `b ]
+"153
+[; ;masteri2c.c: 153:     }
 }
 [e :U 150 ]
-"150
-[; ;masteri2c.c: 150:     GIE = 1;
+"154
+[; ;masteri2c.c: 154:     GIE = 1;
 [e = _GIE -> -> 1 `i `b ]
-"151
-[; ;masteri2c.c: 151: }
+"155
+[; ;masteri2c.c: 155: }
 [e :UE 149 ]
 }

@@ -13,23 +13,23 @@
 %PSECTS
 $dist/default/production\masteri2c.X.production.o
 cinit CODE 0 11 11 6 2
-text1 CODE 0 1A4 1A4 C 2
+text1 CODE 0 1AA 1AA C 2
 text2 CODE 0 112 112 2B 2
-text3 CODE 0 169 169 11 2
+text3 CODE 0 16F 16F 11 2
 text4 CODE 0 A6 A6 3D 2
-text5 CODE 0 17A 17A E 2
+text5 CODE 0 180 180 E 2
 text6 CODE 0 E3 E3 2F 2
-text7 CODE 0 157 157 12 2
-text8 CODE 0 188 188 E 2
-text9 CODE 0 13D 13D 1A 2
-text10 CODE 0 196 196 E 2
+text7 CODE 0 15D 15D 12 2
+text8 CODE 0 18E 18E E 2
+text9 CODE 0 13D 13D 20 2
+text10 CODE 0 19C 19C E 2
 maintext CODE 0 17 17 8F 2
 cstackCOMMON COMMON 1 70 70 7 1
 cstackBANK0 BANK0 1 20 20 4 1
 intentry CODE 0 4 4 A 2
 bssCOMMON COMMON 1 77 77 2 1
 config CONFIG 4 2007 2007 2 2
-$C:\Users\edgar\AppData\Local\Temp\s19e4.o
+$C:\Users\edgar\AppData\Local\Temp\s1d40.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 E E 3 2
 config CONFIG 4 2007 2007 2 2
@@ -48,13 +48,13 @@ BANK1 A0-EF 1
 BANK2 110-16F 1
 BANK3 190-1EF 1
 CONST 3-3 2
-CONST 1B0-1FFF 2
+CONST 1B6-1FFF 2
 ENTRY 3-3 2
-ENTRY 1B0-1FFF 2
+ENTRY 1B6-1FFF 2
 IDLOC 2000-2003 2
 STACK 110-16F 1
 CODE 3-3 2
-CODE 1B0-1FFF 2
+CODE 1B6-1FFF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
 SFR2 100-10F 1
@@ -62,9 +62,9 @@ SFR3 180-18F 1
 COMMON 79-7D 1
 EEDATA 2100-21FF 2
 STRCODE 3-3 2
-STRCODE 1B0-1FFF 2
+STRCODE 1B6-1FFF 2
 STRING 3-3 2
-STRING 1B0-1FFF 2
+STRING 1B6-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -79,33 +79,36 @@ STRING 1B0-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\masteri2c.X.production.o
-11 cinit CODE >973:C:\Users\edgar\AppData\Local\Temp\s19e4.s
-11 cinit CODE >976:C:\Users\edgar\AppData\Local\Temp\s19e4.s
-11 cinit CODE >990:C:\Users\edgar\AppData\Local\Temp\s19e4.s
-12 cinit CODE >991:C:\Users\edgar\AppData\Local\Temp\s19e4.s
-13 cinit CODE >997:C:\Users\edgar\AppData\Local\Temp\s19e4.s
-13 cinit CODE >999:C:\Users\edgar\AppData\Local\Temp\s19e4.s
-14 cinit CODE >1000:C:\Users\edgar\AppData\Local\Temp\s19e4.s
+11 cinit CODE >977:C:\Users\edgar\AppData\Local\Temp\s1d40.s
+11 cinit CODE >980:C:\Users\edgar\AppData\Local\Temp\s1d40.s
+11 cinit CODE >994:C:\Users\edgar\AppData\Local\Temp\s1d40.s
+12 cinit CODE >995:C:\Users\edgar\AppData\Local\Temp\s1d40.s
+13 cinit CODE >1001:C:\Users\edgar\AppData\Local\Temp\s1d40.s
+13 cinit CODE >1003:C:\Users\edgar\AppData\Local\Temp\s1d40.s
+14 cinit CODE >1004:C:\Users\edgar\AppData\Local\Temp\s1d40.s
 4 intentry CODE >144:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
-196 text10 CODE >68:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-197 text10 CODE >69:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-19D text10 CODE >70:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-1A3 text10 CODE >72:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+19C text10 CODE >68:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+19D text10 CODE >69:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+1A3 text10 CODE >70:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+1A9 text10 CODE >72:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
 13D text9 CODE >144:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 13D text9 CODE >145:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 13E text9 CODE >146:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 144 text9 CODE >147:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
-14A text9 CODE >148:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
-14D text9 CODE >150:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
-14E text9 CODE >151:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
-188 text8 CODE >35:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-188 text8 CODE >36:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-194 text8 CODE >37:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-195 text8 CODE >38:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-157 text7 CODE >30:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-158 text7 CODE >31:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-164 text7 CODE >32:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-168 text7 CODE >33:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+148 text9 CODE >148:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+149 text9 CODE >150:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+14F text9 CODE >151:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+152 text9 CODE >152:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+153 text9 CODE >154:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+154 text9 CODE >155:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+18E text8 CODE >35:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+18E text8 CODE >36:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+19A text8 CODE >37:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+19B text8 CODE >38:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+15D text7 CODE >30:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+15E text7 CODE >31:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+16A text7 CODE >32:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+16E text7 CODE >33:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 E3 text6 CODE >20:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 E4 text6 CODE >21:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 F0 text6 CODE >22:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
@@ -114,10 +117,10 @@ FA text6 CODE >24:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\
 100 text6 CODE >25:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 105 text6 CODE >27:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 111 text6 CODE >28:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-17A text5 CODE >15:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-17A text5 CODE >16:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-186 text5 CODE >17:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-187 text5 CODE >18:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+180 text5 CODE >15:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+180 text5 CODE >16:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+18C text5 CODE >17:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+18D text5 CODE >18:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 A6 text4 CODE >40:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 A9 text4 CODE >41:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 B5 text4 CODE >42:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
@@ -127,13 +130,13 @@ C8 text4 CODE >45:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\
 D4 text4 CODE >46:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 E1 text4 CODE >47:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 E2 text4 CODE >48:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-169 text3 CODE >16:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-169 text3 CODE >18:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-16D text3 CODE >19:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-16E text3 CODE >20:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-171 text3 CODE >29:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-175 text3 CODE >39:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-179 text3 CODE >48:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+16F text3 CODE >16:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+16F text3 CODE >18:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+173 text3 CODE >19:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+174 text3 CODE >20:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+177 text3 CODE >29:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+17B text3 CODE >39:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+17F text3 CODE >48:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
 112 text2 CODE >109:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 112 text2 CODE >112:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 115 text2 CODE >113:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
@@ -151,10 +154,10 @@ E2 text4 CODE >48:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\
 136 text2 CODE >132:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 13A text2 CODE >133:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 13C text2 CODE >134:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
-1A4 text1 CODE >50:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-1A5 text1 CODE >51:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-1AB text1 CODE >52:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
-1AF text1 CODE >54:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+1AA text1 CODE >50:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+1AB text1 CODE >51:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+1B1 text1 CODE >52:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
+1B5 text1 CODE >54:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
 17 maintext CODE >60:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 17 maintext CODE >61:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 1C maintext CODE >62:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
@@ -193,36 +196,38 @@ E2 text4 CODE >48:C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
 ___latbits 2 0 ABS 0 - dist/default/production\masteri2c.X.production.o
-__Hspace_0 1B0 0 ABS 0 - -
+__Hspace_0 1B6 0 ABS 0 - -
 __Hspace_1 79 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 4010 0 ABS 0 - -
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 _i2c_leer 14C 0 CODE 0 text4 dist/default/production\masteri2c.X.production.o
-__end_of_usart_R 348 0 CODE 0 text10 dist/default/production\masteri2c.X.production.o
-__end_of_usart_T 360 0 CODE 0 text1 dist/default/production\masteri2c.X.production.o
+__end_of_usart_R 354 0 CODE 0 text10 dist/default/production\masteri2c.X.production.o
+__end_of_usart_T 36C 0 CODE 0 text1 dist/default/production\masteri2c.X.production.o
 __Hstrings 0 0 ABS 0 strings -
+_CREN C4 0 ABS 0 - dist/default/production\masteri2c.X.production.o
+_OERR C1 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _PIE1 8C 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _PIR1 C 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _RCEN 48B 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _RCIF 65 0 ABS 0 - dist/default/production\masteri2c.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\edgar\AppData\Local\Temp\s19e4.o
+___sp 0 0 STACK 2 stack C:\Users\edgar\AppData\Local\Temp\s1d40.o
 _main 2E 0 CODE 0 maintext dist/default/production\masteri2c.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\masteri2c.X.production.o
-start 1C 0 CODE 0 init C:\Users\edgar\AppData\Local\Temp\s19e4.o
+start 1C 0 CODE 0 init C:\Users\edgar\AppData\Local\Temp\s1d40.o
 __end_of_i2c_leer 1C6 0 CODE 0 text4 dist/default/production\masteri2c.X.production.o
 __size_of_main 0 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __Hpowerup 0 0 CODE 0 powerup -
-intlevel0 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s19e4.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s19e4.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s19e4.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s19e4.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s19e4.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s19e4.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1d40.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1d40.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1d40.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1d40.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1d40.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\edgar\AppData\Local\Temp\s1d40.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
-__end_of_i2c_detener 32C 0 CODE 0 text8 dist/default/production\masteri2c.X.production.o
+__end_of_i2c_detener 338 0 CODE 0 text8 dist/default/production\masteri2c.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 __Hfunctab 0 0 ENTRY 0 functab -
 __size_of_i2c_funcion 0 0 ABS 0 - dist/default/production\masteri2c.X.production.o
@@ -230,12 +235,12 @@ __Hclrtext 0 0 ABS 0 clrtext -
 _ANSELH 189 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
 _INTCON B 0 ABS 0 - dist/default/production\masteri2c.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\edgar\AppData\Local\Temp\s19e4.o
-___stacklo 0 0 ABS 0 - C:\Users\edgar\AppData\Local\Temp\s19e4.o
+___stackhi 0 0 ABS 0 - C:\Users\edgar\AppData\Local\Temp\s1d40.o
+___stacklo 0 0 ABS 0 - C:\Users\edgar\AppData\Local\Temp\s1d40.o
 __size_of_setup 0 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _i2c_recep 78 0 COMMON 1 bssCOMMON dist/default/production\masteri2c.X.production.o
 start_initialization 22 0 CODE 0 cinit dist/default/production\masteri2c.X.production.o
-_i2c_iniciar 2F4 0 CODE 0 text5 dist/default/production\masteri2c.X.production.o
+_i2c_iniciar 300 0 CODE 0 text5 dist/default/production\masteri2c.X.production.o
 _ACKSTAT 48E 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _SPBRGH 9A 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 __pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/production\masteri2c.X.production.o
@@ -243,7 +248,7 @@ _SSPADD 93 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _SSPBUF 13 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _SSPCON 14 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 i2c_leer@lect 75 0 COMMON 1 cstackCOMMON dist/default/production\masteri2c.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\edgar\AppData\Local\Temp\s19e4.o
+___int_sp 0 0 STACK 2 stack C:\Users\edgar\AppData\Local\Temp\s1d40.o
 _usart_recep 77 0 COMMON 1 bssCOMMON dist/default/production\masteri2c.X.production.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
@@ -252,8 +257,8 @@ __Hbank3 0 0 ABS 0 bank3 -
 __Hcinit 2E 0 CODE 0 cinit -
 __Hstack 0 0 STACK 2 stack -
 __size_of_i2c_detener 0 0 ABS 0 - dist/default/production\masteri2c.X.production.o
-_usart_R 32C 0 CODE 0 text10 dist/default/production\masteri2c.X.production.o
-_usart_T 348 0 CODE 0 text1 dist/default/production\masteri2c.X.production.o
+_usart_R 338 0 CODE 0 text10 dist/default/production\masteri2c.X.production.o
+_usart_T 354 0 CODE 0 text1 dist/default/production\masteri2c.X.production.o
 __Hmaintext 0 0 ABS 0 maintext -
 __Hcommon 0 0 ABS 0 common -
 __Hconfig 4012 0 CONFIG 4 config -
@@ -264,7 +269,7 @@ __Lbank3 0 0 ABS 0 bank3 -
 __Lcinit 22 0 CODE 0 cinit -
 __Lstack 0 0 STACK 2 stack -
 _PORTBbits 6 0 ABS 0 - dist/default/production\masteri2c.X.production.o
-_usart_conf 2D2 0 CODE 0 text3 dist/default/production\masteri2c.X.production.o
+_usart_conf 2DE 0 CODE 0 text3 dist/default/production\masteri2c.X.production.o
 __Habs1 0 0 ABS 0 abs1 -
 __Hcode 0 0 ABS 0 code -
 __Hinit 1C 0 CODE 0 init -
@@ -287,29 +292,29 @@ _GIE 5F 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _PEN 48A 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _RB1 31 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _SEN 488 0 ABS 0 - dist/default/production\masteri2c.X.production.o
-__S0 1B0 0 ABS 0 - -
+__S0 1B6 0 ABS 0 - -
 __S1 79 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
 _isr 27A 0 CODE 0 text9 dist/default/production\masteri2c.X.production.o
 _i2c_funcion 1C6 0 CODE 0 text6 dist/default/production\masteri2c.X.production.o
 saved_w 7E 0 ABS 0 - dist/default/production\masteri2c.X.production.o
-_i2c_escribir 2AE 0 CODE 0 text7 dist/default/production\masteri2c.X.production.o
-__end_of_isr 2AE 0 CODE 0 text9 dist/default/production\masteri2c.X.production.o
+_i2c_escribir 2BA 0 CODE 0 text7 dist/default/production\masteri2c.X.production.o
+__end_of_isr 2BA 0 CODE 0 text9 dist/default/production\masteri2c.X.production.o
 i2c_funcion@addr 76 0 COMMON 1 cstackCOMMON dist/default/production\masteri2c.X.production.o
 i2c_funcion@mode 75 0 COMMON 1 cstackCOMMON dist/default/production\masteri2c.X.production.o
 i2c_leer@ak 20 0 BANK0 1 cstackBANK0 dist/default/production\masteri2c.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\edgar\AppData\Local\Temp\s19e4.o
-__end_of_usart_conf 2F4 0 CODE 0 text3 dist/default/production\masteri2c.X.production.o
-__ptext10 32C 0 CODE 0 text10 dist/default/production\masteri2c.X.production.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\edgar\AppData\Local\Temp\s1d40.o
+__end_of_usart_conf 300 0 CODE 0 text3 dist/default/production\masteri2c.X.production.o
+__ptext10 338 0 CODE 0 text10 dist/default/production\masteri2c.X.production.o
 __size_of_i2c_escribir 0 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 _BAUDCTL 187 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 __pmaintext 2E 0 CODE 0 maintext dist/default/production\masteri2c.X.production.o
 usart_T@t_data 75 0 COMMON 1 cstackCOMMON dist/default/production\masteri2c.X.production.o
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 4 config -
-__end_of_i2c_escribir 2D2 0 CODE 0 text7 dist/default/production\masteri2c.X.production.o
+__end_of_i2c_escribir 2DE 0 CODE 0 text7 dist/default/production\masteri2c.X.production.o
 __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Lspace_2 0 0 ABS 0 - -
@@ -320,22 +325,22 @@ __HcstackBANK0 0 0 ABS 0 cstackBANK0 -
 _PIR1bits C 0 ABS 0 - dist/default/production\masteri2c.X.production.o
 __Lend_init 1C 0 CODE 0 end_init -
 __LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
-__end_of_i2c_iniciar 310 0 CODE 0 text5 dist/default/production\masteri2c.X.production.o
+__end_of_i2c_iniciar 31C 0 CODE 0 text5 dist/default/production\masteri2c.X.production.o
 end_of_initialization 26 0 CODE 0 cinit dist/default/production\masteri2c.X.production.o
 __Hintentry 1C 0 CODE 0 intentry -
 i2c_escribir@data 75 0 COMMON 1 cstackCOMMON dist/default/production\masteri2c.X.production.o
-_i2c_detener 310 0 CODE 0 text8 dist/default/production\masteri2c.X.production.o
+_i2c_detener 31C 0 CODE 0 text8 dist/default/production\masteri2c.X.production.o
 __Lstrings 0 0 ABS 0 strings -
 __Hreset_vec 6 0 CODE 0 reset_vec -
 usart_R@r_data 71 0 COMMON 1 cstackCOMMON dist/default/production\masteri2c.X.production.o
-__ptext1 348 0 CODE 0 text1 dist/default/production\masteri2c.X.production.o
+__ptext1 354 0 CODE 0 text1 dist/default/production\masteri2c.X.production.o
 __ptext2 224 0 CODE 0 text2 dist/default/production\masteri2c.X.production.o
-__ptext3 2D2 0 CODE 0 text3 dist/default/production\masteri2c.X.production.o
+__ptext3 2DE 0 CODE 0 text3 dist/default/production\masteri2c.X.production.o
 __ptext4 14C 0 CODE 0 text4 dist/default/production\masteri2c.X.production.o
-__ptext5 2F4 0 CODE 0 text5 dist/default/production\masteri2c.X.production.o
+__ptext5 300 0 CODE 0 text5 dist/default/production\masteri2c.X.production.o
 __ptext6 1C6 0 CODE 0 text6 dist/default/production\masteri2c.X.production.o
-__ptext7 2AE 0 CODE 0 text7 dist/default/production\masteri2c.X.production.o
-__ptext8 310 0 CODE 0 text8 dist/default/production\masteri2c.X.production.o
+__ptext7 2BA 0 CODE 0 text7 dist/default/production\masteri2c.X.production.o
+__ptext8 31C 0 CODE 0 text8 dist/default/production\masteri2c.X.production.o
 __ptext9 27A 0 CODE 0 text9 dist/default/production\masteri2c.X.production.o
 __Lpowerup 0 0 CODE 0 powerup -
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
@@ -403,7 +408,7 @@ __size_of_i2c_iniciar 0 0 ABS 0 - dist/default/production\masteri2c.X.production
 %SEGMENTS
 cstackCOMMON 1 70 70 9 1
 cstackBANK0 1 20 20 4 1
-intentry 0 4 8 1AC 2
+intentry 0 4 8 1B2 2
 reset_vec 0 0 0 3 2
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section

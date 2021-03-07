@@ -55,7 +55,7 @@
 [v _INTCON INTCON `VEuc  1 e 1 @11 ]
 "537
 [v _PIR1 PIR1 `VEuc  1 e 1 @12 ]
-[s S207 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[s S209 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -64,8 +64,8 @@
 `uc 1 ADIF 1 0 :1:6 
 ]
 "553
-[u S215 . 1 `S207 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES215  1 e 1 @12 ]
+[u S217 . 1 `S209 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES217  1 e 1 @12 ]
 "843
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "850
@@ -92,7 +92,7 @@
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
 "2556
 [v _TXSTA TXSTA `VEuc  1 e 1 @152 ]
-[s S169 . 1 `uc 1 TX9D 1 0 :1:0 
+[s S171 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -102,15 +102,15 @@
 `uc 1 CSRC 1 0 :1:7 
 ]
 "2582
-[s S178 . 1 `uc 1 TXD8 1 0 :1:0 
+[s S180 . 1 `uc 1 TXD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 nTX8 1 0 :1:6 
 ]
-[s S182 . 1 `uc 1 . 1 0 :6:0 
+[s S184 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX8_9 1 0 :1:6 
 ]
-[u S185 . 1 `S169 1 . 1 0 `S178 1 . 1 0 `S182 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES185  1 e 1 @152 ]
+[u S187 . 1 `S171 1 . 1 0 `S180 1 . 1 0 `S184 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES187  1 e 1 @152 ]
 "2642
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
 "2704
@@ -125,8 +125,12 @@
 [v _ACKEN ACKEN `VEb  1 e 0 @1164 ]
 "3569
 [v _ACKSTAT ACKSTAT `VEb  1 e 0 @1166 ]
+"3836
+[v _CREN CREN `VEb  1 e 0 @196 ]
 "3896
 [v _GIE GIE `VEb  1 e 0 @95 ]
+"4001
+[v _OERR OERR `VEb  1 e 0 @193 ]
 "4043
 [v _PEN PEN `VEb  1 e 0 @1162 ]
 "4106
@@ -202,7 +206,7 @@
 "144 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"151
+"155
 } 0
 "68 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
 [v _usart_R usart_R `(v  1 e 1 0 ]

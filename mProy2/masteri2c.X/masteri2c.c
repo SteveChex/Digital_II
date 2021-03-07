@@ -95,8 +95,6 @@ void main(void) {
         
         //RD0 & RD1 = BITS 0 y 1 de usart_recep; 
         
-        
-                
         __delay_ms(200);
         
     }
@@ -144,7 +142,11 @@ void setup(void) {
 void __interrupt()isr(void) {
     GIE = 0; // DESACTIVANDO INTERRUPCIONES GLOBALES MOMENTANEAMENTE
     if(RCIF){
+        if(OERR){
+            CREN = 0;
+        }
         usart_R(&usart_recep);
+        CREN = 1;
         RCIF = 0;
     }
     GIE = 1; // REACTIVANDO INTERRUPCIONES

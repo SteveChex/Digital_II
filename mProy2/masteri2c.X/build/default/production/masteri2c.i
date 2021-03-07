@@ -2760,7 +2760,11 @@ void setup(void) {
 void __attribute__((picinterrupt((""))))isr(void) {
     GIE = 0;
     if(RCIF){
+        if(OERR){
+            CREN = 0;
+        }
         usart_R(&usart_recep);
+        CREN = 1;
         RCIF = 0;
     }
     GIE = 1;
