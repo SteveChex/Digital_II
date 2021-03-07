@@ -84,19 +84,16 @@ void main(void) {
                 PORTBbits.RB0 = 1;
             }
         }
-        PORTD = i2c_recep;
         
         // UART TRANSMISION
-        
+
         usart_T(i2c_recep);
         __delay_ms(2);
         
-        // UART RECEPCION
-        
-        //RD0 & RD1 = BITS 0 y 1 de usart_recep; 
+        PORTD = usart_recep;
         
         __delay_ms(200);
-        
+
     }
 }
 
@@ -121,10 +118,10 @@ void setup(void) {
     SSPCON2 = 0; // BORRANDO BANDERAS
     SSPADD = 9; //FRECUENCIA DE 100KHZ DE BAUDRATE
     SSPCON = 0B00101000; // ACTIVAR PUERTO SERIAL EN MODO MAESTRO I2C
-    
+
     // COMUNICACIÓN USART
     usart_conf();
-    
+
     // INTERRUPCIONES
     PIR1 = 0;
     PIE1 = 0B00100000;
@@ -141,12 +138,8 @@ void setup(void) {
 
 void __interrupt()isr(void) {
     GIE = 0; // DESACTIVANDO INTERRUPCIONES GLOBALES MOMENTANEAMENTE
-    if(RCIF){
-        if(OERR){
-            CREN = 0;
-        }
+    if (RCIF) {
         usart_R(&usart_recep);
-        CREN = 1;
         RCIF = 0;
     }
     GIE = 1; // REACTIVANDO INTERRUPCIONES

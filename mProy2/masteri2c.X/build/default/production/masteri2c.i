@@ -2708,18 +2708,13 @@ void main(void) {
                 PORTBbits.RB0 = 1;
             }
         }
-        PORTD = i2c_recep;
 
 
 
         usart_T(i2c_recep);
         _delay((unsigned long)((2)*(4000000/4000.0)));
 
-
-
-
-
-
+        PORTD = usart_recep;
 
         _delay((unsigned long)((200)*(4000000/4000.0)));
 
@@ -2756,15 +2751,11 @@ void setup(void) {
     PIE1 = 0B00100000;
     INTCON = 0B11000000;
 }
-# 144 "masteri2c.c"
+# 139 "masteri2c.c"
 void __attribute__((picinterrupt((""))))isr(void) {
     GIE = 0;
-    if(RCIF){
-        if(OERR){
-            CREN = 0;
-        }
+    if (RCIF) {
         usart_R(&usart_recep);
-        CREN = 1;
         RCIF = 0;
     }
     GIE = 1;

@@ -15,7 +15,7 @@
 uint8_t num = 85, n = 0;
 unsigned long lastUp = 0;
 
-#define IO_LOOP_DELAY 2000
+#define IO_LOOP_DELAY 1000
 
 void setup() {
   Wire.begin(20);                // join i2c bus with address #8
@@ -63,13 +63,19 @@ void requestEvent() {
     digitalWrite(5, LOW);
   }
   // as expected by master
+  Serial.print("Respondiendo");
+  Serial.println(num);
 }
 void receiveEvent(int howMany) {
-  while (1 < Wire.available()) { // loop through all but the last
-    char x = Wire.read(); // receive byte as a character
+  if (1 == Wire.available()) {
+    num = (uint8_t)Wire.read();    // receive byte as an integer
   }
-  num = (uint8_t)Wire.read();    // receive byte as an integer
-  Serial.println("--");
+  else {
+    num = (uint8_t)Wire.read();    // receive byte as an integer
+    while (1 < Wire.available()) { // loop through all but the last
+      char x = Wire.read(); // receive byte as a character
+    }
+  }
+  Serial.print("Recibiendo");
   Serial.println(num);
-  Serial.println("--");
 }
