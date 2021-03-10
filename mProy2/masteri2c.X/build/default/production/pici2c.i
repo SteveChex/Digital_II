@@ -2636,7 +2636,8 @@ void i2c_iniciar(void);
 void i2c_funcion(uint8_t addr, uint8_t mode);
 void i2c_escribir(uint8_t data);
 void i2c_detener(void);
-void i2c_leer(uint8_t ak, uint8_t *lect);
+void i2c_reiniciar(void);
+uint8_t i2c_leer();
 # 12 "pici2c.c" 2
 
 
@@ -2644,34 +2645,50 @@ void i2c_leer(uint8_t ak, uint8_t *lect);
 void i2c_iniciar(void) {
     while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111));
     SEN = 1;
+    return;
 }
 
 void i2c_funcion(uint8_t addr, uint8_t mode) {
+    uint8_t data = addr << 1;
     while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111));
+
     if (0 == mode) {
-        SSPBUF = addr & 0B11111110;
+        SSPBUF = data & 0B11111110;
     } else if (1 == mode) {
-        SSPBUF = addr | 0B00000001;
+        SSPBUF = data | 0B00000001;
     }
     while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111));
+    return;
 }
 
 void i2c_escribir(uint8_t data) {
     while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111));
     SSPBUF = data;
+    return;
 }
 
 void i2c_detener(void) {
-    while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111));
+    while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111)) {
+        PORTD = SSPCON2;
+        RB0 = SSPOV;
+    }
     PEN = 1;
+    return;
 }
 
-void i2c_leer(uint8_t ak, uint8_t *lect) {
+void i2c_reiniciar(void) {
+    while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111));
+    RSEN = 1;
+}
+
+uint8_t i2c_leer() {
+    uint8_t lect = 0;
     while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111));
     RCEN = 1;
     while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111));
-    *lect = SSPBUF;
+    lect = SSPBUF;
     while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111));
-    ACKDT = (ak) ? 1 : 0;
+    ACKDT = 0;
     ACKEN = 1;
+    return lect;
 }

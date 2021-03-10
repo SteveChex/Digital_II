@@ -11,22 +11,30 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"60 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+"17 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\colors.c
+[v _escribir8 escribir8 `(v  1 e 1 0 ]
+"37
+[v _leer8 leer8 `(v  1 e 1 0 ]
+"55
+[v _leerColor leerColor `(ui  1 e 2 0 ]
+"63 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 [v _main main `(v  1 e 1 0 ]
-"104
+"255
 [v _setup setup `(v  1 e 1 0 ]
-"139
+"289
 [v _isr isr `II(v  1 e 1 0 ]
 "15 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 [v _i2c_iniciar i2c_iniciar `(v  1 e 1 0 ]
-"20
+"21
 [v _i2c_funcion i2c_funcion `(v  1 e 1 0 ]
-"30
+"34
 [v _i2c_escribir i2c_escribir `(v  1 e 1 0 ]
-"35
-[v _i2c_detener i2c_detener `(v  1 e 1 0 ]
 "40
-[v _i2c_leer i2c_leer `(v  1 e 1 0 ]
+[v _i2c_detener i2c_detener `(v  1 e 1 0 ]
+"49
+[v _i2c_reiniciar i2c_reiniciar `(v  1 e 1 0 ]
+"54
+[v _i2c_leer i2c_leer `(uc  1 e 1 0 ]
 "16 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
 [v _usart_conf usart_conf `(v  1 e 1 0 ]
 "50
@@ -35,7 +43,7 @@
 [v _usart_R usart_R `(v  1 e 1 0 ]
 "228 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
-[s S54 . 1 `uc 1 RB0 1 0 :1:0 
+[s S70 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -45,17 +53,15 @@
 `uc 1 RB7 1 0 :1:7 
 ]
 "245
-[u S63 . 1 `S54 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES63  1 e 1 @6 ]
-"290
-[v _PORTC PORTC `VEuc  1 e 1 @7 ]
+[u S79 . 1 `S70 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES79  1 e 1 @6 ]
 "352
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
 "459
 [v _INTCON INTCON `VEuc  1 e 1 @11 ]
 "537
 [v _PIR1 PIR1 `VEuc  1 e 1 @12 ]
-[s S207 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[s S266 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -64,8 +70,8 @@
 `uc 1 ADIF 1 0 :1:6 
 ]
 "553
-[u S215 . 1 `S207 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES215  1 e 1 @12 ]
+[u S274 . 1 `S266 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES274  1 e 1 @12 ]
 "843
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "850
@@ -92,7 +98,7 @@
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
 "2556
 [v _TXSTA TXSTA `VEuc  1 e 1 @152 ]
-[s S169 . 1 `uc 1 TX9D 1 0 :1:0 
+[s S228 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -102,15 +108,15 @@
 `uc 1 CSRC 1 0 :1:7 
 ]
 "2582
-[s S178 . 1 `uc 1 TXD8 1 0 :1:0 
+[s S237 . 1 `uc 1 TXD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 nTX8 1 0 :1:6 
 ]
-[s S182 . 1 `uc 1 . 1 0 :6:0 
+[s S241 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX8_9 1 0 :1:6 
 ]
-[u S185 . 1 `S169 1 . 1 0 `S178 1 . 1 0 `S182 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES185  1 e 1 @152 ]
+[u S244 . 1 `S228 1 . 1 0 `S237 1 . 1 0 `S241 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES244  1 e 1 @152 ]
 "2642
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
 "2704
@@ -123,86 +129,123 @@
 [v _ACKDT ACKDT `VEb  1 e 0 @1165 ]
 "3566
 [v _ACKEN ACKEN `VEb  1 e 0 @1164 ]
-"3569
-[v _ACKSTAT ACKSTAT `VEb  1 e 0 @1166 ]
 "3896
 [v _GIE GIE `VEb  1 e 0 @95 ]
 "4043
 [v _PEN PEN `VEb  1 e 0 @1162 ]
-"4106
-[v _RB1 RB1 `VEb  1 e 0 @49 ]
+"4103
+[v _RB0 RB0 `VEb  1 e 0 @48 ]
 "4166
 [v _RCEN RCEN `VEb  1 e 0 @1163 ]
 "4175
 [v _RCIF RCIF `VEb  1 e 0 @101 ]
+"4226
+[v _RSEN RSEN `VEb  1 e 0 @1161 ]
 "4250
 [v _SEN SEN `VEb  1 e 0 @1160 ]
-"52 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
-[v _i2c_recep i2c_recep `uc  1 e 1 0 ]
+"4292
+[v _SSPOV SSPOV `VEb  1 e 0 @166 ]
+"50 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 [v _usart_recep usart_recep `uc  1 e 1 0 ]
-"60
+"51
+[v _cont cont `uc  1 e 1 0 ]
+"54
+[v _red red `ui  1 e 2 0 ]
+"56
+[v _data data `uc  1 e 1 0 ]
+"63
 [v _main main `(v  1 e 1 0 ]
 {
-"98
+"249
 } 0
 "50 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
 [v _usart_T usart_T `(v  1 e 1 0 ]
 {
 [v usart_T@t_data t_data `uc  1 a 1 wreg ]
 [v usart_T@t_data t_data `uc  1 a 1 wreg ]
-[v usart_T@t_data t_data `uc  1 a 1 5 ]
+[v usart_T@t_data t_data `uc  1 a 1 0 ]
 "54
 } 0
-"104 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+"255 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"129
+"279
 } 0
 "16 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
 [v _usart_conf usart_conf `(v  1 e 1 0 ]
 {
 "48
 } 0
-"40 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
-[v _i2c_leer i2c_leer `(v  1 e 1 0 ]
+"55 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\colors.c
+[v _leerColor leerColor `(ui  1 e 2 0 ]
 {
-[v i2c_leer@ak ak `uc  1 a 1 wreg ]
-[v i2c_leer@ak ak `uc  1 a 1 wreg ]
-[v i2c_leer@lect lect `*.1uc  1 p 1 5 ]
-[v i2c_leer@ak ak `uc  1 a 1 0 ]
-"48
+[v leerColor@reg reg `uc  1 a 1 wreg ]
+"56
+[v leerColor@data data `ui  1 a 2 13 ]
+[v leerColor@temp temp `ui  1 a 2 10 ]
+"57
+[v leerColor@high high `uc  1 a 1 15 ]
+[v leerColor@low low `uc  1 a 1 12 ]
+"55
+[v leerColor@reg reg `uc  1 a 1 wreg ]
+[v leerColor@reg reg `uc  1 a 1 9 ]
+"84
 } 0
-"15
+"49 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
+[v _i2c_reiniciar i2c_reiniciar `(v  1 e 1 0 ]
+{
+"52
+} 0
+"54
+[v _i2c_leer i2c_leer `(uc  1 e 1 0 ]
+{
+"55
+[v i2c_leer@lect lect `uc  1 a 1 1 ]
+"64
+} 0
+"17 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\colors.c
+[v _escribir8 escribir8 `(v  1 e 1 0 ]
+{
+[v escribir8@reg reg `uc  1 a 1 wreg ]
+[v escribir8@reg reg `uc  1 a 1 wreg ]
+[v escribir8@val val `uc  1 p 1 5 ]
+[v escribir8@reg reg `uc  1 a 1 8 ]
+"35
+} 0
+"15 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\pici2c.c
 [v _i2c_iniciar i2c_iniciar `(v  1 e 1 0 ]
 {
-"18
+"19
 } 0
-"20
+"21
 [v _i2c_funcion i2c_funcion `(v  1 e 1 0 ]
 {
 [v i2c_funcion@addr addr `uc  1 a 1 wreg ]
+"22
+[v i2c_funcion@data data `uc  1 a 1 4 ]
+"21
 [v i2c_funcion@addr addr `uc  1 a 1 wreg ]
-[v i2c_funcion@mode mode `uc  1 p 1 5 ]
-[v i2c_funcion@addr addr `uc  1 a 1 6 ]
-"28
+[v i2c_funcion@mode mode `uc  1 p 1 0 ]
+[v i2c_funcion@addr addr `uc  1 a 1 3 ]
+"32
 } 0
-"30
+"34
 [v _i2c_escribir i2c_escribir `(v  1 e 1 0 ]
 {
 [v i2c_escribir@data data `uc  1 a 1 wreg ]
 [v i2c_escribir@data data `uc  1 a 1 wreg ]
-[v i2c_escribir@data data `uc  1 a 1 5 ]
-"33
-} 0
-"35
-[v _i2c_detener i2c_detener `(v  1 e 1 0 ]
-{
+[v i2c_escribir@data data `uc  1 a 1 0 ]
 "38
 } 0
-"139 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
+"40
+[v _i2c_detener i2c_detener `(v  1 e 1 0 ]
+{
+"47
+} 0
+"289 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\masteri2c.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"146
+"296
 } 0
 "68 C:\Users\edgar\Documents\GitHub\Digital_II\mProy2\masteri2c.X\USART.c
 [v _usart_R usart_R `(v  1 e 1 0 ]

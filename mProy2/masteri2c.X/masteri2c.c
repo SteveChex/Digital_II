@@ -36,7 +36,7 @@
 
 #include "USART.h"
 #include "pici2c.h"
-//#include "colors.h"
+#include "colors.h"
 
 //******************************************************************************
 //                 DEFINICIONES, PROTOTIPOS Y VARIABLES
@@ -47,11 +47,14 @@
 void setup(void);
 void __interrupt()isr(void);
 
-// VARIABLES PARA RECEPCION DE DATOS
+uint8_t i2c_recep = 15, usart_recep = 0;
+uint8_t cont = 0;
+// VARIABLES DE SENSOR
+uint8_t sen_Encendido = 0, dir = 0x29;
+uint16_t red = 0, blue = 0, green = 0, clear = 0;
 
-uint8_t i2c_recep = 0, usart_recep = 0;
+uint8_t data = 0;
 
-// VARIABLES PARA PROCESO DE DATOS
 
 //******************************************************************************
 //                         LOOP PRINCIPAL
@@ -60,39 +63,187 @@ uint8_t i2c_recep = 0, usart_recep = 0;
 void main(void) {
     setup();
     __delay_ms(10);
-    while (1) {
-        // I2C
-        i2c_iniciar();
-        if (RB1) {
-            i2c_funcion(0x29, 1);
-            if (!ACKSTAT) {
-                i2c_leer(0, &i2c_recep);
-                i2c_detener();
-                PORTBbits.RB0 = 0;
-            } else {
-                i2c_detener();
-                PORTBbits.RB0 = 1;
-            }
-        } else {
-            i2c_funcion(0x29, 0);
-            if (!ACKSTAT) {
-                i2c_escribir(15);
-                i2c_detener();
-                PORTBbits.RB0 = 0;
-            } else {
-                i2c_detener();
-                PORTBbits.RB0 = 1;
-            }
-        }
-        
-        // UART TRANSMISION
 
-        usart_T(i2c_recep);
-        __delay_ms(2);
-        
-        PORTD = usart_recep;
-        
-        __delay_ms(200);
+    // - - - - - - - - - - CODIGO DE INICIALIZACION DEL SENSOR I2C
+    // BASICAMENTE ESTE FRAGMENTO ES iniciar(&datos) de colors.c
+    //_ _ _ _ leer8(ID, &data);
+
+
+
+    /*if ((data != 0x44)&&(data != 0x10)) {
+        //PORTBbits.RB0 = 1;
+    } else {
+
+        // ASIGNAR TIEMPO DE INTEGRACION
+        escribir8(ATIME, 0xEB);
+        __delay_ms(5);
+        // ASIGNAR GANANCIA
+        escribir8(CONTROL, 0x01);
+        __delay_ms(5);
+        // HABILITAR SENSOR
+        escribir8(ENABLE, ENABLE_PON);
+        __delay_ms(5);
+        escribir8(ENABLE, (ENABLE_PON | ENABLE_AEN));
+        //        PORTBbits.RB0 = 0;
+        __delay_ms(50);
+    }
+
+    // - - - leer8(0x00, &data);
+    i2c_iniciar();
+    i2c_funcion(ADDRESS, 0);
+    //if (!ACKSTAT) {
+    i2c_escribir(COMMAND_BIT | 0x00);
+    i2c_detener();
+
+    i2c_iniciar();
+    i2c_funcion(ADDRESS, 1);
+    data = i2c_leer();
+    
+    i2c_detener();
+    PORTBbits.RB2 = 1;
+
+    __delay_ms(5);
+    data &= ~ENABLE_AIEN;
+    
+    escribir8(ENABLE, data);
+     */
+    __delay_ms(60);
+
+    // - - - - - - - - - - FIN DEL CODIGO DE INICIALIZACION DEL SENSOR I2C
+
+    while (1) {
+
+        escribir8(ATIME, 0xEB);
+        __delay_ms(5);
+        escribir8(CONTROL, 0x01);
+        __delay_ms(5);
+        escribir8(ENABLE, ENABLE_PON);
+        __delay_ms(5);
+        escribir8(ENABLE, (ENABLE_PON | ENABLE_AEN));
+        __delay_ms(5);
+
+        i2c_iniciar();
+        i2c_funcion(ADDRESS, 0);
+        __delay_ms(3);
+        //if (!ACKSTAT) {
+        i2c_escribir(COMMAND_BIT | ENABLE);
+        __delay_ms(3);
+        i2c_reiniciar();
+        i2c_funcion(ADDRESS, 1);
+        __delay_ms(3);
+        data = i2c_leer();
+        i2c_detener();
+        // _ 
+        __delay_ms(5);
+        data &= ~ENABLE_AIEN;
+        escribir8(ENABLE, data);
+        __delay_ms(60);
+
+        red = leerColor(RDATAL);
+
+        i2c_iniciar();
+        i2c_funcion(ADDRESS, 0);
+        __delay_ms(3);
+        //if (!ACKSTAT) {
+        i2c_escribir(COMMAND_BIT | ENABLE);
+        __delay_ms(3);
+        i2c_reiniciar();
+        i2c_funcion(ADDRESS, 1);
+        __delay_ms(3);
+        data = i2c_leer();
+        i2c_detener();
+        __delay_ms(5);
+        data |= ENABLE_AIEN;
+        escribir8(ENABLE, data);
+        __delay_ms(60);
+        // I2C
+        /*
+           i2c_iniciar();
+           if (RB1) {
+               i2c_funcion(20, 1);
+               if (!ACKSTAT) {
+                   i2c_recep = i2c_leer();
+                   i2c_detener();
+                   PORTBbits.RB0 = 0;
+               } else {
+                   i2c_detener();
+                   PORTBbits.RB0 = 1;
+               }
+           } else {
+               i2c_funcion(20, 0);
+               if (!ACKSTAT) {
+                   i2c_escribir(15);
+                   i2c_detener();
+                   PORTBbits.RB0 = 0;
+               } else {
+                   i2c_detener();
+                   PORTBbits.RB0 = 1;
+               }
+           }
+         */
+
+        // - - - - Llamada a activarInterrupcio(0|1)
+
+
+
+        // - - - - Llamada a leerColores(&red, &green, &blue, &clear);
+        /*
+         *c = leer16(CDATAL);
+         *r = leer16(RDATAL);
+         *g = leer16(GDATAL);
+         *b = leer16(BDATAL);
+         
+        __delay_ms(50);
+         */
+        //activarInterrupcion(0);
+        //leerColores(&red, &green, &blue, &clear);
+        //activarInterrupcion(1);
+
+        /*
+       PORTBbits.RB0 = 1;
+       // UART TRANSMISION
+       cont = (uint8_t) red;
+       usart_T(cont);
+       __delay_ms(3);
+
+       cont = (uint8_t) red >> 8;
+       usart_T(cont);
+       __delay_ms(3);
+
+       cont = (uint8_t) green;
+       usart_T(cont);
+       __delay_ms(3);
+
+       cont = (uint8_t) green >> 8;
+       usart_T(cont);
+       __delay_ms(3);
+
+       cont = (uint8_t) blue;
+       usart_T(cont);
+       __delay_ms(3);
+
+       cont = (uint8_t) blue >> 8;
+       usart_T(cont);
+       __delay_ms(3);
+
+       cont = (uint8_t) clear;
+       usart_T(cont);
+       __delay_ms(3);
+
+       cont = (uint8_t) clear >> 8;
+       usart_T(cont);
+       __delay_ms(3);
+
+         */
+        PORTBbits.RB0 = !RB0;
+        red >>= 8;
+        cont = (uint8_t) red;
+        usart_T(cont);
+        __delay_ms(3);
+
+        //PORTD = (uint8_t) red;
+
+        __delay_ms(500);
 
     }
 }
@@ -106,17 +257,16 @@ void setup(void) {
     //CONFIGURACIÓN GENERAL
     TRISD = 0; // PORTD COMO PUERTO DE SALIDA
     ANSELH = 0;
-    TRISB = 0B00000010;
+    TRISB = 0B11111010;
     PORTB = 0;
     PORTD = 0; // LIMPIANDO PUERTOS
-    PORTC = 0;
 
     // COMUNICACIÓN I2C
     TRISC = 0B00011000; //ASIGNANDO ENTRADAS PARA EL MODULO I2C
 
     SSPSTAT = 0B10000000; // DESHABILITANDO CONTROL DE SLEW RATE
     SSPCON2 = 0; // BORRANDO BANDERAS
-    SSPADD = 9; //FRECUENCIA DE 100KHZ DE BAUDRATE
+    SSPADD = 1; //FRECUENCIA DE 400KHZ DE BAUDRATE
     SSPCON = 0B00101000; // ACTIVAR PUERTO SERIAL EN MODO MAESTRO I2C
 
     // COMUNICACIÓN USART

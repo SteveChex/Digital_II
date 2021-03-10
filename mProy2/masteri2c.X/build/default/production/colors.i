@@ -2629,10 +2629,13 @@ typedef uint16_t uintptr_t;
 # 14 "./colors.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 14 "./colors.h" 2
-# 39 "./colors.h"
+# 56 "./colors.h"
 void escribir8(uint8_t reg, uint8_t val);
 void leer8(uint8_t reg, uint8_t *data);
-void leer16(uint8_t reg, uint8_t *dataL, uint8_t *dataH);
+uint16_t leer16(uint8_t reg);
+void activarInterrupcion(uint8_t op);
+uint16_t leerColor(uint8_t reg);
+void iniciar(uint8_t *datos);
 # 12 "colors.c" 2
 
 # 1 "./pici2c.h" 1
@@ -2646,7 +2649,8 @@ void i2c_iniciar(void);
 void i2c_funcion(uint8_t addr, uint8_t mode);
 void i2c_escribir(uint8_t data);
 void i2c_detener(void);
-void i2c_leer(uint8_t ak, uint8_t *lect);
+void i2c_reiniciar(void);
+uint8_t i2c_leer();
 # 13 "colors.c" 2
 
 
@@ -2655,29 +2659,121 @@ void i2c_leer(uint8_t ak, uint8_t *lect);
 void escribir8(uint8_t reg, uint8_t val) {
     i2c_iniciar();
     i2c_funcion((0X29), 0);
+    _delay((unsigned long)((3)*(4000000/4000.0)));
+
     i2c_escribir((0x80) | reg);
+    _delay((unsigned long)((3)*(4000000/4000.0)));
     i2c_escribir(val);
+    _delay((unsigned long)((3)*(4000000/4000.0)));
     i2c_detener();
+
+
+
+
+
+
+
+    return;
 }
 
-void leer8(uint8_t reg, uint8_t *data) {
-    i2c_iniciar();
-    i2c_funcion((0X29), 1);
-    i2c_escribir((0x80) | reg);
-    i2c_detener();
-
+void leer8(uint8_t reg, uint8_t *dato) {
     i2c_iniciar();
     i2c_funcion((0X29), 0);
-    i2c_leer(0, &(*data));
+
+    i2c_escribir((0x80) | reg);
+    i2c_reiniciar();
+    i2c_funcion((0X29), 1);
+    _delay((unsigned long)((3)*(4000000/4000.0)));
+    *dato = i2c_leer();
+    i2c_detener();
+
+
+
+
+
+    return;
 }
 
-void leer16(uint8_t reg, uint8_t *dataL, uint8_t *dataH) {
-    i2c_iniciar();
-    i2c_funcion((0X29), 1);
-    i2c_escribir((0x80) | reg);
-    i2c_detener();
-
+uint16_t leerColor(uint8_t reg) {
+    uint16_t data = 0, temp = 0;
+    uint8_t low = 0, high = 0;
     i2c_iniciar();
     i2c_funcion((0X29), 0);
-    i2c_leer(0, &(*dataH));
+    _delay((unsigned long)((3)*(4000000/4000.0)));
+
+    i2c_escribir((0x80) | reg);
+    _delay((unsigned long)((3)*(4000000/4000.0)));
+    i2c_reiniciar();
+    i2c_funcion((0X29), 1);
+    _delay((unsigned long)((3)*(4000000/4000.0)));
+    low = i2c_leer();
+    _delay((unsigned long)((3)*(4000000/4000.0)));
+    high = i2c_leer();
+    _delay((unsigned long)((3)*(4000000/4000.0)));
+    i2c_detener();
+    PORTD = high;
+    data = high;
+    temp = low;
+    data <<= 8;
+    data |= temp;
+
+
+
+
+
+
+    return data;
+}
+
+void activarInterrupcion(uint8_t op) {
+    uint8_t data = 0;
+    leer8(0x00, &data);
+
+    PORTBbits.RB2 = 1;
+    _delay((unsigned long)((5)*(4000000/4000.0)));
+
+    if (op == 1) {
+        data |= (0x10);
+    } else if (op == 0) {
+        data &= ~(0x10);
+    }
+    escribir8((0x00), data);
+    _delay((unsigned long)((60)*(4000000/4000.0)));
+    return;
+}
+
+void leerColores(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c) {
+    *r = leer16((0x16));
+# 115 "colors.c"
+    _delay((unsigned long)((60)*(4000000/4000.0)));
+
+
+    return;
+}
+
+void iniciar(uint8_t *datos) {
+    uint8_t data;
+    leer8((0x12), &data);
+    _delay((unsigned long)((5)*(4000000/4000.0)));
+    if ((data != 0x44)&&(data != 0x10)) {
+
+        return;
+    } else {
+
+
+        escribir8((0x01), 0xEB);
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+
+        escribir8((0x0F), 0x01);
+
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+
+        escribir8((0x00), (0x01));
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+        escribir8((0x00), ((0x01) | (0x02)));
+
+        *datos = data;
+        _delay((unsigned long)((50)*(4000000/4000.0)));
+        return;
+    }
 }

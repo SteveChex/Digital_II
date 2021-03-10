@@ -2665,16 +2665,40 @@ void i2c_iniciar(void);
 void i2c_funcion(uint8_t addr, uint8_t mode);
 void i2c_escribir(uint8_t data);
 void i2c_detener(void);
-void i2c_leer(uint8_t ak, uint8_t *lect);
+void i2c_reiniciar(void);
+uint8_t i2c_leer();
 # 38 "masteri2c.c" 2
-# 47 "masteri2c.c"
+
+# 1 "./colors.h" 1
+# 14 "./colors.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 14 "./colors.h" 2
+# 56 "./colors.h"
+void escribir8(uint8_t reg, uint8_t val);
+void leer8(uint8_t reg, uint8_t *data);
+uint16_t leer16(uint8_t reg);
+void activarInterrupcion(uint8_t op);
+uint16_t leerColor(uint8_t reg);
+void iniciar(uint8_t *datos);
+# 39 "masteri2c.c" 2
+
+
+
+
+
+
+
+
 void setup(void);
 void __attribute__((picinterrupt((""))))isr(void);
 
+uint8_t i2c_recep = 15, usart_recep = 0;
+uint8_t cont = 0;
 
+uint8_t sen_Encendido = 0, dir = 0x29;
+uint16_t red = 0, blue = 0, green = 0, clear = 0;
 
-uint8_t i2c_recep = 0, usart_recep = 0;
-
+uint8_t data = 0;
 
 
 
@@ -2684,39 +2708,66 @@ uint8_t i2c_recep = 0, usart_recep = 0;
 void main(void) {
     setup();
     _delay((unsigned long)((10)*(4000000/4000.0)));
+# 110 "masteri2c.c"
+    _delay((unsigned long)((60)*(4000000/4000.0)));
+
+
+
     while (1) {
 
+        escribir8((0x01), 0xEB);
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+        escribir8((0x0F), 0x01);
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+        escribir8((0x00), (0x01));
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+        escribir8((0x00), ((0x01) | (0x02)));
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+
         i2c_iniciar();
-        if (RB1) {
-            i2c_funcion(0x29, 1);
-            if (!ACKSTAT) {
-                i2c_leer(0, &i2c_recep);
-                i2c_detener();
-                PORTBbits.RB0 = 0;
-            } else {
-                i2c_detener();
-                PORTBbits.RB0 = 1;
-            }
-        } else {
-            i2c_funcion(0x29, 0);
-            if (!ACKSTAT) {
-                i2c_escribir(15);
-                i2c_detener();
-                PORTBbits.RB0 = 0;
-            } else {
-                i2c_detener();
-                PORTBbits.RB0 = 1;
-            }
-        }
+        i2c_funcion((0X29), 0);
+        _delay((unsigned long)((3)*(4000000/4000.0)));
+
+        i2c_escribir((0x80) | (0x00));
+        _delay((unsigned long)((3)*(4000000/4000.0)));
+        i2c_reiniciar();
+        i2c_funcion((0X29), 1);
+        _delay((unsigned long)((3)*(4000000/4000.0)));
+        data = i2c_leer();
+        i2c_detener();
+
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+        data &= ~(0x10);
+        escribir8((0x00), data);
+        _delay((unsigned long)((60)*(4000000/4000.0)));
+
+        red = leerColor((0x16));
+
+        i2c_iniciar();
+        i2c_funcion((0X29), 0);
+        _delay((unsigned long)((3)*(4000000/4000.0)));
+
+        i2c_escribir((0x80) | (0x00));
+        _delay((unsigned long)((3)*(4000000/4000.0)));
+        i2c_reiniciar();
+        i2c_funcion((0X29), 1);
+        _delay((unsigned long)((3)*(4000000/4000.0)));
+        data = i2c_leer();
+        i2c_detener();
+        _delay((unsigned long)((5)*(4000000/4000.0)));
+        data |= (0x10);
+        escribir8((0x00), data);
+        _delay((unsigned long)((60)*(4000000/4000.0)));
+# 238 "masteri2c.c"
+        PORTBbits.RB0 = !RB0;
+        red >>= 8;
+        cont = (uint8_t) red;
+        usart_T(cont);
+        _delay((unsigned long)((3)*(4000000/4000.0)));
 
 
 
-        usart_T(i2c_recep);
-        _delay((unsigned long)((2)*(4000000/4000.0)));
-
-        PORTD = usart_recep;
-
-        _delay((unsigned long)((200)*(4000000/4000.0)));
+        _delay((unsigned long)((500)*(4000000/4000.0)));
 
     }
 }
@@ -2730,17 +2781,16 @@ void setup(void) {
 
     TRISD = 0;
     ANSELH = 0;
-    TRISB = 0B00000010;
+    TRISB = 0B11111010;
     PORTB = 0;
     PORTD = 0;
-    PORTC = 0;
 
 
     TRISC = 0B00011000;
 
     SSPSTAT = 0B10000000;
     SSPCON2 = 0;
-    SSPADD = 9;
+    SSPADD = 1;
     SSPCON = 0B00101000;
 
 
@@ -2751,7 +2801,7 @@ void setup(void) {
     PIE1 = 0B00100000;
     INTCON = 0B11000000;
 }
-# 139 "masteri2c.c"
+# 289 "masteri2c.c"
 void __attribute__((picinterrupt((""))))isr(void) {
     GIE = 0;
     if (RCIF) {

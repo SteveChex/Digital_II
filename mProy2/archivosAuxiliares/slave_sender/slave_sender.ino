@@ -25,22 +25,11 @@ void setup() {
 
   Serial.begin(9600);
   Serial1.begin(9600);
+  Serial2.begin(9600);
 }
 
 void loop() {
   if (millis() > (lastUp + IO_LOOP_DELAY)) {
-    Serial.println("");
-    switch (n) {
-      case 0:
-        Serial1.write(85);
-        break;
-      case 1:
-        Serial1.write(15);
-        break;
-      case 2:
-        Serial1.write(1);
-        break;
-    }
     lastUp = millis();
     n++;
     if (n == 3) {
@@ -49,6 +38,9 @@ void loop() {
   }
   if (Serial1.available()) {
     Serial.println(Serial1.read());
+  }
+  if (Serial2.available()) {
+    Serial.println(Serial2.read());
   }
 }
 
@@ -63,8 +55,8 @@ void requestEvent() {
     digitalWrite(5, LOW);
   }
   // as expected by master
-  Serial.print("Respondiendo");
-  Serial.println(num);
+  // Serial.print("Respondiendo");
+  // Serial.println(num);
 }
 void receiveEvent(int howMany) {
   if (1 == Wire.available()) {
@@ -76,6 +68,6 @@ void receiveEvent(int howMany) {
       char x = Wire.read(); // receive byte as a character
     }
   }
-  Serial.print("Recibiendo");
-  Serial.println(num);
+  //Serial.print("Recibiendo");
+  //Serial.println(num);
 }
