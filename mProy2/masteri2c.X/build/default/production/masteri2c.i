@@ -2673,13 +2673,15 @@ uint8_t i2c_leer();
 # 14 "./colors.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 14 "./colors.h" 2
-# 56 "./colors.h"
+# 58 "./colors.h"
 void escribir8(uint8_t reg, uint8_t val);
-void leer8(uint8_t reg, uint8_t *data);
+uint8_t leer8(uint8_t reg);
 uint16_t leer16(uint8_t reg);
 void activarInterrupcion(uint8_t op);
 uint16_t leerColor(uint8_t reg);
 void iniciar(uint8_t *datos);
+void pedirLectura(uint8_t reg);
+uint8_t obtenerLectura();
 # 39 "masteri2c.c" 2
 
 
@@ -2708,66 +2710,36 @@ uint8_t data = 0;
 void main(void) {
     setup();
     _delay((unsigned long)((10)*(4000000/4000.0)));
-# 110 "masteri2c.c"
-    _delay((unsigned long)((60)*(4000000/4000.0)));
-
-
-
+# 80 "masteri2c.c"
     while (1) {
-
-        escribir8((0x01), 0xEB);
-        _delay((unsigned long)((5)*(4000000/4000.0)));
-        escribir8((0x0F), 0x01);
-        _delay((unsigned long)((5)*(4000000/4000.0)));
-        escribir8((0x00), (0x01));
-        _delay((unsigned long)((5)*(4000000/4000.0)));
-        escribir8((0x00), ((0x01) | (0x02)));
-        _delay((unsigned long)((5)*(4000000/4000.0)));
-
+# 111 "masteri2c.c"
         i2c_iniciar();
-        i2c_funcion((0X29), 0);
+        if (RB1) {
+            i2c_funcion(20, 1);
+            if (!ACKSTAT) {
+                i2c_recep = i2c_leer();
+                i2c_detener();
+                PORTBbits.RB0 = 0;
+            } else {
+                i2c_detener();
+                PORTBbits.RB0 = 1;
+            }
+        } else {
+            i2c_funcion(20, 0);
+            if (!ACKSTAT) {
+                i2c_escribir(15);
+                i2c_detener();
+                PORTBbits.RB0 = 0;
+            } else {
+                i2c_detener();
+                PORTBbits.RB0 = 1;
+            }
+        }
+
+        usart_T(i2c_recep);
         _delay((unsigned long)((3)*(4000000/4000.0)));
 
-        i2c_escribir((0x80) | (0x00));
-        _delay((unsigned long)((3)*(4000000/4000.0)));
-        i2c_reiniciar();
-        i2c_funcion((0X29), 1);
-        _delay((unsigned long)((3)*(4000000/4000.0)));
-        data = i2c_leer();
-        i2c_detener();
-
-        _delay((unsigned long)((5)*(4000000/4000.0)));
-        data &= ~(0x10);
-        escribir8((0x00), data);
-        _delay((unsigned long)((60)*(4000000/4000.0)));
-
-        red = leerColor((0x16));
-
-        i2c_iniciar();
-        i2c_funcion((0X29), 0);
-        _delay((unsigned long)((3)*(4000000/4000.0)));
-
-        i2c_escribir((0x80) | (0x00));
-        _delay((unsigned long)((3)*(4000000/4000.0)));
-        i2c_reiniciar();
-        i2c_funcion((0X29), 1);
-        _delay((unsigned long)((3)*(4000000/4000.0)));
-        data = i2c_leer();
-        i2c_detener();
-        _delay((unsigned long)((5)*(4000000/4000.0)));
-        data |= (0x10);
-        escribir8((0x00), data);
-        _delay((unsigned long)((60)*(4000000/4000.0)));
-# 238 "masteri2c.c"
-        PORTBbits.RB0 = !RB0;
-        red >>= 8;
-        cont = (uint8_t) red;
-        usart_T(cont);
-        _delay((unsigned long)((3)*(4000000/4000.0)));
-
-
-
-        _delay((unsigned long)((500)*(4000000/4000.0)));
+        PORTD = usart_recep;
 
     }
 }
@@ -2781,7 +2753,7 @@ void setup(void) {
 
     TRISD = 0;
     ANSELH = 0;
-    TRISB = 0B11111010;
+    TRISB = 0B11111000;
     PORTB = 0;
     PORTD = 0;
 
@@ -2801,11 +2773,12 @@ void setup(void) {
     PIE1 = 0B00100000;
     INTCON = 0B11000000;
 }
-# 289 "masteri2c.c"
+# 180 "masteri2c.c"
 void __attribute__((picinterrupt((""))))isr(void) {
     GIE = 0;
     if (RCIF) {
         usart_R(&usart_recep);
+        cont++;
         RCIF = 0;
     }
     GIE = 1;

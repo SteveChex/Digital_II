@@ -2625,6 +2625,7 @@ typedef int16_t intptr_t;
 typedef uint16_t uintptr_t;
 # 11 "pici2c.c" 2
 
+
 # 1 "./pici2c.h" 1
 # 14 "./pici2c.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
@@ -2638,7 +2639,7 @@ void i2c_escribir(uint8_t data);
 void i2c_detener(void);
 void i2c_reiniciar(void);
 uint8_t i2c_leer();
-# 12 "pici2c.c" 2
+# 13 "pici2c.c" 2
 
 
 
@@ -2669,8 +2670,7 @@ void i2c_escribir(uint8_t data) {
 
 void i2c_detener(void) {
     while ((SSPSTAT & 0B00000100) || (SSPCON2 & 0B00011111)) {
-        PORTD = SSPCON2;
-        RB0 = SSPOV;
+        PORTBbits.RB1 = SSPCON2bits.ACKEN;
     }
     PEN = 1;
     return;

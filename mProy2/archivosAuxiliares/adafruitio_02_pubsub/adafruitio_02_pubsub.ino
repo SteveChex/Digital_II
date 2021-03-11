@@ -40,6 +40,7 @@ uint8_t txdata = 0;
 unsigned long lastUpdate = 0;
 
 // set up the 'counter' feed
+
 AdafruitIO_Feed *counter = io.feed("counter");
 AdafruitIO_Feed *LuzRoja = io.feed("LuzRoja");
 AdafruitIO_Feed *LuzVerde = io.feed("LuzVerde");
@@ -92,102 +93,47 @@ void loop() {
   io.run();
 
   if (millis() > (lastUpdate + IO_LOOP_DELAY)) {
-    // save count to the 'counter' feed on Adafruit IO
-    //Serial.print("sending -> ");
-    //Serial.print(count);
     counter->save(rxdata);
-    // increment the count by 1
-    // after publishing, store the current time
     lastUpdate = millis();
-    //Serial.print("* * * ");
-    //Serial.print(rlec);
-    //Serial.print(" -- ");
-    //Serial.print(glec);
     if (rec) {
       //  Serial.println(" - TRANSMITTING");
       Serial.println(txdata);
     }
-    else {
-      //  Serial.println("");
-    }
     rec = false;
   }
   if (Serial2.available()) {
+    while (1 < Serial2.available()) {
+      char x = Serial2.read();
+    }
     rxdata = (uint8_t)Serial2.read();
     Serial.print("Serial2data: ");
     Serial.println(rxdata);
     Serial2.write(txdata); // ENVIANDO A LA VEZ LOS DATOS AL PIC
-    if (rxdata & 128) {
-      digitalWrite(13, HIGH);
-    } else {
-      digitalWrite(13, LOW);
-    }
-    if (rxdata & 64) {
-      digitalWrite(12, HIGH);
-    } else {
-      digitalWrite(12, LOW);
-    }
-    if (rxdata & 32) {
-      digitalWrite(14, HIGH);
-    } else {
-      digitalWrite(14, LOW);
-    }
-    if (rxdata & 16) {
-      digitalWrite(27, HIGH);
-    } else {
-      digitalWrite(27, LOW);
-    }
-    if (rxdata & 8) {
-      digitalWrite(26, HIGH);
-    } else {
-      digitalWrite(26, LOW);
-    }
-    if (rxdata & 4) {
-      digitalWrite(25, HIGH);
-    } else {
-      digitalWrite(25, LOW);
-    }
-    if (rxdata & 2) {
-      digitalWrite(33, HIGH);
-    } else {
-      digitalWrite(33, LOW);
-    }
-    if (rxdata & 1) {
-      digitalWrite(32, HIGH);
-    } else {
-      digitalWrite(32, LOW);
-    }
   }
-
 }
-
 // this function is called whenever a 'counter' message
 // is received from Adafruit IO. it was attached to
 // the counter feed in the setup() function above.
 void handleMessageR(AdafruitIO_Data *data) {
   //Serial.print("Red received <- ");
   if (data->toPinLevel() == HIGH) {
-    //Serial.println("HIGH");
     rlec = 1;
   }
   else {
-    //Serial.println("LOW");
     rlec = 0;
   }
-  txdata = rlec + glec*2;
+  txdata = rlec + glec * 2;
   rec = true;
 }
 
 void handleMessageG(AdafruitIO_Data *data) {
   //Serial.print("Green received <- ");
   if (data->toPinLevel() == HIGH) {
-    //Serial.println("HIGH");
     glec = 1;
   }
   else {
-    //Serial.println("LOW");
     glec = 0;
   }
-  txdata = rlec + glec*2 ;
+  txdata = rlec + glec * 2 ;
   rec = true;
 }

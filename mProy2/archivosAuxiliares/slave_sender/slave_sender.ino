@@ -12,16 +12,17 @@
 
 #include <Wire.h>
 #include <stdint.h>
-uint8_t num = 85, n = 0;
+uint8_t num = 85, cont = 10;
+int n = 0;
 unsigned long lastUp = 0;
 
-#define IO_LOOP_DELAY 1000
+#define IO_LOOP_DELAY 200
 
 void setup() {
   Wire.begin(20);                // join i2c bus with address #8
   Wire.onRequest(requestEvent); // register event
   Wire.onReceive(receiveEvent); // register event
-  pinMode(5, OUTPUT);
+  pinMode(A0, INPUT);
 
   Serial.begin(9600);
   Serial1.begin(9600);
@@ -31,10 +32,9 @@ void setup() {
 void loop() {
   if (millis() > (lastUp + IO_LOOP_DELAY)) {
     lastUp = millis();
-    n++;
-    if (n == 3) {
-      n = 0;
-    }
+    n = analogRead(A0);
+    Serial.println(n);
+
   }
   if (Serial1.available()) {
     Serial.println(Serial1.read());
@@ -44,30 +44,25 @@ void loop() {
   }
 }
 
-// function that executes whenever data is requested by master
-// this function is registered as an event, see setup()
 void requestEvent() {
+  num = (uint8_t)(n >> 2);
   Wire.write(num); //
-  if (digitalRead(5)) {
-    digitalWrite(5, HIGH);
-  }
-  else {
-    digitalWrite(5, LOW);
-  }
-  // as expected by master
-  // Serial.print("Respondiendo");
-  // Serial.println(num);
+  Serial.print("Respondiendo->");
+  Serial.println(num);
 }
 void receiveEvent(int howMany) {
   if (1 == Wire.available()) {
-    num = (uint8_t)Wire.read();    // receive byte as an integer
+    num = Wire.read();    // receive byte as an integer
+    //if (num == 15) {
+    //  bandera = true; No implementado
+    //}
   }
   else {
-    num = (uint8_t)Wire.read();    // receive byte as an integer
     while (1 < Wire.available()) { // loop through all but the last
       char x = Wire.read(); // receive byte as a character
     }
+    num = Wire.read();    // receive byte as an integer
   }
-  //Serial.print("Recibiendo");
-  //Serial.println(num);
+  Serial.print("Recibiendo: ");
+  Serial.println(num);
 }

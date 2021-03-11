@@ -35,6 +35,8 @@
 
 #define ID (0x12)
 
+#define STAT (0x13)
+
 // REGISTROS RGBC DEL MODULO
 #define CDATAL (0x14)//CLEAR
 #define CDATAH (0x15)
@@ -54,11 +56,13 @@
 //******************************************************************************
 
 void escribir8(uint8_t reg, uint8_t val);
-void leer8(uint8_t reg, uint8_t *data);
+uint8_t leer8(uint8_t reg);
 uint16_t leer16(uint8_t reg);
 void activarInterrupcion(uint8_t op);
 uint16_t leerColor(uint8_t reg);
 void iniciar(uint8_t *datos); //Fusion de begin y init
+void pedirLectura(uint8_t reg);
+uint8_t obtenerLectura();
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

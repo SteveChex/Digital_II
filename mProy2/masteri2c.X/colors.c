@@ -14,45 +14,48 @@
 
 #define _XTAL_FREQ 4000000  // PARA EL USO DE LA FUNCIÓN __delay_ms
 
-void escribir8(uint8_t reg, uint8_t val) {
+void escribir8(uint8_t reg, uint8_t val) { // PROTOCOLO PARA ESCRIBIR AL SENSOR
     i2c_iniciar();
     i2c_funcion(ADDRESS, 0);
-    __delay_ms(3);
-    //if (!ACKSTAT) 
     i2c_escribir(COMMAND_BIT | reg);
-    __delay_ms(3);
     i2c_escribir(val);
-    __delay_ms(3);
     i2c_detener();
-    //PORTBbits.RB0 = 0;
-    //PORTBbits.RB0 = 1;
-    /*} else {
-        i2c_detener();
-        PORTBbits.RB0 = 1;
-        //PORTBbits.RB0 = 0;
-    }*/
     return;
 }
 
-void leer8(uint8_t reg, uint8_t *dato) {
+uint8_t leer8(uint8_t reg) { // PROTOCOLO PARA LEER DEL SENSOR
+    uint8_t dato = 0;
     i2c_iniciar();
     i2c_funcion(ADDRESS, 0);
-    //if (!ACKSTAT) {
     i2c_escribir(COMMAND_BIT | reg);
     i2c_reiniciar();
     i2c_funcion(ADDRESS, 1);
-    __delay_ms(3);
-    *dato = i2c_leer();
-    i2c_detener();
-    //PORTBbits.RB0 = 0;
-    /*} else {
-        PORTBbits.RB0 = 1;
+    if (!ACKSTAT) {
+        dato = i2c_leer();
         i2c_detener();
-    }*/
-    return;
+    } else {
+        dato = 0;
+        i2c_detener();
+    }
+    PORTBbits.RB2 = 0;
+    return dato;
 }
 
-uint16_t leerColor(uint8_t reg) {
+void pedirLectura(uint8_t reg) {
+    i2c_iniciar();
+    i2c_funcion(ADDRESS, 0);
+    i2c_escribir(COMMAND_BIT | reg);
+}
+
+uint8_t obtenerLectura() {
+    uint8_t data = 0;
+    i2c_reiniciar();
+    i2c_funcion(ADDRESS, 1);
+    data = i2c_leer();
+    i2c_detener();
+}
+
+uint16_t leerColor(uint8_t reg) { // PROTOCOLO FALLIDO PARA LEER 16 BITS DEL SENSOR
     uint16_t data = 0, temp = 0;
     uint8_t low = 0, high = 0;
     i2c_iniciar();
@@ -66,6 +69,16 @@ uint16_t leerColor(uint8_t reg) {
     __delay_ms(3);
     low = i2c_leer();
     __delay_ms(3);
+    i2c_reiniciar();
+    i2c_funcion(ADDRESS, 0);
+    __delay_ms(3);
+    i2c_escribir(COMMAND_BIT | reg + 1);
+    __delay_ms(3);
+    i2c_reiniciar();
+    i2c_funcion(ADDRESS, 1);
+    __delay_ms(3);
+
+
     high = i2c_leer();
     __delay_ms(3);
     i2c_detener();
@@ -83,11 +96,11 @@ uint16_t leerColor(uint8_t reg) {
     return data;
 }
 
-void activarInterrupcion(uint8_t op) {
+void activarInterrupcion(uint8_t op) { // ACTIVA LA RECEPCION DE DATOS
     uint8_t data = 0;
-    leer8(0x00, &data);
+    data = leer8(0x00);
 
-    PORTBbits.RB2 = 1;
+    //PORTBbits.RB2 = 1;
     __delay_ms(5);
 
     if (op == 1) {
@@ -100,16 +113,17 @@ void activarInterrupcion(uint8_t op) {
     return;
 }
 
-void leerColores(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c) {
+void leerColores(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c) { 
+    // PROTOCOLO FALLIDO PARA LEER 4 VARIABLES DE 16 BITS DEL SENSOR
     *r = leer16(RDATAL);
-   //RD1 = 0;
+    //RD1 = 0;
     //__delay_ms(60);
     //*c = leer16(CDATAL);
     //RD1 = 0;
     //__delay_ms(60);
     //*g = leer16(GDATAL);
     //RD1 = 0;
-   // __delay_ms(60);
+    // __delay_ms(60);
     //*b = leer16(BDATAL);
 
     __delay_ms(60);
@@ -118,9 +132,10 @@ void leerColores(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c) {
     return;
 }
 
-void iniciar(uint8_t *datos) { //Fusion de begin y init
+void iniciar(uint8_t *datos) { //Fusion de begin y init de la librería adafruit
+    // PROTOCOLO DE INICIO DEL SENSOR
     uint8_t data;
-    leer8(ID, &data);
+    data = leer8(ID);
     __delay_ms(5);
     if ((data != 0x44)&&(data != 0x10)) {
         // PORTBbits.RB0 = 1;
