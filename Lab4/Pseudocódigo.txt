@@ -1,0 +1,25 @@
+Si (boton 1 && boton 2) {
+	iniciarCarrera = True;
+	reiniciarSemaforo();
+}
+
+Si (iniciarCarrera){
+	IniciarSemaforo();
+	while (carreraEnMarcha){
+		ConvertirContador1(); <- leen el contador y activan las leds de acuerdo a eso
+		ConvertirContador2();
+		comprobarEstadoDeCarrera(); <- Comprueba que la carrera haya finalizado
+	}
+	apagarLuces(); <- apaga todas las luces de los contadores
+	MostrarGanadorColores(); <- muestra al ganador con los colores programados
+}
+
+
+<- Interrupcion Botones. Basicamente es la misma 
+Si (InterrupcionActivada){
+	Si (intervaloDeTiempoHumanoPaso){
+		IncrementarContador();
+		ComprobarContadorVacio();
+		GuardarTiempo();
+	}
+}
