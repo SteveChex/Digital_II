@@ -1,0 +1,51 @@
+IniciarSPI0();
+IniciarSD();
+
+Si (!hay sd?){
+	ImprimirEnTerminal("No hay SD");
+	Dejar de configurar;
+}
+
+Si (hay sd){
+	Direccion = "/";
+	contenido = leerContenido(Dirección);
+}
+
+Loop{
+	Si (hay sd && !SePuedeRecibirDatos) {
+		MostrarMenu();
+		SePuedenRecibirDatos = True;
+	}
+
+	Si (HayDatosSeriales){
+		validarLectura = True;
+		SePuedenRecibirDatos = false;
+		dato = leerDatoSerial();
+		Switch (dato) {
+		caso espada:
+			archivo = Espada;
+		caso gato:
+			archivo = gato;
+		caso banana:
+			archivo = banana;
+		caso contenido:
+			validarLectura = false;
+			ImprimirEnTerminal(contenido)
+		}
+	}
+
+	si (validarLectura){
+		Switch (archivo) {
+		caso espada:
+			direccion = "/espada";
+		caso gato:
+			direccion = "/gato";
+		caso banana:
+			direccion = "/banana";
+		}
+		contenidoArchivo = LeerArchivo(direccion);
+		ImprimirEnTerminal(contenidoArchivo);
+		cerrarArchivo(direccion);
+	}
+}
+
