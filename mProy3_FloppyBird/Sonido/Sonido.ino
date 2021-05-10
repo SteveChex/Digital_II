@@ -1,5 +1,5 @@
 // Sonidos.ino
-// Código creado para la manipulación de sonido usando la tiva C y un buzzer
+// Código creado para generar sonido usando la tiva C y un buzzer
 // Código original tomado de:
 //      https://henryforceblog.wordpress.com/2015/05/02/blink-example-using-timer-on-a-tiva-launchpad/
 // Modificado por Luis Alberto Rivera (Procesamiento de señales)
